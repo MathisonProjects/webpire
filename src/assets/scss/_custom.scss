@@ -1,0 +1,16 @@
+.required label::after { content: ' *'; color: red; }
+
+.router-link-active {
+    color: red;
+}
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 0.5s ease;
+}
+.fade-leave {}
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}

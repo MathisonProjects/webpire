@@ -1,0 +1,29 @@
+.DS_Store
+node_modules
+/dist
+mix-manifest.json
+package-lock.json
+hot
+gitcommit.credentials.json
+
+# local env files
+.env.development
+.env.production
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.zip
+*.hot-update.json
+*.code-workspace

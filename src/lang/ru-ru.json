@@ -1,0 +1,26 @@
+{
+	"Site": {
+		"name": "AWSVueM",
+		"loading": "Loading...",
+		"description": "",
+		"menu": {
+			"home": "Главная",
+			"language": "Язык",
+			"lang": {
+				"english": "English",
+				"spanish": "Espanol",
+				"russian": "Русский",
+				"french": "Francais",
+				"mandarin": "普通话",
+				"vietnamese": "Tiếng Việt",
+				"korean": "한국어",
+				"japanese": "日本語",
+				"arabic": "عربى",
+				"german": "Deutsche"
+			}
+		},
+		"footer": {
+			"subheader": "Присоеднисте с нами под социальными сетями!"
+		}
+	}
+}

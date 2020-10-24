@@ -1,0 +1,43 @@
+{
+	"Site": {
+		"name": "Webpire",
+		"loading": "Loading...",
+		"description": "",
+		"menu": {
+			"home": "Home",
+			"language": "Language",
+			"lang": {
+				"english": "English",
+				"spanish": "Espanol",
+				"russian": "Русский",
+				"french": "Francais",
+				"mandarin": "普通话",
+				"vietnamese": "Tiếng Việt",
+				"korean": "한국어",
+				"japanese": "日本語",
+				"arabic": "عربى",
+				"german": "Deutsche"
+			}
+		},
+		"section": {
+			"main": {},
+			"admin": {
+				"landing": {
+					"registerTitle": "Register",
+					"loginTitle": "Login",
+					"email": "Email",
+					"username": "Username",
+					"password": "Password",
+					"repeat": "Repeat Password",
+					"refresh": "Refresh",
+					"submit": "Submit",
+					"accountExist": "Account Exists?",
+					"accountNotExist": "Account Does Not Exist"
+				}
+			}
+		},
+		"footer": {
+			"subheader": "Get connected with us on social networks!"
+		}
+	}
+}
