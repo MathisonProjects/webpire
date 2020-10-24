@@ -33,7 +33,6 @@ class WebpireScripts {
             }
         }
         if (env === 'production') {
-            devVariables.build = 0
             devVariables.iteration++
             fs.writeFile('./dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
             fs.writeFile('./src/json/dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
