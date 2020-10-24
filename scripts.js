@@ -1,4 +1,5 @@
 const fs = require('fs')
+const dynamoSetup = require('./migrations')
 const funcFire = (process.env.FUNCFIRE !== undefined) ? process.env.FUNCFIRE : null
 
 class WebpireScripts {
@@ -39,6 +40,11 @@ class WebpireScripts {
         }
         console.log(devVariables)
     }
+
+    async seedDynamo() {
+        await dynamoSetup.createTables()
+        dynamoSetup.seedTables()
+    }
 }
 
 if (funcFire !== null) routeFunction(funcFire)
@@ -51,6 +57,9 @@ function routeFunction(funcFire) {
             break
         case 'updateVersion':
             webpireScripts.updateVersion('development')
+            break
+        case 'seedDynamo':
+            webpireScripts.seedDynamo()
             break
         default:
             console.log('Routed incorrectly...')

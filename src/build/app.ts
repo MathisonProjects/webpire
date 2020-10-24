@@ -22,5 +22,7 @@ export default new Vue({
     store,
     router,
     vuetify: new Vuetify({ theme: { dark: false } }),
-    created() {}
+    created() {
+        plugins.socket.init()
+    }
 })

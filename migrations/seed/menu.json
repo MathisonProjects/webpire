@@ -1,0 +1,21 @@
+[
+    {
+        "key": "/",
+        "icon": "mdi-home",
+        "text": "Home",
+        "page": "default-home",
+        "internal": true
+    },
+    {
+        "key": "/page/about",
+        "icon": "mdi-home",
+        "text": "About",
+        "internal": true
+    },
+    {
+        "key": "/page/contact",
+        "icon": "mdi-home",
+        "text": "Contact",
+        "internal": true
+    }
+]

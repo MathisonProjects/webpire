@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Blog",
+        "rows": [
+            {
+                "collection": false,
+                "type": "string",
+                "name": "Title"
+            }
+        ]
+    },
+    {
+        "name": "News",
+        "rows": [
+            {
+                "collection": false,
+                "type": "string",
+                "name": "Article Title"
+            }
+        ]
+    },
+    {
+        "name": "Shop",
+        "rows": [
+            {
+                "collection": false,
+                "type": "string",
+                "name": "Product Name"
+            }
+        ]
+    },
+    {
+        "name": "Wiki",
+        "rows": [
+            {
+                "collection": false,
+                "type": "string",
+                "name": "Article Name"
+            }
+        ]
+    }
+]

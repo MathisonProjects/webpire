@@ -1,5 +1,8 @@
-const express = require('express');
-const Dotenv = require('dotenv-webpack');
+const express = require('express')()
+const server = require('http').createServer(express)
+const Dotenv = require('dotenv-webpack')
+const io = require('socket.io')(server)
+const Plugins = require('./plugins')
 const env = process.env.NODE_ENV ? process.env.NODE_ENV : "development";
 const envFile = './.env.'+env
 console.log(envFile)
@@ -9,11 +12,19 @@ const port = { hot: parseInt(envVariables.definitions['process.env.HOT_PORT'].re
 // Constants
 const PORT = port.node;
 
-// App
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+io.on('connection', socket => {
+  console.log('Well hello there...')
+  socket.emit('connection confirmation', { response: 'Confirmed Node Server Connection...' })
 
-app.listen(PORT);
+  for (var i in Plugins.Router) {
+    const route = Plugins.Router[i]
+    socket.on(route, (payload = null) => {
+      Plugins.WebpirePlugin.routeFunction(route, payload).then(response => {
+        socket.emit('return ' + route, response)
+      })
+    })
+  }
+})
+
+server.listen(PORT);
 console.log(`Running on http://127.0.0.1:${PORT}`);

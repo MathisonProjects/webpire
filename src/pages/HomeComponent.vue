@@ -1,13 +1,14 @@
 <template>
     <div>
-        <h1><v-icon>{{ mdiIconsList.FACTORY }}</v-icon> Example Component</h1>
+        <h1><v-icon>{{ mdiIconsList.FACTORY }}</v-icon> Welcome to Webpire</h1>
+		<p>This project will be your first step towards building out an impressive web based empire!</p>
     </div>
 </template>
 
 <script>
 	import { MdiIcons } from '@/enums'
     export default {
-		name      : "example-component",
+		name      : "home-component",
 		props     : [],
 		components: {},
 		created()   {},

@@ -27,14 +27,17 @@
     "git-force-pull": "git fetch --all && git reset --hard origin/dev",
     "git-quick-push": "git add . && git commit -m \"Quick push\" && git push -u origin dev",
     "cleanHotUpdate": "cross-env FUNCFIRE=cleanHotUpdate node ./scripts.js",
-    "updateVersion": "cross-env FUNCFIRE=updateVersion node ./scripts.js"
+    "updateVersion": "cross-env FUNCFIRE=updateVersion node ./scripts.js",
+    "seedDynamo": "cross-env FUNCFIRE=seedDynamo node ./scripts.js"
   },
   "author": "Jacob Mathison",
   "license": "ISC",
   "dependencies": {
     "@types/lodash-es": "^4.17.3",
     "@types/node": "^14.14.2",
+    "@types/socket.io-client": "^1.4.34",
     "@types/webpack-env": "^1.15.3",
+    "aws-sdk": "^2.778.0",
     "cross-env": "^7.0.2",
     "dotenv-webpack": "^4.0.0",
     "express": "^4.17.1",
@@ -48,6 +51,7 @@
     "socket.io-client": "^2.3.1",
     "ts-loader": "^8.0.6",
     "typescript": "^4.0.3",
+    "uuidv4": "^6.2.4",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.1",
     "vue-router": "^3.4.7",

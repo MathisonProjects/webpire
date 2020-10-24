@@ -9,8 +9,6 @@ const envFile = './.env.'+env
 const envVariables = new Dotenv({ path: envFile })
 const port = { hot: parseInt(envVariables.definitions['process.env.HOT_PORT'].replace('"', '')), node: parseInt(envVariables.definitions['process.env.NODE_PORT'].replace('"', '')) }
 
-scriptsFile.updateVersion(env)
-
 console.log('Loading', envFile, 'variables...')
 if (!fs.existsSync(envFile)) {
 	console.info("You didn't set up your local environment variables. We will get you started...", (err) => { if (err) throw err })
