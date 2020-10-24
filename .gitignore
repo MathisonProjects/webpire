@@ -7,8 +7,6 @@ hot
 gitcommit.credentials.json
 
 # local env files
-.env.development
-.env.production
 .env
 
 # Log files
