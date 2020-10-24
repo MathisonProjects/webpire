@@ -26,5 +26,9 @@ io.on('connection', socket => {
   }
 })
 
+express.get('/', (req, res) => {
+  res.send('Welcome to Webpire!')
+})
+
 server.listen(PORT);
-console.log(`Running on http://127.0.0.1:${PORT}`);
+console.log(`--- Running on http://127.0.0.1:${PORT} ---`);

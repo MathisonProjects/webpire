@@ -1,5 +1,7 @@
 [
     {
+        "type": "main",
+        "oid": 0,
         "key": "/",
         "icon": "mdi-home",
         "text": "Home",
@@ -7,15 +9,55 @@
         "internal": true
     },
     {
+        "type": "main",
+        "oid": 1,
         "key": "/page/about",
-        "icon": "mdi-home",
+        "icon": "mdi-contacts",
         "text": "About",
         "internal": true
     },
     {
+        "type": "main",
+        "oid": 2,
         "key": "/page/contact",
-        "icon": "mdi-home",
+        "icon": "mdi-email",
         "text": "Contact",
+        "internal": true
+    },
+    {
+        "type": "main",
+        "oid": 3,
+        "key": "/admin",
+        "icon": "mdi-view-dashboard",
+        "text": "Admin",
+        "page": "admin-dashboard",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 0,
+        "key": "/admin",
+        "icon": "mdi-view-dashboard",
+        "text": "Dashboard",
+        "page": "admin-dashboard",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 1,
+        "key": "/admin/icons",
+        "icon": "mdi-material-design",
+        "text": "Icons",
+        "page": "admin-settings",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 2,
+        "key": "/admin/settings",
+        "icon": "mdi-cog",
+        "text": "Settings",
+        "page": "admin-settings",
         "internal": true
     }
 ]

@@ -4,10 +4,13 @@ Vue.use(VueRouter)
 
 
 const layoutList = {
-    DefaultLayout : require('@/layouts/DefaultLayoutComponent.vue').default
+    DefaultLayout : require('@/layouts/DefaultLayoutComponent.vue').default,
+    AdminLayout : require('@/layouts/AdminLayoutComponent.vue').default,
 }
 const componentList = {
-    HomeComponent : require('@/pages/HomeComponent.vue').default
+    HomeComponent : require('@/pages/HomeComponent.vue').default,
+    AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
+    AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
 }
 
 const routes = [
@@ -18,14 +21,37 @@ const routes = [
 		children: [
 			{
 				path: '/',
-				name: 'home-home',
+				name: 'default-home',
 				component: componentList.HomeComponent,
 				meta: {
 					title: "Home"
 				}
             }
         ]
-    }
+	},
+	{
+		path: '/admin',
+		component: layoutList.AdminLayout,
+		props: true,
+		children: [
+			{
+				path: '/',
+				name: 'admin-home',
+				component: componentList.AdminHomeComponent,
+				meta: {
+					title: "Dashboard"
+				}
+			},
+			{
+				path: 'icons',
+				name: 'admin-home',
+				component: componentList.AdminIconsComponent,
+				meta: {
+					title: "Icons"
+				}
+			}
+        ]
+	}
 ]
 
 const router = new VueRouter({

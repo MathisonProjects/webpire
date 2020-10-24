@@ -9,6 +9,8 @@ export default {
         })
         socket.on('return get dbstore', (response: any) => {
             console.log(response)
+            store.dispatch('menuStore/setInit', response.menu.Items)
+            store.dispatch('settingsStore/setInit', response.settings.Items)
         })
         socket.emit('get dbstore', {})
     }

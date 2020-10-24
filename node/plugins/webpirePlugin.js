@@ -11,8 +11,7 @@ class WebpirePlugin {
     }
 
     async routeFunction(endpoint, payload = null) {
-        console.log('endpoint:',endpoint)
-        console.log('payload:',payload)
+        console.log('endpoint:',endpoint,' | ','payload:',payload)
         switch (endpoint) {
             case 'get dbstore':
                 return await this.getDbStore()
