@@ -15,7 +15,7 @@ COPY .env.production ./
 RUN npm install
 COPY . .
 
-RUN npm run dev
+RUN npm run prod
 
 EXPOSE 8000
 EXPOSE 8001
