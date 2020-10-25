@@ -41,8 +41,20 @@ class WebpireScripts {
     }
 
     async seedDynamo() {
-        await dynamoSetup.createTables()
-        dynamoSetup.seedTables()
+        const devVariables = require('./dev-variables.json')
+        if (!devVariables.seeded) {
+            await dynamoSetup.createTables()
+            dynamoSetup.seedTables()
+        }
+
+        devVariables.seeded = true
+        fs.writeFile('./dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
+    }
+
+    resetSeed() {
+        const devVariables = require('./dev-variables.json')
+        devVariables.seeded = false
+        fs.writeFile('./dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
     }
 }
 
@@ -59,6 +71,9 @@ function routeFunction(funcFire) {
             break
         case 'seedDynamo':
             webpireScripts.seedDynamo()
+            break
+        case 'resetSeed':
+            webpireScripts.resetSeed()
             break
         default:
             console.log('Routed incorrectly...')

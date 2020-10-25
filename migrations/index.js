@@ -1,8 +1,8 @@
 const { uuid } = require('uuidv4');
 const AWS = require('aws-sdk')
 AWS.config.update({
-    region: "us-west-1",
-    endpoint: 'http://localhost:8000'
+    region: "us-west-2",
+    endpoint: 'http://172.18.0.2:8000'
 })
 // Use the local Docker endpoint if executed locally
 

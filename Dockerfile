@@ -1,11 +1,13 @@
 FROM node:lts-alpine
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
-RUN sudo ./aws/install
-RUN npm install -g http-server
-RUN npm install -g pm2
-RUN npm install -g dynamodb-admin
+RUN apk add curl python
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+RUN unzip awscli-bundle.zip
+RUN ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+RUN aws configure set aws_access_key_id default_access_key
+RUN aws configure set aws_secret_access_key default_secret_key
+RUN aws configure set default.region us-west-2
+RUN npm install -g http-server pm2 dynamodb-admin
 WORKDIR /app
 COPY package*.json ./
 COPY .env.development ./

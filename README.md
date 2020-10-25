@@ -11,11 +11,10 @@ Create a .env.development or .env.production environment file in your root. Copy
 ## Running App
 
 ```sh
-$ docker run -p 8000:8000 amazon/dynamodb-local
-$ npm install -g dynamodb-admin
-$ dynamodb-admin &
+$ docker network create --subnet=172.18.0.0/16 webpire-net
+$ docker run --net webpire-net --ip 172.18.0.01 -p 8000:8000 amazon/dynamodb-local
 $ docker build -t webpire:dev .
-$ docker run -p 8081:8081 -p 8082:8082 --name webpire webpire:dev
+$ docker run --net webpire-net --ip 172.18.0.02 -p 8001:8001 -p 8081:8081 -p 8082:8082 --name webpire webpire:dev
 ```
 
 ## Developer

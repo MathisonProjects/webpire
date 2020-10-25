@@ -8,10 +8,10 @@
     "dev": "cross-env rm -rf dist && npm run development",
     "nodeServer": "cross-env node ./node/server.js",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "dockerDeploy": "npm run dockerDeployDist && npm run dockerDeployNode && npm run dockerDeployDynamoAdmin",
+    "dockerDeploy": "npm run dockerDeployDist && npm run dockerDeployNode && npm run seedDynamo &&  npm run dockerDeployDynamoAdmin",
     "dockerDeployDist": "http-server dist -p 8081 &",
     "dockerDeployNode": "pm2 start ./node/server.js --no-daemon &",
-    "dockerDeployDynamoAdmin": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin &",
+    "dockerDeployDynamoAdmin": "DYNAMO_ENDPOINT=http://172.18.0.2:8000 dynamodb-admin",
     "watch": "npm run development -- --watch",
     "watch-poll": "npm run watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -29,7 +29,8 @@
     "git-quick-push": "git add . && git commit -m \"Quick push\" && git push -u origin dev",
     "cleanHotUpdate": "cross-env FUNCFIRE=cleanHotUpdate node ./scripts.js",
     "updateVersion": "cross-env FUNCFIRE=updateVersion node ./scripts.js",
-    "seedDynamo": "cross-env FUNCFIRE=seedDynamo node ./scripts.js"
+    "seedDynamo": "cross-env FUNCFIRE=seedDynamo node ./scripts.js &",
+    "resetSeed": "cross-env FUNCFIRE=resetSeed node ./scripts.js"
   },
   "author": "Jacob Mathison",
   "license": "ISC",
