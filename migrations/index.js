@@ -1,17 +1,26 @@
 const { uuid } = require('uuidv4');
 const AWS = require('aws-sdk')
 AWS.config.update({
-    region: "us-west-2",
-    endpoint: 'http://172.18.0.2:8000'
+    region: "us-west-2"
 })
 // Use the local Docker endpoint if executed locally
 
-const dbHandler = new AWS.DynamoDB({apiVersion: '2012-08-10'})
-var docClient = new AWS.DynamoDB.DocumentClient()
+var dbHandler = null
+var docClient = null
 const dbKey = 'webpire'
 
 module.exports = {
-    async createTables() {
+    updateEndpoint(endpoint) {
+        // http://172.18.0.2:8000 || http://localhost:8000
+        AWS.config.update({
+            endpoint: endpoint
+        })
+        dbHandler = new AWS.DynamoDB({apiVersion: '2012-08-10'})
+        docClient = new AWS.DynamoDB.DocumentClient()
+    },
+    async createTables(endpoint = 'http://172.18.0.2:8000') {
+        console.log(endpoint)
+        this.updateEndpoint(endpoint)
         await this.createTable(dbKey + '_dynamic_tables')
         await this.createTable(dbKey + '_dynamic_table_content')
         await this.createTable(dbKey + '_menu')
@@ -21,7 +30,8 @@ module.exports = {
         await this.createTable(dbKey + '_roles')
         await this.createTable(dbKey + '_settings')
     },
-    seedTables() {
+    seedTables(endpoint = 'http://172.18.0.2:8000') {
+        this.updateEndpoint(endpoint)
         const seedItems = {
             dynamic_table_content: require('./seed/dynamic_table_content.json'),
             dynamic_tables: require('./seed/dynamic_tables.json'),

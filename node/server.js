@@ -1,4 +1,5 @@
 const express = require('express')()
+const fs = require('fs')
 const server = require('http').createServer(express)
 const Dotenv = require('dotenv-webpack')
 const io = require('socket.io')(server)
@@ -27,7 +28,9 @@ io.on('connection', socket => {
 })
 
 express.get('/', (req, res) => {
-  res.send('Welcome to Webpire!')
+  fs.readFile(__dirname + '/index.html', 'utf8', (err, text) => {
+      res.send(text);
+  });
 })
 
 server.listen(PORT);

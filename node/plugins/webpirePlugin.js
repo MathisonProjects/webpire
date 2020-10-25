@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk')
 AWS.config.update({
     region: "us-west-2",
-    endpoint: 'http://172.18.0.2:8000'
+    endpoint: process.env.NODE_ENV === 'DEV' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
 })
 var docClient = new AWS.DynamoDB.DocumentClient()
 

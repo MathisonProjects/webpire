@@ -50,6 +50,16 @@ class WebpireScripts {
         devVariables.seeded = true
         fs.writeFile('./dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
     }
+    async seedDynamoDev() {
+        const devVariables = require('./dev-variables.json')
+        if (!devVariables.seeded) {
+            await dynamoSetup.createTables('http://localhost:8000')
+            dynamoSetup.seedTables('http://localhost:8000')
+        }
+
+        devVariables.seeded = true
+        fs.writeFile('./dev-variables.json', JSON.stringify(devVariables), (err,files) => { })
+    }
 
     resetSeed() {
         const devVariables = require('./dev-variables.json')
@@ -74,6 +84,9 @@ function routeFunction(funcFire) {
             break
         case 'resetSeed':
             webpireScripts.resetSeed()
+            break
+        case 'seedDynamoDev':
+            webpireScripts.seedDynamoDev()
             break
         default:
             console.log('Routed incorrectly...')

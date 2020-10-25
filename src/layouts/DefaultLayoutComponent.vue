@@ -80,13 +80,12 @@
 				return this.$store.getters['settingsStore/keyedSettings']
 			},
 			menu() {
-				let customMenu = this.$store.state.menuStore.mainMenu.sort( (a, b) => {
-					if (a.oid > b.oid) return 1
-					if (a.oid < b.oid) return -1
-					return 0
-				})
-
-				customMenu.push(
+				let customMenu = [
+					...this.$store.state.menuStore.mainMenu.sort( (a, b) => {
+						if (a.oid > b.oid) return 1
+						if (a.oid < b.oid) return -1
+						return 0
+					}),
 					{ text: '', icon: MdiIcons.EARTH, internal: true, key: null, action: LinkActions.DROPDOWN, dropdown: [
 						{ icon: MdiIcons.ALPHAEBOXOUTLINE, text: this.$t('Site.menu.lang.english'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ENUS },
 						{ icon: MdiIcons.ALPHASBOXOUTLINE, text: this.$t('Site.menu.lang.spanish'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ESMX },
@@ -99,9 +98,10 @@
 						{ icon: MdiIcons.ALPHAABOXOUTLINE, text: this.$t('Site.menu.lang.arabic'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ARSA },
 						{ icon: MdiIcons.ALPHAGBOXOUTLINE, text: this.$t('Site.menu.lang.german'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.DEDE }
 						]
-					}
-				)
-				customMenu.push({ text: '', icon: MdiIcons.MOONWANINGCRESCENT, internal: true, key: null, action: LinkActions.CHANGELIGHTMODE })
+					},
+					{ text: '', icon: MdiIcons.MOONWANINGCRESCENT, internal: true, key: null, action: LinkActions.CHANGELIGHTMODE }
+				]
+
 				return customMenu
 			},
 			buildData() {
