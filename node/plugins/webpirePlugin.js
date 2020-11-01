@@ -1,13 +1,19 @@
 const AWS = require('aws-sdk')
 AWS.config.update({
-    region: "us-west-2",
-    endpoint: process.env.NODE_ENV === 'dev' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
+    region: "us-west-2"
 })
-var docClient = new AWS.DynamoDB.DocumentClient()
+var docClient = null
 
 class WebpirePlugin {
     testFire() {
         console.log('Test Fire Away!')
+    }
+
+    setEndpoint(stage) {
+        AWS.config.update({
+            endpoint: stage === 'development' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
+        })
+        docClient = new AWS.DynamoDB.DocumentClient()
     }
 
     async routeFunction(endpoint, payload = null) {
