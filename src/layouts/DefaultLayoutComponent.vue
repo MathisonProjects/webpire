@@ -106,6 +106,7 @@
 			},
 			buildData() {
 				const devVariables = this.$store.state.jsonStore.devVariables
+				console.log(devVariables)
 				return devVariables.majorRelease + '.' + devVariables.minorRelease + '.' + devVariables.iteration + '.' + devVariables.build
 			}
 		},

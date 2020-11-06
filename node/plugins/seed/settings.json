@@ -1,0 +1,32 @@
+[
+    {
+        "type": "string",
+        "key": "site_name",
+        "label": "Site Name",
+        "value": "Webpire"
+    },
+    {
+        "type": "string",
+        "key": "description",
+        "label": "Description",
+        "value": "Webspire helps developers quickly deploy and focus on building their dream site!"
+    },
+    {
+        "type": "string",
+        "key": "footer_text",
+        "label": "Footer Text",
+        "value": "Join us on social media!"
+    },
+    {
+        "type": "boolean",
+        "key": "footer_fixed",
+        "label": "Footer Affixed to Bottom",
+        "value": true
+    },
+    {
+        "type": "boolean",
+        "key": "back_to_top",
+        "label": "Show Back to Top",
+        "value": true
+    }
+]

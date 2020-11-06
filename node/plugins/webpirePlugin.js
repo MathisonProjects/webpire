@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk')
+const { uuid } = require('uuidv4');
 AWS.config.update({
     region: "us-west-2"
 })
@@ -21,10 +22,36 @@ class WebpirePlugin {
         switch (endpoint) {
             case 'get dbstore':
                 return await this.getDbStore()
+            case "reset dynamicTableContent":
+                await this.resetTable('proj_webpire_dynamic_table_content')
+                break
+            case "reset dynamicTables":
+                await this.resetTable('proj_webpire_dynamic_tables')
+                break
+            case "reset menu":
+                await this.resetTable('proj_webpire_menu')
+                this.repopulateTable('proj_webpire_menu','menu')
+                break
+            case "reset pages":
+                await this.resetTable('proj_webpire_pages')
+                break
+            case "reset permissions":
+                await this.resetTable('proj_webpire_permissions')
+                break
+            case "reset roles":
+                await this.resetTable('proj_webpire_roles')
+                break
+            case "reset settings":
+                await this.resetTable('proj_webpire_settings')
+                break
+            case "reset tags":
+                await this.resetTable('proj_webpire_tags')
+                break
             default:
                 return this.responseHandler({}, 404)
                 break
         }
+        return {}
     }
 
     async getDbStore() {
@@ -37,6 +64,35 @@ class WebpirePlugin {
             tableData[tables[i]] = await docClient.scan(params, (err, data) => {}).promise()
         }
         return tableData
+    }
+
+    async resetTable(tableName) {
+        const params = {
+            TableName: tableName
+        }
+        await docClient.scan(params, async (err, data) => {
+            await data.Items.forEach( (item) => {
+                let params = {
+                    TableName: tableName,
+                    Key: {
+                        'id': item.id
+                    }
+                }
+                docClient.delete(params, (err2,data2) => {})
+            })
+        })
+    }
+
+    async repopulateTable(tableName,seed) {
+        const seedData = require('./seed/'+seed+'.json')
+        seedData.forEach(item => {
+            item.id = uuid()
+            const params = {
+                TableName: tableName,
+                Item: item
+            }
+            docClient.put(params, function(err, data) {})
+        })
     }
 
     responseHandler(response, code = 200) {

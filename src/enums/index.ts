@@ -1,4 +1,5 @@
-export * from './MdiIcons'
-export * from './LinkList'
 export * from './Architecture'
+export * from './LinkList'
+export * from './MdiIcons'
+export * from './SocketFuncs'
 export * from './TypesLists'

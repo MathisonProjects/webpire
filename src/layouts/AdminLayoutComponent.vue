@@ -17,7 +17,7 @@
     import { MdiIcons } from '@/enums'
 
     export default {
-		name      : "template-component",
+		name      : "admin-layout-component",
 		props     : [],
 		components: {
             SnackbarNotificationComponent,

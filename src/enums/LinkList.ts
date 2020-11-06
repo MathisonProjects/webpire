@@ -36,6 +36,7 @@ enum AdminSectionPurpose {
 	CREATE = 'create',
 	VIEW = 'view',
 	UPDATE = 'update',
+	SAVE = 'save',
 	DELETE = 'delete'
 }
 

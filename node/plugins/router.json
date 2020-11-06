@@ -1,4 +1,12 @@
 [
     "test fire",
-    "get dbstore"
+    "get dbstore",
+    "reset dynamicTableContent",
+    "reset dynamicTables",
+    "reset menu",
+    "reset pages",
+    "reset permissions",
+    "reset roles",
+    "reset settings",
+    "reset tags"
 ]

@@ -10,7 +10,9 @@ const layoutList = {
 const componentList = {
     HomeComponent : require('@/pages/HomeComponent.vue').default,
     AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
-    AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
+    AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
+	AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
+	AdminSettingsComponent: require('@/pages/admin/SettingsComponent.vue').default
 }
 
 const routes = [
@@ -43,11 +45,27 @@ const routes = [
 				}
 			},
 			{
+				path: 'menu',
+				name: 'admin-home',
+				component: componentList.AdminMenuComponent,
+				meta: {
+					title: "Menu"
+				}
+			},
+			{
 				path: 'icons',
 				name: 'admin-home',
 				component: componentList.AdminIconsComponent,
 				meta: {
 					title: "Icons"
+				}
+			},
+			{
+				path: 'settings',
+				name: 'admin-settings',
+				component: componentList.AdminSettingsComponent,
+				meta: {
+					title: "Settings"
 				}
 			}
         ]
