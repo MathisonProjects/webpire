@@ -52,21 +52,28 @@ class WebpirePlugin {
                 await this.saveRecord('proj_webpire_tags', payload)
                 return await this.getDbStore()
             case "delete dynamicTableContent":
+                await this.deleteRecord('proj_webpire_dynamic_table_content', payload)
                 return await this.getDbStore()
             case "delete dynamicTables":
+                await this.deleteRecord('proj_webpire_dynamic_tables', payload)
                 return await this.getDbStore()
             case "delete menu":
+                await this.deleteRecord('proj_webpire_menu', payload)
                 return await this.getDbStore()
             case "delete pages":
                 await this.deleteRecord('proj_webpire_pages', payload)
                 return await this.getDbStore()
             case "delete permissions":
+                await this.deleteRecord('proj_webpire_permissions', payload)
                 return await this.getDbStore()
             case "delete roles":
+                await this.deleteRecord('proj_webpire_roles', payload)
                 return await this.getDbStore()
             case "delete settings":
+                await this.deleteRecord('proj_webpire_settings', payload)
                 return await this.getDbStore()
             case "delete tags":
+                await this.deleteRecord('proj_webpire_tags', payload)
                 return await this.getDbStore()
             case 'account register':
                 return await Cognito.registerUser(payload)
