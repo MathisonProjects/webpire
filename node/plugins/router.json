@@ -8,5 +8,8 @@
     "reset permissions",
     "reset roles",
     "reset settings",
-    "reset tags"
+    "reset tags",
+    "account register",
+    "account login",
+    "account forget"
 ]

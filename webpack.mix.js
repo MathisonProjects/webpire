@@ -15,6 +15,13 @@ if (!fs.existsSync(envFile)) {
 	fs.copyFile('./.env.example', envFile, (err) => { if (err) throw err })
 } else { console.info("Successfully loaded", envFile) }
 
+mix.options({
+	hmrOptions: {
+		host: 'localhost',
+		port: port.hot
+	}
+})
+
 mix.webpackConfig({
 	resolve: {
 		extensions: ['.js', '.vue', '.json', "*", ".jsx", ".ts", ".tsx"],
@@ -23,18 +30,20 @@ mix.webpackConfig({
 	plugins: [
 		new Dotenv({ path: envFile })
 	],
-	module: { rules: [ { test: /\.tsx?$/, loader: "ts-loader", exclude: /node_modules/ } ] },
+	module: { rules: [ { test: /\.tsx?$/, loader: "ts-loader", options: { appendTsSuffixTo: [/\.vue$/] }, exclude: /node_modules/ } ] },
 	devServer: {
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
 			'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
 		},
-		contentBase: path.join(__dirname, '/dist'),
+		contentBase: ['./dist'],
+		inline: true,
 		host: '127.0.0.1',
 		port: port.hot,
+		open: true,
 		hot: true,
-		writeToDisk: true,
+		writeToDisk: true
 	},
 })
 	.js('src/main.ts'                   , 'dist/js/app.bundle.js')

@@ -63,4 +63,8 @@ export default {
     copiedIconNotification(iconCopied:string): void {
         this.fireSuccessNotification('Icon Copied: ' + iconCopied)
     },
+    loginSuccessNotification() {},
+    loginFailedNotification() {},
+    registerSuccessNotification() {},
+    registerFailedNotification() {},
 }

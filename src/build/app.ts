@@ -5,6 +5,11 @@ import store from '@/stores'
 import VueI18n from 'vue-i18n'
 import messages from '@/lang'
 import plugins from '@/plugins'
+import VuetifyDataTableComponent from '@/components/shared/VuetifyDataTableComponent.vue';
+
+
+Vue.component('VuetifyDataTableComponent',VuetifyDataTableComponent)
+
 
 Vue.use(Vuetify)
 Vue.use(VueI18n)

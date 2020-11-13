@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk')
+const Cognito = require('./cognito')
 const { uuid } = require('uuidv4');
 AWS.config.update({
     region: "us-west-2"
@@ -19,9 +20,18 @@ class WebpirePlugin {
 
     async routeFunction(endpoint, payload = null) {
         console.log('endpoint:',endpoint,' | ','payload:',payload)
+
         switch (endpoint) {
             case 'get dbstore':
                 return await this.getDbStore()
+            case 'save dbstore pages':
+                await await this.saveRecord('proj_webpire_pages', payload)
+                return await this.getDbStore()
+            case 'account register':
+                return await Cognito.registerUser(payload)
+            case 'account login':
+                return await Cognito.loginUser(payload)
+            case 'account forget':
             case "reset dynamicTableContent":
                 await this.resetTable('proj_webpire_dynamic_table_content')
                 break
@@ -94,6 +104,8 @@ class WebpirePlugin {
             docClient.put(params, function(err, data) {})
         })
     }
+
+    async saveRecord(tableName, payload) {}
 
     responseHandler(response, code = 200) {
         return {

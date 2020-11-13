@@ -12,6 +12,7 @@ const componentList = {
     AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
     AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
 	AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
+	AdminPagesComponent : require('@/pages/admin/PagesComponent.vue').default,
 	AdminSettingsComponent: require('@/pages/admin/SettingsComponent.vue').default
 }
 
@@ -58,6 +59,14 @@ const routes = [
 				component: componentList.AdminIconsComponent,
 				meta: {
 					title: "Icons"
+				}
+			},
+			{
+				path: 'pages',
+				name: 'admin-pages',
+				component: componentList.AdminPagesComponent,
+				meta: {
+					title: "Pages"
 				}
 			},
 			{

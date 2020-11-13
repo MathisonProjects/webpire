@@ -20,8 +20,18 @@ enum ColorSets {
     SUCCESS = 'success'
 }
 
+enum AdminMode {
+    VIEW = "view",
+    CREATE = "create",
+    UPDATE = "update",
+    COPY = "copy",
+    DELETE = "delete",
+    READ = "read"
+}
+
 export {
     DynamoDbTables,
     LanguageCodes,
-    ColorSets
+    ColorSets,
+    AdminMode
 }
