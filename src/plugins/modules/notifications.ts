@@ -63,8 +63,22 @@ export default {
     copiedIconNotification(iconCopied:string): void {
         this.fireSuccessNotification('Icon Copied: ' + iconCopied)
     },
-    loginSuccessNotification() {},
-    loginFailedNotification() {},
-    registerSuccessNotification() {},
-    registerFailedNotification() {},
+    loginSuccessNotification() {
+        this.fireSuccessNotification('Login Successful')
+    },
+    loginFailedNotification() {
+        this.fireErrorNotification('Login Failed')
+    },
+    registerSuccessNotification() {
+        this.fireSuccessNotification('Registration Successful')
+    },
+    registerFailedNotification() {
+        this.fireErrorNotification('Registration Failed')
+    },
+    pagesSavedNotification() {
+        this.fireSuccessNotification('Page Saved Successfully')
+    },
+    pagesDeletedNotification() {
+        this.fireSuccessNotification('Page Deleted Successfully')
+    },
 }

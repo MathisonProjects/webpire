@@ -13,6 +13,7 @@ export default {
         socket.on(SocketResponses.RETURNGETDBSTORE, (response: any) => {
             store.dispatch('menuStore/setInit', response.menu.Items)
             store.dispatch('settingsStore/setInit', response.settings.Items)
+            store.dispatch('pagesStore/setPageList', response.pages.Items)
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
@@ -21,6 +22,57 @@ export default {
         socket.on(SocketResponses.ACCOUNTLOGIN, (response: any) => {
             store.dispatch('userStore/setLogin', response)
             notifications.loginSuccessNotification()
+        })
+
+        socket.on(SocketResponses.SAVEDYNAMICTABLECONTENT, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVEDYNAMICTABLES, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVEMENU, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVEPAGES, (response: any) => {
+            store.dispatch('pagesStore/setPageList', response.pages.Items)
+            notifications.pagesSavedNotification()
+        })
+        socket.on(SocketResponses.SAVEPERMISSIONS, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVEROLES, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVESETTINGS, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.SAVETAGS, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETEDYNAMICTABLECONTENT, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETEDYNAMICTABLES, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETEMENU, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETEPAGES, (response: any) => {
+            store.dispatch('pagesStore/setPageList', response.pages.Items)
+            notifications.pagesDeletedNotification()
+        })
+        socket.on(SocketResponses.DELETEPERMISSIONS, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETEROLES, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETESETTINGS, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.DELETETAGS, (response: any) => {
+            console.log(response)
         })
 
         socket.emit('get dbstore', {})

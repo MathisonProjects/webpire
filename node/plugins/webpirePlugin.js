@@ -25,7 +25,48 @@ class WebpirePlugin {
             case 'get dbstore':
                 return await this.getDbStore()
             case 'save dbstore pages':
-                await await this.saveRecord('proj_webpire_pages', payload)
+                await this.saveRecord('proj_webpire_pages', payload)
+                return await this.getDbStore()
+            case "save dynamicTableContent":
+                await this.saveRecord('proj_webpire_dynamic_table_content', payload)
+                return await this.getDbStore()
+            case "save dynamicTables":
+                await this.saveRecord('proj_webpire_dynamic_tables', payload)
+                return await this.getDbStore()
+            case "save menu":
+                await this.saveRecord('proj_webpire_menu', payload)
+                return await this.getDbStore()
+            case "save pages":
+                await this.saveRecord('proj_webpire_pages', payload)
+                return await this.getDbStore()
+            case "save permissions":
+                await this.saveRecord('proj_webpire_permissions', payload)
+                return await this.getDbStore()
+            case "save roles":
+                await this.saveRecord('proj_webpire_roles', payload)
+                return await this.getDbStore()
+            case "save settings":
+                await this.saveRecord('proj_webpire_settings', payload)
+                return await this.getDbStore()
+            case "save tags":
+                await this.saveRecord('proj_webpire_tags', payload)
+                return await this.getDbStore()
+            case "delete dynamicTableContent":
+                return await this.getDbStore()
+            case "delete dynamicTables":
+                return await this.getDbStore()
+            case "delete menu":
+                return await this.getDbStore()
+            case "delete pages":
+                await this.deleteRecord('proj_webpire_pages', payload)
+                return await this.getDbStore()
+            case "delete permissions":
+                return await this.getDbStore()
+            case "delete roles":
+                return await this.getDbStore()
+            case "delete settings":
+                return await this.getDbStore()
+            case "delete tags":
                 return await this.getDbStore()
             case 'account register':
                 return await Cognito.registerUser(payload)
@@ -105,8 +146,20 @@ class WebpirePlugin {
         })
     }
 
-    async saveRecord(tableName, payload) {}
-
+    async saveRecord(tableName, payload) {
+        const params = {
+            TableName: tableName,
+            Item: payload
+        }
+        docClient.put(params, function(err, data) {})
+    }
+    async deleteRecord(tableName,payload) {
+        const params = {
+            TableName: tableName,
+            Key: { 'id': payload.id }
+        }
+        docClient.delete(params, function(err, data) {})
+    }
     responseHandler(response, code = 200) {
         return {
             code: code,

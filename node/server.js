@@ -15,7 +15,9 @@ const PORT = port.node;
 Plugins.WebpirePlugin.setEndpoint(envVariables.definitions['process.env.STAGE'].replace('"development"', 'development'))
 
 io.on('connection', socket => {
-  console.log('Well hello there...')
+  console.log('--------------Well hello there-------------')
+  console.log("-------------------------------------------")
+
   socket.emit('connection confirmation', { response: 'Confirmed Node Server Connection...' })
 
   for (var i in Plugins.Router) {
@@ -35,4 +37,10 @@ express.get('/', (req, res) => {
 })
 
 server.listen(PORT);
-console.log(`--- Running on http://127.0.0.1:${PORT} ---`);
+console.log(' ')
+console.log(' ')
+console.log(' ')
+console.log("-------------------------------------------")
+console.log('-------Webpire NodeJS Server is Live-------')
+console.log(`----- Running on http://127.0.0.1:${PORT} ----`);
+console.log("-------------------------------------------")

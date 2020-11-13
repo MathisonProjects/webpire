@@ -8,12 +8,12 @@
 				<v-btn color='primary' small @click='mode = adminModesList.VIEW' v-if='mode !== adminModesList.VIEW'><v-icon>{{ mdiIconsList.BACKBURGER }}</v-icon> Back</v-btn>
 				<v-btn color='success' small @click='mode = adminModesList.READ' v-if='selected.length > 0'><v-icon>{{ mdiIconsList.EYE }}</v-icon>View</v-btn>
 				<v-btn color='primary' small @click='mode = adminModesList.CREATE' v-if='selected.length === 0 && mode !== adminModesList.CREATE'><v-icon>{{ mdiIconsList.PLUS }}</v-icon> Create</v-btn>
-				<v-btn color='warning' small @click='mode = adminModesList.EDIT' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.PENCIL }}</v-icon>Edit</v-btn>
-				<v-btn color='info' small @click='mode = adminModesList.COPY' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.CONTENTCOPY }}</v-icon>Copy</v-btn>
-				<v-btn color='error' small @click='mode = adminModesList.DELETE' v-if='selected.length > 0'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
+				<v-btn color='warning' small @click='mode = adminModesList.UPDATE' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.PENCIL }}</v-icon>Edit</v-btn>
+				<v-btn color='info' small @click='copyPage' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.CONTENTCOPY }}</v-icon>Copy</v-btn>
+				<v-btn color='error' small @click='mode = adminModesList.DELETE' v-if='selected.length > 0 && mode !== adminModesList.DELETE'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
 			</div>
 		</div>
-		<VuetifyDataTableComponent :headers='pageHeaders' :items='items' @tableUpdate='tableUpdate' v-if='mode === adminModesList.VIEW' />
+		<VuetifyDataTableComponent :headers='pageHeaders' :items='items' @tableUpdate='tableUpdate' :showSelect='true' v-if='mode === adminModesList.VIEW' />
 
 		<v-card v-if='mode === adminModesList.CREATE || mode === adminModesList.UPDATE'>
 			<v-card-title v-if='mode === adminModesList.CREATE'>Create Page</v-card-title>
@@ -74,7 +74,7 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer />
-				<v-btn color='error' @click='confirmDeletion'></v-btn>
+				<v-btn color='error' @click='confirmDeletion' small><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
 			</v-card-actions>
 		</v-card>
 
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-	import { MdiIcons, AdminMode } from '@/enums'
+	import { MdiIcons, AdminMode, SocketFuncs } from '@/enums'
 	import { uuid } from 'uuidv4'
 
     export default {
@@ -139,7 +139,7 @@
 				return pageHeaders
 			},
 			items() {
-				return []
+				return this.$store.state.pagesStore.pageList
 			}
 		},
 		data()      {
@@ -151,7 +151,9 @@
 					key: null,
 					type: null,
 					preset: null,
-					fieldData: []
+					fieldData: [],
+					created_at: null,
+					updated_at: null
 				},
 				mode: AdminMode.VIEW
 			}
@@ -162,6 +164,18 @@
 			},
 			confirmDeletion() {
 				this.mode = AdminMode.VIEW
+				for (let i in this.selected) {
+					this.$p.socket.socketEmitFire(SocketFuncs.DELETEPAGES, this.selected[i])
+				}
+				this.selected = []
+			},
+			copyPage() {
+				this.pageForm = this.selected[0]
+				this.pageForm.id = uuid()
+				this.pageForm.created_at = Date.now()
+				this.pageForm.updated_at = Date.now()
+
+				this.$p.socket.socketEmitFire(SocketFuncs.SAVEPAGES, this.pageForm)
 			},
 			addField() {
 				this.pageForm.fieldData.push({
@@ -171,12 +185,38 @@
 					content: null
 				})
 			},
-			resetRecord() {},
+			resetRecord() {
+				this.pageForm = {
+					id: null,
+					name: null,
+					key: null,
+					type: null,
+					preset: null,
+					fieldData: [],
+					created_at: null,
+					updated_at: null
+				}
+			},
 			saveRecord() {
-				console.log(this.pageForm)
+				if (this.pageForm.id === null) {
+					this.pageForm.id = uuid()
+				}
+				if (this.pageForm.created_at === null) {
+					this.pageForm.created_at = Date.now()
+				}
+
+				this.pageForm.updated_at = Date.now()
+
+				this.$p.socket.socketEmitFire(SocketFuncs.SAVEPAGES, this.pageForm)
 			}
 		},
-		watch     : {}
+		watch     : {
+			mode(newVal) {
+				if (newVal === AdminMode.UPDATE) {
+					this.pageForm = this.selected[0]
+				}
+			}
+		}
     }
 </script>
 
