@@ -11,6 +11,7 @@ const componentList = {
     HomeComponent : require('@/pages/HomeComponent.vue').default,
     AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
     AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
+    AdminDynamicTablesComponent : require('@/pages/admin/DynamicTablesComponent.vue').default,
 	AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
 	AdminPagesComponent : require('@/pages/admin/PagesComponent.vue').default,
 	AdminSettingsComponent: require('@/pages/admin/SettingsComponent.vue').default
@@ -59,6 +60,14 @@ const routes = [
 				component: componentList.AdminIconsComponent,
 				meta: {
 					title: "Icons"
+				}
+			},
+			{
+				path: 'dynamic-tables',
+				name: 'admin-dynamic-tables',
+				component: componentList.AdminDynamicTablesComponent,
+				meta: {
+					title: "Dynamic Tables"
 				}
 			},
 			{

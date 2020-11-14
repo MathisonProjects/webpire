@@ -64,7 +64,7 @@
         "type": "admin",
         "oid": 3,
         "key": "/admin/roles",
-        "icon": "mdi-view",
+        "icon": "mdi-police-badge-outline",
         "text": "Roles",
         "page": "admin-roles",
         "internal": true

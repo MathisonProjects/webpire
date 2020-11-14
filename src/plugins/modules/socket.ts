@@ -14,14 +14,19 @@ export default {
             store.dispatch('menuStore/setInit', response.menu.Items)
             store.dispatch('settingsStore/setInit', response.settings.Items)
             store.dispatch('pagesStore/setPageList', response.pages.Items)
+            store.dispatch('jsonStore/reset')
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
             console.log(response)
         })
         socket.on(SocketResponses.ACCOUNTLOGIN, (response: any) => {
-            store.dispatch('userStore/setLogin', response)
-            notifications.loginSuccessNotification()
+            if (response.payload === null) {
+                notifications.loginFailedNotification(response.err.message)
+            } else {
+                store.dispatch('userStore/setLogin', response)
+                notifications.loginSuccessNotification()
+            }
         })
 
         socket.on(SocketResponses.SAVEDYNAMICTABLECONTENT, (response: any) => {
@@ -31,7 +36,8 @@ export default {
             console.log(response)
         })
         socket.on(SocketResponses.SAVEMENU, (response: any) => {
-            console.log(response)
+            store.dispatch('menuStore/setInit', response.menu.Items)
+            notifications.menuSavedNotification()
         })
         socket.on(SocketResponses.SAVEPAGES, (response: any) => {
             store.dispatch('pagesStore/setPageList', response.pages.Items)
@@ -56,7 +62,8 @@ export default {
             console.log(response)
         })
         socket.on(SocketResponses.DELETEMENU, (response: any) => {
-            console.log(response)
+            store.dispatch('menuStore/setInit', response.menu.Items)
+            notifications.menuDeletedNotification()
         })
         socket.on(SocketResponses.DELETEPAGES, (response: any) => {
             store.dispatch('pagesStore/setPageList', response.pages.Items)

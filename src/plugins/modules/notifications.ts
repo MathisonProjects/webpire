@@ -66,8 +66,8 @@ export default {
     loginSuccessNotification() {
         this.fireSuccessNotification('Login Successful')
     },
-    loginFailedNotification() {
-        this.fireErrorNotification('Login Failed')
+    loginFailedNotification(msg: string) {
+        this.fireErrorNotification(msg)
     },
     registerSuccessNotification() {
         this.fireSuccessNotification('Registration Successful')
@@ -81,4 +81,10 @@ export default {
     pagesDeletedNotification() {
         this.fireSuccessNotification('Page Deleted Successfully')
     },
+    menuSavedNotification() {
+        this.fireSuccessNotification('Menu Saved Successfully')
+    },
+    menuDeletedNotification() {
+        this.fireErrorNotification('Menu Deleted Successfully')
+    }
 }
