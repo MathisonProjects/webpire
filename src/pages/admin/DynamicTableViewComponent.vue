@@ -13,27 +13,32 @@
                     <v-btn color='primary' small @click='mode = adminModesList.VIEW' v-if='mode !== adminModesList.VIEW'><v-icon>{{ mdiIconsList.BACKBURGER }}</v-icon> Back</v-btn>
                     <v-btn color='primary' small @click='mode = adminModesList.CREATE' v-if='selected.length === 0 && mode !== adminModesList.CREATE'><v-icon>{{ mdiIconsList.PLUS }}</v-icon> Create</v-btn>
                     <v-btn color='warning' small @click='mode = adminModesList.UPDATE' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.PENCIL }}</v-icon>Edit</v-btn>
-                    <v-btn color='info' small @click='copyTable' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.CONTENTCOPY }}</v-icon>Copy</v-btn>
+                    <v-btn color='info' small @click='copyRecord' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.CONTENTCOPY }}</v-icon>Copy</v-btn>
                     <v-btn color='error' small @click='mode = adminModesList.DELETE' v-if='selected.length > 0 && mode !== adminModesList.DELETE'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
                 </div>
             </div>
-		    <VuetifyDataTableComponent :headers='headers' :items='items' @tableUpdate='tableUpdate' :showSelect='true' v-if='mode === adminModesList.VIEW' />
+		    <VuetifyDataTableComponent :headers='headers' :items='itemsDisplayList' @tableUpdate='tableUpdate' :showSelect='true' v-if='mode === adminModesList.VIEW' />
             <v-card v-if='mode === adminModesList.CREATE || mode === adminModesList.UPDATE'>
-                <v-card-title></v-card-title>
+                <v-card-title>
+                    {{ currentTable.name }}
+                    <v-spacer />
+                    <v-btn color='success' @click='saveTableViewRecord'><v-icon>{{ mdiIconsList.CONTENTSAVE }}</v-icon> Save</v-btn>
+                </v-card-title>
                 <v-card-text>
                     <div class='row'>
                         <div class='col'>
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                 <div class='col'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData[item.key]' dense />
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' dense />
                                 </div>
                             </div>
                         </div>
                         <div class='col'>
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                 <div class='col' v-if='item.name !== "[ FILLER ]"'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData[item.key]' dense />
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' dense />
                                 </div>
+                                <div class='col my-4' v-if='item.name === "[ FILLER ]"'><div class='mt-4'></div></div>
                             </div>
                         </div>
                     </div>
@@ -44,7 +49,8 @@
 </template>
 
 <script>
-    import { AdminMode, MdiIcons } from '@/enums'
+    import { AdminMode, MdiIcons, SocketFuncs } from '@/enums'
+    import { uuid } from 'uuidv4'
 
     export default {
 		name      : "admin-dynamic-table-view-component",
@@ -92,7 +98,20 @@
 				return pageHeaders
             },
             items() {
-                return []
+                return this.$store.state.dynamicTableContentStore.contentList.filter( (item) => {
+                    return item.tid === this.currentTable.id
+                })
+            },
+            itemsDisplayList() {
+                return this.items.map( (item) => {
+                    return {
+                        id: item.id,
+                        name: item.content.name,
+                        description: item.content.description,
+                        created_at: item.created_at,
+                        updated_at: item.updated_at
+                    }
+                })
             }
 		},
 		data()      {
@@ -105,13 +124,57 @@
 		methods   : {
             tableUpdate(response) {
 				this.selected = response
+            },
+            saveTableViewRecord() {
+                this.formData.updated_at = Date.now()
+                this.formData.content.updated_at = Date.now()
+                this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, this.formData)
+                this.mode = AdminMode.VIEW
+            },
+            resetFormData() {
+                this.formData = {
+                    id: uuid(),
+                    tid: this.currentTable.id,
+                    content: {}
+                }
+                for (let i in this.currentTable.displayFieldsLeft) {
+                    if (this.currentTable.displayFieldsLeft[i].key === null) continue
+                    this.formData.content[this.currentTable.displayFieldsLeft[i].key] = null
+                }
+                for (let i in this.currentTable.displayFieldsRight) {
+                    if (this.currentTable.displayFieldsRight[i].key === null) continue
+
+                    this.formData.content[this.currentTable.displayFieldsRight[i].key] = null
+                }
+                for (let i in this.currentTable.fields) {
+                    if (this.currentTable.fields[i].key === null) continue
+                    this.formData.content[this.currentTable.fields[i].key] = null
+                }
+                this.formData.created_at = Date.now()
+                this.formData.content.created_at = Date.now()
+            },
+            copyRecord() {
+                this.formData = this.items.filter( item => {
+                    return this.selected[0].id === item.id
+                })[0]
+                this.formData.id = uuid()
+                this.formData.created_at = Date.now()
+                this.formData.content.created_at = Date.now()
+                this.formData.updated_at = Date.now()
+                this.formData.content.updated_at = Date.now()
+                this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, this.formData)
             }
         },
 		watch     : {
             mode(newVal) {
 				if (newVal === AdminMode.UPDATE) {
-					this.dynamicTableForm = this.selected[0]
-				}
+					this.formData = this.items.filter( item => {
+                        return this.selected[0].id === item.id
+                    })[0]
+                }
+                if (newVal === AdminMode.CREATE) {
+                    this.resetFormData()
+                }
 			}
         }
     }
