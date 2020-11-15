@@ -15,6 +15,7 @@ export default {
             store.dispatch('settingsStore/setInit', response.settings.Items)
             store.dispatch('pagesStore/setPageList', response.pages.Items)
             store.dispatch('jsonStore/reset')
+            store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items)
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
@@ -33,7 +34,8 @@ export default {
             console.log(response)
         })
         socket.on(SocketResponses.SAVEDYNAMICTABLES, (response: any) => {
-            console.log(response)
+            store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items) // Dinner Time!
+            notifications.dynamicTableSavedNotification()
         })
         socket.on(SocketResponses.SAVEMENU, (response: any) => {
             store.dispatch('menuStore/setInit', response.menu.Items)
@@ -59,7 +61,7 @@ export default {
             console.log(response)
         })
         socket.on(SocketResponses.DELETEDYNAMICTABLES, (response: any) => {
-            console.log(response)
+            notifications.dynamicTableDeletedNotification()
         })
         socket.on(SocketResponses.DELETEMENU, (response: any) => {
             store.dispatch('menuStore/setInit', response.menu.Items)

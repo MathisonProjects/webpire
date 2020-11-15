@@ -1,42 +1,18 @@
 [
     {
         "name": "Blog",
-        "rows": [
-            {
-                "collection": false,
-                "type": "string",
-                "name": "Title"
-            }
-        ]
+        "key": "blog"
     },
     {
         "name": "News",
-        "rows": [
-            {
-                "collection": false,
-                "type": "string",
-                "name": "Article Title"
-            }
-        ]
+        "key": "News"
     },
     {
         "name": "Shop",
-        "rows": [
-            {
-                "collection": false,
-                "type": "string",
-                "name": "Product Name"
-            }
-        ]
+        "key": "shop"
     },
     {
         "name": "Wiki",
-        "rows": [
-            {
-                "collection": false,
-                "type": "string",
-                "name": "Article Name"
-            }
-        ]
+        "key": "wiki"
     }
 ]

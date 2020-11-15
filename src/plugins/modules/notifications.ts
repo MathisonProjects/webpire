@@ -86,5 +86,11 @@ export default {
     },
     menuDeletedNotification() {
         this.fireErrorNotification('Menu Deleted Successfully')
-    }
+    },
+    dynamicTableSavedNotification() {
+        this.fireSuccessNotification('Dynamic Table Saved Successfully')
+    },
+    dynamicTableDeletedNotification() {
+        this.fireErrorNotification('Dynamic Table Deleted Successfully')
+    },
 }
