@@ -29,6 +29,9 @@
                 </div>
                 <div class='row'>
                     <div class='col'>
+                        <v-autocomplete dense placeholder='Choose your table icon...' label='Icon' :items='iconList' v-model='dynamicTableForm.icon' />
+                    </div>
+                    <div class='col'>
 						<v-text-field label='Description' dense placeholder="ex. Records of important contacts." v-model='dynamicTableForm.description' clearable />
                     </div>
                 </div>
@@ -110,12 +113,16 @@
 			mdiIconsList() {
 				return MdiIcons
             },
+            iconList() {
+                return this.$store.state.jsonStore.materialistIconsList
+            },
             fieldTypeList() {
                 return [
                     'text',
                     'wysiwyg',
                     'number',
                     'currency',
+                    'computed',
                     'date',
                     'time',
                     'datetime',
@@ -148,6 +155,7 @@
                 selected: [],
                 dynamicTableForm: {
                     id  : '',
+                    icon: '',
                     name: '',
                     key : '',
                     description: '',

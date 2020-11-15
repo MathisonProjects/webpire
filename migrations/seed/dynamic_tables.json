@@ -1,18 +1,46 @@
 [
     {
         "name": "Blog",
-        "key": "blog"
+        "key": "blog",
+        "description": "",
+        "icon": "",
+        "fields": [],
+        "displayFieldsLeft": [],
+        "displayFieldsRight": [],
+        "created_at": "",
+        "updated_at": ""
     },
     {
         "name": "News",
-        "key": "News"
+        "key": "news",
+        "description": "",
+        "icon": "",
+        "fields": [],
+        "displayFieldsLeft": [],
+        "displayFieldsRight": [],
+        "created_at": "",
+        "updated_at": ""
     },
     {
         "name": "Shop",
-        "key": "shop"
+        "key": "shop",
+        "description": "",
+        "icon": "",
+        "fields": [],
+        "displayFieldsLeft": [],
+        "displayFieldsRight": [],
+        "created_at": "",
+        "updated_at": ""
     },
     {
         "name": "Wiki",
-        "key": "wiki"
+        "key": "wiki",
+        "description": "",
+        "icon": "",
+        "fields": [],
+        "displayFieldsLeft": [],
+        "displayFieldsRight": [],
+        "created_at": "",
+        "updated_at": ""
     }
 ]
