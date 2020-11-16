@@ -7,6 +7,7 @@
             <div class='col-md-6 text-right'>
                 <v-btn icon rounded @click="$router.push('/')"><v-icon small>{{ mdiIconsList.HOME }}</v-icon></v-btn>
                 <v-btn icon rounded><v-icon small>{{ mdiIconsList.BELL }}</v-icon></v-btn>
+                <v-btn icon rounded @click='logout'><v-icon small>{{ mdiIconsList.LOGOUT }}</v-icon></v-btn>
             </div>
         </div>
         <v-container>
@@ -33,7 +34,12 @@
 		data()      {
             return {}
         },
-		methods   : {},
+		methods   : {
+            logout() {
+                this.$store.dispatch('userStore/logout')
+                this.$p.notifications.logoutSuccessfulNotification()
+            }
+        },
 		watch     : {}
     }
 </script>

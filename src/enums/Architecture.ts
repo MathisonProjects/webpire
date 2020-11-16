@@ -29,9 +29,16 @@ enum AdminMode {
     READ = "read"
 }
 
+enum AccessMode {
+    REGISTER = 'register',
+    LOGIN = 'login',
+    FORGET = 'forget'
+}
+
 export {
     DynamoDbTables,
     LanguageCodes,
     ColorSets,
-    AdminMode
+    AdminMode,
+    AccessMode
 }

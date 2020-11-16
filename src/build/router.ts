@@ -5,10 +5,13 @@ Vue.use(VueRouter)
 
 const layoutList = {
     DefaultLayout : require('@/layouts/DefaultLayoutComponent.vue').default,
+    MemberLayout : require('@/layouts/DefaultMemberComponent.vue').default,
     AdminLayout : require('@/layouts/AdminLayoutComponent.vue').default,
 }
 const componentList = {
     HomeComponent : require('@/pages/HomeComponent.vue').default,
+    AccessComponent : require('@/pages/AccessComponent.vue').default,
+    MemberHomeComponent : require('@/pages/member/HomeComponent.vue').default,
     AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
     AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
     AdminDynamicTablesComponent : require('@/pages/admin/DynamicTablesComponent.vue').default,
@@ -31,8 +34,31 @@ const routes = [
 				meta: {
 					title: "Home"
 				}
-            }
+			},
+			{
+				path: 'access',
+				name: 'default-access',
+				component: componentList.AccessComponent,
+				meta: {
+					title: "Access"
+				}
+			},
         ]
+	},
+	{
+		path: '/m',
+		component: layoutList.MemberLayout,
+		props: true,
+		children: [
+			{
+				path: '/',
+				name: 'member-home',
+				component: componentList.MemberHomeComponent,
+				meta: {
+					title: "User Dashboard"
+				}
+			}
+		]
 	},
 	{
 		path: '/admin',

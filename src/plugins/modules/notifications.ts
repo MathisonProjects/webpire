@@ -69,6 +69,9 @@ export default {
     loginFailedNotification(msg: string) {
         this.fireErrorNotification(msg)
     },
+    logoutSuccessfulNotification() {
+        this.fireSuccessNotification('Logout Successful')
+    },
     registerSuccessNotification() {
         this.fireSuccessNotification('Registration Successful')
     },

@@ -1,16 +1,23 @@
 <template>
-    <div>
-        <h1><v-icon large>{{ mdiIconsList.TESTTUBEEMPTY }}</v-icon> Template</h1>
-		<p><b>AWS Vue Template</b> This is built off of a template.</p>
-    </div>
+    <v-app>
+		<SnackbarNotificationComponent />
+        <v-main>
+			<v-container>
+				<transition name='fade' mode='out-in'>
+					<router-view />
+				</transition>
+			</v-container>
+		</v-main>
+    </v-app>
 </template>
 
 <script>
+    import SnackbarNotificationComponent from '@/components/shared/SnackbarNotificationComponent'
 	import { MdiIcons } from '@/enums'
 	import jwt from 'jsonwebtoken'
 
     export default {
-		name      : "template-component",
+		name      : "layout-member-component",
 		props     : [],
 		components: {},
 		created()   {},
