@@ -14,7 +14,7 @@
         </div>
 
         <v-expansion-panels focusable>
-            <v-expansion-panel v-for='(menuItem, index) in menuList' :key='index' >
+            <v-expansion-panel v-for='(menuItem, index) in menuList' :key='menuItem.oid' >
                 <v-expansion-panel-header><span><v-icon>{{ menuItem.icon }}</v-icon> {{ menuItem.text }}</span></v-expansion-panel-header>
                 <v-expansion-panel-content>
                     <v-card>
@@ -37,8 +37,8 @@
                         <v-card-actions>
                             <v-spacer />
                             <v-btn color='primary' small @click='copyMenuItem(menuItem)'><v-icon>{{ mdiIconsList.CONTENTCOPY }}</v-icon></v-btn>
-                            <v-btn color='warning' small><v-icon>{{ mdiIconsList.ARROWUP }}</v-icon></v-btn>
-                            <v-btn color='warning' small><v-icon>{{ mdiIconsList.ARROWDOWN }}</v-icon></v-btn>
+                            <v-btn color='warning' small @click='changeOrderId(index, -1)'><v-icon>{{ mdiIconsList.ARROWUP }}</v-icon></v-btn>
+                            <v-btn color='warning' small @click='changeOrderId(index, 1)'><v-icon>{{ mdiIconsList.ARROWDOWN }}</v-icon></v-btn>
                             <v-btn color='error' small @click='deleteMenu(menuItem, index)'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon></v-btn>
                         </v-card-actions>
                     </v-card>
@@ -98,6 +98,14 @@
             }
         },
 		methods   : {
+            changeOrderId(index, change) {
+                const index2 = index + change
+                if (this.menuList[index2] !== undefined) {
+                    this.menuList[index2].oid -= change
+                }
+                this.menuList[index].oid += change
+                let forceComputedUpdate = this.menu
+            },
             saveMenu() {
                 for (let i in this.menuList) {
                     const menuItem = this.menuList[i]

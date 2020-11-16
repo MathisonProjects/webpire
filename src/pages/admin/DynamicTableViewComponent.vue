@@ -7,7 +7,7 @@
         <div v-if='currentTable !== null'>
             <div class='row'>
                 <div class='col'>
-                    <h1><v-icon large>{{ currentTable.icon }}</v-icon> {{ currentTable.name}}</h1>
+                    <h1><v-icon large>{{ currentTable.icon }}</v-icon> {{ currentTable.name}} - {{ mode.toUpperCase() }}</h1>
                 </div>
                 <div class='col text-right'>
                     <v-btn color='primary' small @click='mode = adminModesList.VIEW' v-if='mode !== adminModesList.VIEW'><v-icon>{{ mdiIconsList.BACKBURGER }}</v-icon> Back</v-btn>
@@ -22,23 +22,28 @@
                 <v-card-title>
                     {{ currentTable.name }}
                     <v-spacer />
-                    <v-btn color='success' @click='saveTableViewRecord'><v-icon>{{ mdiIconsList.CONTENTSAVE }}</v-icon> Save</v-btn>
+                    <v-btn color='success' small @click='saveTableViewRecord'><v-icon>{{ mdiIconsList.CONTENTSAVE }}</v-icon> Save</v-btn>
                 </v-card-title>
                 <v-card-text>
                     <div class='row'>
                         <div class='col'>
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
-                                <div class='col'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' dense />
+                                <div class='col' v-if='item.type !== "filler"'>
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
                                 </div>
+                                <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
                         </div>
                         <div class='col'>
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
-                                <div class='col' v-if='item.name !== "[ FILLER ]"'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' dense />
+                                <div class='col' v-if='item.type !== "filler"'>
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
                                 </div>
-                                <div class='col my-4' v-if='item.name === "[ FILLER ]"'><div class='mt-4'></div></div>
+                                <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
                         </div>
                     </div>
@@ -50,13 +55,18 @@
 
 <script>
     import { AdminMode, MdiIcons, SocketFuncs } from '@/enums'
+    import moment from 'moment'
     import { uuid } from 'uuidv4'
 
     export default {
 		name      : "admin-dynamic-table-view-component",
 		props     : [],
 		components: {},
-		created()   {},
+		created()   {
+            if (this.routeMode !== null) {
+                this.mode = this.routeMode
+            }
+        },
 		computed  : {
             adminModesList() {
 				return AdminMode
@@ -92,7 +102,7 @@
 					let fixedText = visibleFields[i].replace('_', ' ')
 					fixedText = fixedText.split(' ').map( item => { return item.charAt(0).toUpperCase() + item.slice(1)}).join(' ')
 					pageHeaders.push({
-						text: fixedText, value: visibleFields[i], align: 'middle', sortable: true
+						text: fixedText, value: visibleFields[i], align: 'left', sortable: true
 					})
 				}
 				return pageHeaders
@@ -102,14 +112,20 @@
                     return item.tid === this.currentTable.id
                 })
             },
+            routeMode() {
+                return (this.$route.params.mode !== undefined) ? this.$route.params.mode : null
+            },
+            routeId() {
+                return (this.$route.params.id !== undefined) ? this.$route.params.id : null
+            },
             itemsDisplayList() {
                 return this.items.map( (item) => {
                     return {
                         id: item.id,
                         name: item.content.name,
                         description: item.content.description,
-                        created_at: item.created_at,
-                        updated_at: item.updated_at
+                        created_at: this.$p.standardFuncs.standardizedTime(item.created_at),
+                        updated_at: this.$p.standardFuncs.standardizedTime(item.updated_at)
                     }
                 })
             }

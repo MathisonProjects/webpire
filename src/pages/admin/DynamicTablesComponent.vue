@@ -51,6 +51,9 @@
                     <div class='col'>
                         <v-text-field label='Key' dense placeholder='DB Key of field' v-model='fieldItem.key' />
                     </div>
+                    <div class='col text-center' v-if='fieldItem.type === "dropdown"'>
+                        <v-text-field label='Dropdown Options' dense placeholder='Comma list of dropdown options' v-model='fieldItem.options' />
+                    </div>
                     <div class='col-md-1 text-center'>
                         <v-btn color='error' small><v-icon>{{mdiIconsList.TRASHCANOUTLINE}}</v-icon></v-btn>
                     </div>
@@ -126,7 +129,9 @@
                     'date',
                     'time',
                     'datetime',
-                    'related to'
+                    'dropdown',
+                    'related to',
+                    'filler'
                 ]
             },
             dynamicTablesHeader() {
@@ -195,8 +200,9 @@
             addField() {
                 this.dynamicTableForm.fields.push({
                     key: null,
-                    name: '[ FILLER ]',
-                    type: null
+                    name: null,
+                    type: 'filler',
+                    options: null
                 })
             },
             saveTable() {

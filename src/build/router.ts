@@ -102,6 +102,22 @@ const routes = [
 				meta: {
 					title: "Dynamic Table View"
 				}
+			},
+			{
+				path: 'dt/:key/:mode',
+				name: 'admin-dynamic-table-view',
+				component: componentList.AdminDynamicTableViewComponent,
+				meta: {
+					title: "Dynamic Table View"
+				}
+			},
+			{
+				path: 'dt/:key/:mode/:id',
+				name: 'admin-dynamic-table-view',
+				component: componentList.AdminDynamicTableViewComponent,
+				meta: {
+					title: "Dynamic Table View"
+				}
 			}
         ]
 	}
