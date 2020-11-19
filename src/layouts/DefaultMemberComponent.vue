@@ -1,7 +1,7 @@
 <template>
     <v-app>
 		<SnackbarNotificationComponent />
-        <v-main>
+        <v-main v-if='loggedIn'>
 			<v-container>
 				<transition name='fade' mode='out-in'>
 					<router-view />
@@ -19,7 +19,9 @@
     export default {
 		name      : "layout-member-component",
 		props     : [],
-		components: {},
+		components: {
+			SnackbarNotificationComponent
+		},
 		created()   {},
 		computed  : {
 			mdiIconsList() {
@@ -34,7 +36,19 @@
 				} else {
 					return null
 				}
-            }
+            },
+			loggedIn() {
+				if (this.parsedJwt !== null) {
+					const expirationTime = parseInt(this.parsedJwt.payload.exp + '000')
+					const currentTime = Date.now()
+					if (expirationTime > currentTime) {
+						return true
+					} else {
+						this.$router.push('/access')
+					}
+				}
+				this.$router.push('/access')
+			}
 		},
 		data()      { return {} },
 		methods   : {},

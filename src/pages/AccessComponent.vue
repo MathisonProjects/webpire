@@ -47,6 +47,7 @@
 					const expirationTime = parseInt(this.parsedJwt.payload.exp + '000')
 					const currentTime = Date.now()
 					if (expirationTime > currentTime) {
+                        this.$router.push('/m')
 						return true
 					} else {
 						return false

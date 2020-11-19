@@ -105,11 +105,18 @@ class WebpirePlugin {
             case "reset tags":
                 await this.resetTable('proj_webpire_tags')
                 break
+            case "get all users":
+                return await this.getAllUsers()
+                break
             default:
                 return this.responseHandler({}, 404)
                 break
         }
         return {}
+    }
+
+    async getAllUsers() {
+        return await Cognito.allUsers()
     }
 
     async getDbStore() {

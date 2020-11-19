@@ -27,5 +27,6 @@
     "delete tags",
     "account register",
     "account login",
-    "account forget"
+    "account forget",
+    "get all users"
 ]

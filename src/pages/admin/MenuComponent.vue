@@ -84,7 +84,8 @@
             menuTypes() {
                 return [
                     'admin',
-                    'main'
+                    'main',
+                    'member'
                 ]
             },
 			mdiIconsList() {

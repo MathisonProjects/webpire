@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1><v-icon large>{{ mdiIconsList.TESTTUBEEMPTY }}</v-icon> Dashboard</h1>
+        <h1><v-icon large>{{ mdiIconsList.TESTTUBEEMPTY }}</v-icon> Template</h1>
 		<p><b>AWS Vue Template</b> This is built off of a template.</p>
     </div>
 </template>
@@ -10,7 +10,7 @@
 	import jwt from 'jsonwebtoken'
 
     export default {
-		name      : "member-home-component",
+		name      : "member-settings-component",
 		props     : [],
 		components: {},
 		created()   {},

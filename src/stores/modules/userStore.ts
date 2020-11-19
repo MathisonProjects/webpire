@@ -1,15 +1,19 @@
+import jwt from 'jsonwebtoken'
+
 interface IUserStore {
     jwt: string
     username: string
     uid: string
     email: string
     sub: string
+    email_verified: boolean
 }
 
 export default {
     state: {
         jwt: null,
         uid: null,
+        sub: null, // uid & sub the same
         username: null,
         email_verified: null,
         email: null
@@ -23,6 +27,10 @@ export default {
         },
         SET_UID(state: IUserStore, payload: string) {
             state.uid = payload
+            state.sub = payload
+        },
+        SET_EMAILVERIFIED(state: IUserStore, payload: boolean) {
+            state.email_verified = payload
         },
         SET_EMAIL(state: IUserStore, payload: string) {
             state.email = payload
@@ -30,8 +38,10 @@ export default {
     },
     actions: {
         setLogin({commit} : { commit: any }, payload: IUserStore) {
+            const jwtParsed: any = jwt.decode(payload.jwt, {complete: true})
+            commit('SET_USERNAME', jwtParsed.payload['cognito:username'])
+            commit('SET_EMAILVERIFIED', jwtParsed.payload.email_verified)
             commit('SET_JWT', payload.jwt)
-            commit('SET_USERNAME', payload.username)
             commit('SET_UID', payload.sub)
             commit('SET_EMAIL', payload.email)
         },

@@ -2,6 +2,7 @@ import io, { Socket } from 'socket.io-client'
 import store from '@/stores'
 import notifications from './notifications'
 import { SocketFuncs, SocketResponses } from '@/enums'
+import { AnyNsRecord } from 'dns'
 const socket = io('http://localhost:8082')
 
 export default {
@@ -17,12 +18,15 @@ export default {
             store.dispatch('jsonStore/reset')
             store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items)
             store.dispatch('dynamicTableContentStore/setContentList', response.dynamic_table_content.Items)
-
-            console.log(response)
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
-            console.log(response)
+            if (response.payload === null) {
+                notifications.registerFailedNotification()
+            } else {
+                store.dispatch('userStore/setLogin', response)
+                notifications.registerSuccessNotification()
+            }
         })
         socket.on(SocketResponses.ACCOUNTLOGIN, (response: any) => {
             if (response.payload === null) {
@@ -88,7 +92,37 @@ export default {
             console.log(response)
         })
 
+        socket.on(SocketResponses.CHATGETCONVERSATIONS, (response: any) => {
+            store.dispatch('chatModuleStore/setConversationList', response)
+        })
+        socket.on(SocketResponses.CHATSETCONVERSATION, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.CHATGETMESSAGES, (response: any) => {
+            store.dispatch('chatModuleStore/setChatMessageList', response)
+        })
+        socket.on(SocketResponses.CHATSETMESSAGES, (response: any) => {
+            console.log(response)
+        })
+        socket.on(SocketResponses.ACCOUNTGETALLUSERS, (response: any) => {
+            let userMap = response.Users.map( (item:any) => {
+                const user: any = {
+                    username: item.Username,
+                    enabled: item.Enabled,
+                    created_at: item.UserCreateDate,
+                    updated_at: item.UserLastModifiedDate,
+                    status: item.UserStatus
+                }
+                for (let i in item.Attributes) {
+                    user[item.Attributes[i].Name] = item.Attributes[i].Value
+                }
+                return user
+            })
+            store.dispatch('usersStore/setUserList', userMap)
+        })
+
         socket.emit('get dbstore', {})
+        socket.emit(SocketFuncs.ACCOUNTGETALLUSERS, {})
     },
     resetToFactorySettings(resetFunc: SocketFuncs) {
         socket.emit(resetFunc, {})

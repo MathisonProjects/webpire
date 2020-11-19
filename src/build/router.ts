@@ -12,6 +12,8 @@ const componentList = {
     HomeComponent : require('@/pages/HomeComponent.vue').default,
     AccessComponent : require('@/pages/AccessComponent.vue').default,
     MemberHomeComponent : require('@/pages/member/HomeComponent.vue').default,
+    MemberChatComponent : require('@/pages/member/ChatComponent.vue').default,
+    MemberSettingsComponent : require('@/pages/member/SettingsComponent.vue').default,
     AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
     AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
     AdminDynamicTablesComponent : require('@/pages/admin/DynamicTablesComponent.vue').default,
@@ -52,10 +54,26 @@ const routes = [
 		children: [
 			{
 				path: '/',
-				name: 'member-home',
+				name: 'member-dashboard',
 				component: componentList.MemberHomeComponent,
 				meta: {
-					title: "User Dashboard"
+					title: "Dashboard"
+				}
+			},
+			{
+				path: 'chat',
+				name: 'member-home',
+				component: componentList.MemberChatComponent,
+				meta: {
+					title: "Chat"
+				}
+			},
+			{
+				path: 'settings',
+				name: 'member-home',
+				component: componentList.MemberSettingsComponent,
+				meta: {
+					title: "Settings"
 				}
 			}
 		]

@@ -28,10 +28,15 @@ enum SocketFuncs {
     DELETESETTINGS                    = 'delete settings',
     DELETETAGS                        = 'delete tags',
 
-
+    ACCOUNTGETALLUSERS                = 'get all users',
     ACCOUNTREGISTER                   = 'account register',
     ACCOUNTLOGIN                      = 'account login',
     ACCOUNTFORGET                     = 'account forget',
+
+    CHATGETCONVERSATIONS              = 'get conversations',
+    CHATSETCONVERSATION               = 'set conversation',
+    CHATGETMESSAGES                   = 'get messages',
+    CHATSETMESSAGE                    = 'set message',
 }
 
 enum SocketResponses {
@@ -56,9 +61,15 @@ enum SocketResponses {
     DELETESETTINGS                    = 'return delete settings',
     DELETETAGS                        = 'return delete tags',
 
-    ACCOUNTREGISTER       = 'return account register',
-    ACCOUNTLOGIN          = 'return account login',
-    ACCOUNTFORGET         = 'return account forget',
+    ACCOUNTGETALLUSERS                = 'return get all users',
+    ACCOUNTREGISTER                   = 'return account register',
+    ACCOUNTLOGIN                      = 'return account login',
+    ACCOUNTFORGET                     = 'return account forget',
+
+    CHATGETCONVERSATIONS              = 'return get conversations',
+    CHATSETCONVERSATION               = 'return set conversation',
+    CHATGETMESSAGES                   = 'return get messages',
+    CHATSETMESSAGES                   = 'return set message',
 }
 
 export {

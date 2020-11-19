@@ -15,6 +15,7 @@ const PORT = port.node;
 Plugins.WebpirePlugin.setEndpoint(envVariables.definitions['process.env.STAGE'].replace('"development"', 'development'))
 
 io.on('connection', socket => {
+  socket.setMaxListeners(0)
   console.log('|             Well hello there            |')
   console.log("|_________________________________________|")
 
@@ -28,6 +29,28 @@ io.on('connection', socket => {
       })
     })
   }
+
+  socket.on('get conversations', (payload) => {
+    Plugins.ChatPlugin.checkUserExists(payload.uid, __dirname)
+    socket.emit('return get conversations', require(__dirname + '/conversations/' + payload.uid + '/chat_partners.json'))
+  })
+  socket.on('set conversation', (payload) => {
+    Plugins.ChatPlugin.startConversation(payload, __dirname)
+    socket.emit('return get conversations', require(__dirname + '/conversations/' + payload.uid + '/chat_partners.json'))
+  })
+  socket.on('get messages', (payload) => {
+    Plugins.ChatPlugin.checkUserExists(payload.uid, __dirname)
+    Plugins.ChatPlugin.checkMessageExists(payload.uid, payload.id, __dirname)
+    socket.leaveAll()
+    socket.join(payload.id)
+    socket.emit('return get messages', require(__dirname + '/conversations/' + payload.uid + '/'+payload.id+'.json'))
+  })
+  socket.on('set message', (payload) => {
+    Plugins.ChatPlugin.sendMessage(payload, __dirname)
+    socket.emit('return get conversations', require(__dirname + '/conversations/' + payload.from + '/chat_partners.json'))
+    socket.emit('return get messages', require(__dirname + '/conversations/' + payload.from + '/'+payload.conversation.id+'.json'))
+    socket.to(payload.conversation.id).broadcast.emit('return get messages', require(__dirname + '/conversations/' + payload.from + '/'+payload.conversation.id+'.json'))
+  })
 })
 
 express.get('/', (req, res) => {

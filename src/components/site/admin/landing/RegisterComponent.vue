@@ -4,7 +4,7 @@
 
 <script>
     import VuetifyFormComponent from '@/components/shared/VuetifyFormComponent'
-    import { FieldTypes, MdiIcons, LinkActions, ColorSets } from '@/enums'
+    import { FieldTypes, MdiIcons, LinkActions, ColorSets, SocketFuncs } from '@/enums'
     export default {
 		name      : "example-component",
 		props     : [],
@@ -101,7 +101,6 @@
                 } else if (action === LinkActions.REGISTER) {
                     if (this.formData.password === this.formData.passwordRepeat && this.formData.password.length > 6) {
                         this.$p.socket.socketEmitFire(SocketFuncs.ACCOUNTREGISTER, this.formData)
-                        this.$p.notifications.registerNotification(true)
                     } else {
                         this.$p.notifications.registerFailedNotification()
                     }
