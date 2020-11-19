@@ -8,6 +8,8 @@ gitcommit.credentials.json
 
 # local env files
 .env
+.env.development
+.env.production
 
 # Log files
 npm-debug.log*
