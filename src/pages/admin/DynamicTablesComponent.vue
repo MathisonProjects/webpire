@@ -124,12 +124,13 @@
                     'text',
                     'wysiwyg',
                     'number',
-                    'currency',
-                    'computed',
+                    'dropdown',
                     'date',
                     'time',
                     'datetime',
-                    'dropdown',
+                    'currency',
+                    'computed',
+                    'file',
                     'related to',
                     'filler'
                 ]
@@ -206,7 +207,7 @@
                 })
             },
             saveTable() {
-                if (this.dynamicTableForm.id === null) {
+                if (this.dynamicTableForm.id === null || this.dynamicTableForm.id === '') {
 					this.dynamicTableForm.id = uuid()
 				}
 				if (this.dynamicTableForm.created_at === null || this.dynamicTableForm.created_at === undefined || this.dynamicTableForm.created_at === '') {

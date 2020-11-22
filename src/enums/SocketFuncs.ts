@@ -37,6 +37,8 @@ enum SocketFuncs {
     CHATSETCONVERSATION               = 'set conversation',
     CHATGETMESSAGES                   = 'get messages',
     CHATSETMESSAGE                    = 'set message',
+
+    UPLOADFILE                        = 'upload file'
 }
 
 enum SocketResponses {

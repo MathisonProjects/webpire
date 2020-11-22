@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk')
 const Cognito = require('./cognito')
+const s3 = require('./s3')
 const { uuid } = require('uuidv4');
 AWS.config.update({
     region: "us-west-2"
@@ -80,6 +81,7 @@ class WebpirePlugin {
             case 'account login':
                 return await Cognito.loginUser(payload)
             case 'account forget':
+                break
             case "reset dynamicTableContent":
                 await this.resetTable('proj_webpire_dynamic_table_content')
                 break
@@ -108,6 +110,8 @@ class WebpirePlugin {
             case "get all users":
                 return await this.getAllUsers()
                 break
+            case "upload file":
+                s3.upload(payload)
             default:
                 return this.responseHandler({}, 404)
                 break
