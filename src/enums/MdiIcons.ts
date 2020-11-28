@@ -17,6 +17,7 @@ enum MdiIcons {
     ALPHAVBOXOUTLINE          = 'mdi-alpha-v-box-outline',
     ARROWDOWNBOLD             = "mdi-arrow-down-bold",
     ARROWUPBOLD               = "mdi-arrow-up-bold",
+    APPLICATIONEXPORT         = 'mdi-application-export',
     BACKBURGER                = "mdi-backburger",
     BELL                      = "mdi-bell",
     CALENDARMONTH             = "mdi-calendar-month",

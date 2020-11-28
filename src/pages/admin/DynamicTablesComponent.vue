@@ -5,6 +5,7 @@
                 <h1><v-icon large>{{ mdiIconsList.TABLE }}</v-icon> Dynamic Tables</h1>
             </div>
             <div class='col text-right'>
+                <v-btn color='primary' small @click='exportDynamicTables' v-if='selected.length > 0'><v-icon>{{ mdiIconsList.APPLICATIONEXPORT }}</v-icon> Export</v-btn>
 				<v-btn color='primary' small @click='mode = adminModesList.VIEW' v-if='mode !== adminModesList.VIEW'><v-icon>{{ mdiIconsList.BACKBURGER }}</v-icon> Back</v-btn>
                 <v-btn color='primary' small @click='mode = adminModesList.CREATE' v-if='selected.length === 0 && mode !== adminModesList.CREATE'><v-icon>{{ mdiIconsList.PLUS }}</v-icon> Create</v-btn>
 				<v-btn color='warning' small @click='mode = adminModesList.UPDATE' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.PENCIL }}</v-icon>Edit</v-btn>
@@ -159,39 +160,7 @@
             return {
                 mode: AdminMode.VIEW,
                 selected: [],
-                dynamicTableForm: {
-                    id  : '',
-                    icon: '',
-                    name: '',
-                    key : '',
-                    description: '',
-                    fields: [
-                        {
-                            key: 'name',
-                            name: 'Name',
-                            type: 'text'
-                        },
-                        {
-                            key: 'description',
-                            name: 'Description',
-                            type: 'text'
-                        },
-                        {
-                            key: 'created_at',
-                            name: 'Created At',
-                            type: 'datetime'
-                        },
-                        {
-                            key: 'updated_at',
-                            name: 'Updated At',
-                            type: 'datetime'
-                        }
-                    ],
-                    displayFieldsLeft: [],
-                    displayFieldsRight: [],
-                    created_at: '',
-                    updated_at: ''
-                }
+                dynamicTableForm: {}
             }
         },
 		methods   : {
@@ -226,13 +195,54 @@
 				this.dynamicTableForm.updated_at = Date.now()
 
 				this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLES, this.dynamicTableForm)
+            },
+            exportDynamicTables() {
+                var link = document.createElement('a');
+                link.download = 'data.json';
+                var blob = new Blob([JSON.stringify(this.selected)], {type: 'text/plain'});
+                link.href = window.URL.createObjectURL(blob);
+                link.click()
             }
         },
 		watch     : {
             mode(newVal) {
 				if (newVal === AdminMode.UPDATE) {
 					this.dynamicTableForm = this.selected[0]
-				}
+				} else if (newVal === AdminMode.CREATE) {
+                    this.dynamicTableForm = {
+                        id  : '',
+                        icon: '',
+                        name: '',
+                        key : '',
+                        description: '',
+                        fields: [
+                            {
+                                key: 'name',
+                                name: 'Name',
+                                type: 'text'
+                            },
+                            {
+                                key: 'description',
+                                name: 'Description',
+                                type: 'text'
+                            },
+                            {
+                                key: 'created_at',
+                                name: 'Created At',
+                                type: 'datetime'
+                            },
+                            {
+                                key: 'updated_at',
+                                name: 'Updated At',
+                                type: 'datetime'
+                            }
+                        ],
+                        displayFieldsLeft: [],
+                        displayFieldsRight: [],
+                        created_at: '',
+                        updated_at: ''
+                    }
+                }
 			}
         }
     }

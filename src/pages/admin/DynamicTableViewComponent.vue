@@ -30,8 +30,10 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' dense />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
+                                    <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
@@ -40,6 +42,7 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' :placeholder='"NOT IMPLEMENTED CORRECTLY " + item.name' v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' dense />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
                                     <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
