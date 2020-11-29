@@ -18,7 +18,7 @@
                     <v-btn color='error' small @click='mode = adminModesList.DELETE' v-if='selected.length > 0 && mode !== adminModesList.DELETE'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
                 </div>
             </div>
-            <div class='row'>
+            <div class='row' v-if='mode === adminModesList.VIEW'>
                 <div class='col'>
                     <v-select v-model='visibleFields' :items='allFields' item-text='name' item-value='key' label='Display fields' dense chips multiple />
                 </div>
