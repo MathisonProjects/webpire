@@ -50,6 +50,7 @@ enum MdiIcons {
     MATERIALDESIGN            = "mdi-material-design",
     MATERIALUI                = "mdi-material-ui",
     MENU                      = "mdi-menu",
+    MINUS                     = "mdi-minus",
     MOONWANINGCRESCENT        = "mdi-moon-waning-crescent",
     NEWBOX                    = "mdi-new-box",
     NEWSPAPER                 = "mdi-newspaper",

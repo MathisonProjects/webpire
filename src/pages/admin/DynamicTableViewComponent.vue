@@ -19,8 +19,38 @@
                 </div>
             </div>
             <div class='row' v-if='mode === adminModesList.VIEW'>
-                <div class='col'>
+                <div class='col-md-12'>
                     <v-select v-model='visibleFields' :items='allFields' item-text='name' item-value='key' label='Display fields' dense chips multiple />
+                </div>
+                <div class='col-md-12'>
+                    <v-card>
+                        <v-card-title>
+                            Filters
+                            <v-spacer />
+                            <v-btn v-if='!showFilterOptions' color='primary' @click='showFilterOptions = !showFilterOptions' icon><v-icon>{{ mdiIconsList.PLUS }}</v-icon></v-btn>
+                            <v-btn v-if='showFilterOptions' color='primary' @click='showFilterOptions = !showFilterOptions' icon><v-icon>{{ mdiIconsList.MINUS }}</v-icon></v-btn>
+                        </v-card-title>
+                        <v-card-text v-if='showFilterOptions'>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
+                                        <div class='col' v-if='item.type !== "filler"'>
+                                            <v-text-field :label='item.name + " Filter"' dense />
+                                        </div>
+                                        <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
+                                        <div class='col' v-if='item.type !== "filler"'>
+                                            <v-text-field :label='item.name + " Filter"' dense />
+                                        </div>
+                                        <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </v-card-text>
+                    </v-card>
                 </div>
             </div>
 		    <VuetifyDataTableComponent :headers='headers' :items='itemsDisplayList' @tableUpdate='tableUpdate' :showSelect='true' v-if='mode === adminModesList.VIEW' />
@@ -173,6 +203,7 @@
             },
             allFields() {
                 return [
+                    { key: 'id', name: 'Id' },
                     ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name } }),
                     ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name } }),
                 ]
@@ -181,6 +212,7 @@
 		data()      {
             return {
                 mode: AdminMode.VIEW,
+                showFilterOptions: false,
                 visibleFields: ['id', 'name', 'description', 'created_at', 'updated_at'],
                 selected: [],
                 formData: {},
