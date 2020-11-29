@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-text>
-            <v-data-table :headers='headers' :items='items' :items-per-page="itemsPerPage" v-model='selected' :single-select='singleSelect' :show-select='showSelect' />
+            <v-data-table dense :headers='headers' :items='items' :items-per-page="itemsPerPage" v-model='selected' :single-select='singleSelect' :show-select='showSelect' />
         </v-card-text>
     </v-card>
 </template>
@@ -22,7 +22,7 @@
         @Prop({required: true}) readonly items: any[] | undefined
         @Prop({required: false, default: false}) readonly singleSelect: boolean | undefined
         @Prop({required: false, type: Boolean, default: false}) readonly showSelect: boolean | undefined
-        @Prop({required: false, type: Number, default: 5}) readonly itemsPerPage: number | undefined
+        @Prop({required: false, type: Number, default: 10}) readonly itemsPerPage: number | undefined
 
         // Set Data
         private selected: any[] = []

@@ -85,7 +85,7 @@ const routes = [
 		children: [
 			{
 				path: '/',
-				name: 'admin-home',
+				name: 'admin-dashboard',
 				component: componentList.AdminHomeComponent,
 				meta: {
 					title: "Dashboard"
@@ -93,7 +93,7 @@ const routes = [
 			},
 			{
 				path: 'menu',
-				name: 'admin-home',
+				name: 'admin-menu',
 				component: componentList.AdminMenuComponent,
 				meta: {
 					title: "Menu"
@@ -101,7 +101,7 @@ const routes = [
 			},
 			{
 				path: 'icons',
-				name: 'admin-home',
+				name: 'admin-icons',
 				component: componentList.AdminIconsComponent,
 				meta: {
 					title: "Icons"
