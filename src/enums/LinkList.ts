@@ -28,7 +28,8 @@ enum LinkActions {
 	BACK = "back",
 	EDIT = "edit",
 	DELETE = "delete",
-	VIEW = "view"
+	VIEW = "view",
+	SAVE = "save",
 }
 
 enum AdminSectionPurpose {

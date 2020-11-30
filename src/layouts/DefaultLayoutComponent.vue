@@ -2,7 +2,7 @@
     <v-app>
 		<SnackbarNotificationComponent />
 
-		<v-app-bar app dense>
+		<v-app-bar app dense :style='"background-color: rgba(" +settings.header_color.value.r + ", " +settings.header_color.value.g + ", " +settings.header_color.value.b + ", " +settings.header_color.value.a + ") !important;"'>
 			<v-toolbar-title v-if='settings.site_name === undefined'>{{ $t('Site.name') }}</v-toolbar-title>
 			<v-toolbar-title v-if='settings.site_name !== undefined'>{{ settings.site_name.value }}</v-toolbar-title>
 			<v-spacer></v-spacer>
@@ -24,15 +24,15 @@
 				</v-menu>
 			</v-toolbar-items>
 		</v-app-bar>
-        <v-main>
+        <v-main :style='"background-color: rgba(" +settings.background_color.value.r + ", " +settings.background_color.value.g + ", " +settings.background_color.value.b + ", " +settings.background_color.value.a + ") !important;"'>
 			<v-container>
 				<transition name='fade' mode='out-in'>
 					<router-view />
 				</transition>
 			</v-container>
 		</v-main>
-		<v-footer dark padless :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
-			<v-card class="flex" flat tile>
+		<v-footer  dark padless :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
+			<v-card :style='"background-color: rgba(" +settings.footer_color.value.r + ", " +settings.footer_color.value.g + ", " +settings.footer_color.value.b + ", " +settings.footer_color.value.a + ") !important;"' class="flex" flat tile>
 				<v-card-title class="dark">
 					<strong class="subheading" v-if='settings.footer_text === undefined'>{{ $t('Site.footer.subheader') }}</strong>
 					<strong class="subheading" v-if='settings.footer_text !== undefined'>{{ settings.footer_text.value }}</strong>

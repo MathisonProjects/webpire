@@ -10,6 +10,7 @@
                     <h1><v-icon large>{{ currentTable.icon }}</v-icon> {{ currentTable.name}} - {{ mode.toUpperCase() }}</h1>
                 </div>
                 <div class='col text-right'>
+                    <v-btn color='success' small @click='exportRecords' v-if='selected.length > 0 && mode === adminModesList.VIEW'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Export</v-btn>
                     <v-btn color='primary' small @click='mode = adminModesList.VIEW' v-if='mode !== adminModesList.VIEW'><v-icon>{{ mdiIconsList.BACKBURGER }}</v-icon> Back</v-btn>
                     <v-btn color='primary' small @click='mode = adminModesList.CREATE' v-if='selected.length === 0 && mode !== adminModesList.CREATE'><v-icon>{{ mdiIconsList.PLUS }}</v-icon> Create</v-btn>
                     <v-btn color='info' small @click='mode = adminModesList.READ' v-if='selected.length === 1'><v-icon>{{ mdiIconsList.EYE }}</v-icon>View</v-btn>
@@ -35,7 +36,7 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field :label='item.name + " Filter"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' dense />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -43,7 +44,7 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field :label='item.name + " Filter"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' dense />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -125,6 +126,7 @@
     import { AdminMode, MdiIcons, SocketFuncs } from '@/enums'
     import moment from 'moment'
     import { uuid } from 'uuidv4'
+    const Papa = require('papaparse')
 
     export default {
 		name      : "admin-dynamic-table-view-component",
@@ -199,6 +201,15 @@
                     }
 
                     return returnItem
+                }).filter( (item) => {
+                    let returnItem = true
+                    for (let i in this.filters) {
+                        let curItem = item[i].toLowerCase()
+                        if (!curItem.includes(this.filters[i].toLowerCase())) {
+                            returnItem = false
+                        }
+                    }
+                    if (returnItem) return item
                 })
             },
             allFields() {
@@ -213,6 +224,7 @@
             return {
                 mode: AdminMode.VIEW,
                 showFilterOptions: false,
+                filters: {},
                 visibleFields: ['id', 'name', 'description', 'created_at', 'updated_at'],
                 selected: [],
                 formData: {},
@@ -268,6 +280,14 @@
                 this.formData.updated_at = Date.now()
                 this.formData.content.updated_at = Date.now()
                 this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, this.formData)
+            },
+            exportRecords() {
+                let response = Papa.unparse(JSON.stringify(this.selected))
+                var link = document.createElement('a');
+                link.download = 'data.csv';
+                var blob = new Blob([response], {type: 'text/plain'});
+                link.href = window.URL.createObjectURL(blob);
+                link.click()
             }
         },
 		watch     : {

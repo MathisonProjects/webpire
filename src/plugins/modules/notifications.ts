@@ -102,4 +102,7 @@ export default {
     dynamicTableContentDeletedNotification() {
         this.fireErrorNotification('Dynamic Table Content Deleted Successfully')
     },
+    settingsSavedNotification() {
+        this.fireSuccessNotification('Settings Saved Successfully')
+    }
 }

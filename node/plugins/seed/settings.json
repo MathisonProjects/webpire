@@ -28,5 +28,38 @@
         "key": "back_to_top",
         "label": "Show Back to Top",
         "value": true
+    },
+    {
+        "label": "Header Color",
+        "type": "color",
+        "value": {
+          "a": 1,
+          "r": 245,
+          "b": 245,
+          "g": 245
+        },
+        "key": "header_color"
+    },
+    {
+        "label": "Footer Color",
+        "type": "color",
+        "value": {
+          "a": 1,
+          "r": 30,
+          "b": 30,
+          "g": 30
+        },
+        "key": "footer_color"
+    },
+    {
+        "label": "Background Color",
+        "type": "color",
+        "value": {
+          "a": 1,
+          "r": 255,
+          "b": 255,
+          "g": 255
+        },
+        "key": "background_color"
     }
 ]

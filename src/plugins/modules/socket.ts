@@ -60,7 +60,8 @@ export default {
             console.log(response)
         })
         socket.on(SocketResponses.SAVESETTINGS, (response: any) => {
-            console.log(response)
+            store.dispatch('settingsStore/setInit', response.settings.Items)
+            notifications.settingsSavedNotification()
         })
         socket.on(SocketResponses.SAVETAGS, (response: any) => {
             console.log(response)

@@ -1,11 +1,11 @@
 <template>
     <div>
-		<VuetifyFormComponent v-model='settingsData' :form='settingsForm' />
+		<VuetifyFormComponent v-model='settingsData' :form='settingsForm' @callbackHandler='callbackHandler' />
     </div>
 </template>
 
 <script>
-    import { LinkActions, MdiIcons } from '@/enums'
+    import { LinkActions, MdiIcons, SocketFuncs } from '@/enums'
     import VuetifyFormComponent from '@/components/shared/VuetifyFormComponent'
 
     export default {
@@ -53,7 +53,7 @@
 		},
 		data()      {
             return {
-                settingsData: []
+                settingsData: {}
             }
         },
 		methods   : {
@@ -62,8 +62,17 @@
                     this.settingsData[this.settings[i].key] = this.settings[i].value
                 }
             },
+            callbackHandler(action) {
+                if (action === LinkActions.SAVE) {
+                    this.saveForm()
+                }
+            },
             saveForm() {
-                console.log(saveForm)
+                for (let i in this.settings) {
+                    let setting = this.settings[i]
+                    setting.value = this.settingsData[setting.key]
+                    this.$p.socket.socketEmitFire(SocketFuncs.SAVESETTINGS, setting)
+                }
             }
         },
 		watch     : {

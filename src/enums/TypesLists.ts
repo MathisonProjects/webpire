@@ -1,11 +1,14 @@
 enum FieldTypes {
-    TEXT = "text",
-    HIDDENTEXT = "hiddentext",
+    ADDRESS = "address",
+    BOOLEAN = "boolean",
+    CALCULATED = "calculated",
+    COLOR = "color",
     EMAIL = "email",
+    FILE = "file",
+    HIDDENTEXT = "hiddentext",
+    TEXT = "text",
     PHONE = "phone",
     MULTILINE = "multiline",
-    WYSIWYG = "wysiwyg",
-    ADDRESS = "address",
     STATE = "state",
     COUNTRY = "country",
     STATECOUNTRY = "stateCountry",
@@ -14,10 +17,8 @@ enum FieldTypes {
     CURRENCY = "currency",
     DATETIME = "datetime",
     IMAGE = "image",
-    FILE = "file",
-    BOOLEAN = "boolean",
-    CALCULATED = "calculated",
-    RECORDS = "records"
+    RECORDS = "records",
+    WYSIWYG = "wysiwyg",
 }
 
 export {

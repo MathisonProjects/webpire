@@ -9,7 +9,7 @@
 
                     <v-textarea :class='getClass(field)' v-model='$attrs.value[field.vmodel]' :label='field.label' v-if='field.type === fieldTypes.MULTILINE' dense />
 
-                    <label v-if='field.type === fieldTypes.WYSIWYG'><h4>{{ field.label }}</h4></label>
+                    <label v-if='field.type === fieldTypes.WYSIWYG' style='field.label'>{{ field.label }}</label>
                     <TipTapVuetifyTextEditorComponent class='mt-2' v-model='$attrs.value[field.vmodel]' :content='$attrs.value[field.vmodel]' v-if='field.type === fieldTypes.WYSIWYG' />
                     <v-autocomplete :class='getClass(field)' v-model='$attrs.value[field.vmodel]' :items='field.options' :label='field.label' v-if='field.type === fieldTypes.SELECT' dense clearable />
                     <div v-if='field.type === fieldTypes.BOOLEAN'>
@@ -18,6 +18,8 @@
                             <v-radio :value='truthyFalsy.FALSE' label='False' />
                         </v-radio-group>
                     </div>
+                    <label style='font-size: 90%;' v-if='field.type === fieldTypes.COLOR'>{{field.label}}</label>
+                    <v-color-picker v-model='$attrs.value[field.vmodel]' v-if='field.type === fieldTypes.COLOR' />
                     <v-file-input :class='getClass(field)' v-model='$attrs.value[field.vmodel]' :label='field.label' v-if='field.type === fieldTypes.FILE' dense clearable></v-file-input>
                 </div>
             </div>

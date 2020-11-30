@@ -1,10 +1,9 @@
 Tasks to Prioritize
 - Sandbox vs Production
 - Client Portal with Forms
-- Data Filters
-	- Share Filter
+- Share Filter
 - File Upload
-- Theme Customization
+- Admin Theme Customization
 - Menu Permissions
 - File Management
 - Page, add embed from datatable & record
@@ -17,3 +16,5 @@ Tasks to Prioritize
 - Import Template
 + Contacts as a default
 + User Defined Datatable Headers
++ Data Filters
++ Frontend Theme Customization
