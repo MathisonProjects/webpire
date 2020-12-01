@@ -2,10 +2,8 @@ Tasks to Prioritize
 - Sandbox vs Production
 - Client Portal with Forms
 - Share Filter
-- File Upload
 - Admin Theme Customization
 - Menu Permissions
-- File Management
 - Page, add embed from datatable & record
 - Reporting with Visualizations, Pie Chart, Bar Graphs, Gantt
 - Integrations for logging calls & emails
@@ -18,3 +16,5 @@ Tasks to Prioritize
 + Frontend Theme Customization
 + Export Data
 + Page Publish Status
++ File Upload
++ File Management
