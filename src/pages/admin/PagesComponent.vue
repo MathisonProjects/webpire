@@ -29,6 +29,9 @@
 				</div>
 				<div class='row'>
 					<div class='col'>
+						<v-select v-model='pageForm.status' :items='["Published", "Unpublished"]' placeholder='Status' label='Page Type' />
+					</div>
+					<div class='col'>
 						<v-select v-model='pageForm.type' :items='typeOptions' placeholder='Pick Page Type...' label='Page Type' />
 					</div>
 					<div class='col' v-if='pageForm.type === "Preset"'>
@@ -149,6 +152,7 @@
 					id: null,
 					name: null,
 					key: null,
+					status: 'Unpublished',
 					type: null,
 					preset: null,
 					fieldData: [],
@@ -190,6 +194,7 @@
 					id: null,
 					name: null,
 					key: null,
+					status: 'Unpublished',
 					type: null,
 					preset: null,
 					fieldData: [],

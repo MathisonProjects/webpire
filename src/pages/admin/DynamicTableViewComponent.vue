@@ -97,6 +97,11 @@
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
                                     <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
+                                    <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
+                                        <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
+                                    </div>
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='["placeholder","placeholder 2"]' :multiple='item.relationType === "one-to-many"' chips />
+
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
@@ -110,6 +115,10 @@
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
                                     <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
+                                    <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
+                                        <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
+                                    </div>
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='["placeholder","placeholder 2"]' :multiple='item.relationType === "one-to-many"' chips />
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
@@ -214,10 +223,15 @@
             },
             allFields() {
                 return [
-                    { key: 'id', name: 'Id' },
-                    ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name } }),
-                    ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name } }),
+                    { key: 'id', name: 'Id', relatedId: null },
+                    ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
+                    ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
                 ]
+            },
+            relatedOptions() {
+                return this.allFields.filter( item => {
+                    return item.relatedTo !== null
+                })
             }
 		},
 		data()      {

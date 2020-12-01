@@ -7,10 +7,8 @@ Tasks to Prioritize
 - Menu Permissions
 - File Management
 - Page, add embed from datatable & record
-- Page Publish Status
 - Reporting with Visualizations, Pie Chart, Bar Graphs, Gantt
 - Integrations for logging calls & emails
-- Export Data
 - Dashboard Report Integration
 - Bulk Changes
 - Import Template
@@ -18,3 +16,5 @@ Tasks to Prioritize
 + User Defined Datatable Headers
 + Data Filters
 + Frontend Theme Customization
++ Export Data
++ Page Publish Status

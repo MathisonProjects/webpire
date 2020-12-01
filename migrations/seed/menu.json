@@ -90,6 +90,24 @@
     {
         "type": "admin",
         "oid": 6,
+        "key": "/admin/dt/contacts",
+        "icon": "mdi-phone-ring",
+        "text": "Contacts",
+        "page": "admin-contacts",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 7,
+        "key": "/admin/dt/file_upload",
+        "icon": "mdi-folder",
+        "text": "File Management",
+        "page": "admin-folder-management",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 8,
         "key": "/admin/tags",
         "icon": "mdi-view-dashboard",
         "text": "Tags",
@@ -98,7 +116,7 @@
     },
     {
         "type": "admin",
-        "oid": 7,
+        "oid": 9,
         "key": "/admin/dynamic-tables",
         "icon": "mdi-table",
         "text": "Dynamic Tables",
@@ -107,7 +125,7 @@
     },
     {
         "type": "admin",
-        "oid": 8,
+        "oid": 10,
         "key": "/admin/icons",
         "icon": "mdi-material-design",
         "text": "Icons",
@@ -116,7 +134,7 @@
     },
     {
         "type": "admin",
-        "oid": 9,
+        "oid": 11,
         "key": "/admin/settings",
         "icon": "mdi-cogs",
         "text": "Settings",

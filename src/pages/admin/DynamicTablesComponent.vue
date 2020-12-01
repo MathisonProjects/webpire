@@ -52,6 +52,12 @@
                     <div class='col'>
                         <v-text-field label='Key' dense placeholder='DB Key of field' v-model='fieldItem.key' />
                     </div>
+                    <div class='col text-center' v-if='fieldItem.type === "related to"'>
+                        <v-select label='Related To...' placeholder='Table Related To' v-model='fieldItem.relatedId' :items='tablesList' item-text='name' item-value="id" dense />
+                    </div>
+                    <div class='col text-center' v-if='fieldItem.type === "related to"'>
+                        <v-select label='Relationship Type' placeholder='Relationship Type' v-model='fieldItem.relationType' :items='["one-to-one","one-to-many"]' dense />
+                    </div>
                     <div class='col text-center' v-if='fieldItem.type === "dropdown"'>
                         <v-text-field label='Dropdown Options' dense placeholder='Comma list of dropdown options' v-model='fieldItem.options' />
                     </div>
