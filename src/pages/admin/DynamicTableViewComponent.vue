@@ -62,7 +62,12 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <label><b>{{item.name}}:</b></label>
-                                    <div>{{ formData.content[item.key] }}</div>
+                                    <div v-if="item.type !== 'related to'">{{ formData.content[item.key] }}</div>
+                                    <div v-if="item.type === 'related to'">
+                                        <div v-for='(relatedItem,index) in formData.content[item.key]' :key='index'>
+                                            <v-btn text small>{{ relatedOptions[item.relatedId][relatedItem].content.name }}</v-btn>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                             </div>
@@ -71,10 +76,27 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <label><b>{{item.name}}:</b></label>
-                                    <div>{{ formData.content[item.key] }}</div>
+                                    <div v-if="item.type !== 'related to'">{{ formData.content[item.key] }}</div>
+                                    <div v-if="item.type === 'related to'">
+                                        <div v-for='(relatedItem,index) in formData.content[item.key]' :key='index'>
+                                            <v-btn @click='viewRelated = relatedOptions[item.relatedId][relatedItem]' text small>{{ relatedOptions[item.relatedId][relatedItem].content.name }}</v-btn>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                             </div>
+                        </div>
+                    </div>
+                </v-card-text>
+            </v-card>
+
+            <v-card class='mt-2' v-if='mode === adminModesList.READ && viewRelated !== null'>
+                <v-card-title>{{ viewRelated.content.name }}<v-spacer /><v-btn @click='viewRelated = null' color='error' small text>x</v-btn></v-card-title>
+                <v-card-text>
+                    <div class='row'>
+                        <div class='col-md-6' v-for='(item, index) in viewRelated.content' :key='index'>
+                            <h4>{{ index.toUpperCase() }}</h4>
+                            <div v-html='item'></div>
                         </div>
                     </div>
                 </v-card-text>
@@ -118,7 +140,7 @@
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
                                     </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='["placeholder","placeholder 2"]' :multiple='item.relationType === "one-to-many"' chips />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='Object.values(relatedOptions[item.relatedId])' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
@@ -223,15 +245,14 @@
             },
             allFields() {
                 return [
-                    { key: 'id', name: 'Id', relatedId: null },
+                    { key: 'id', name: 'Id', relatedTo: null },
                     ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
                     ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
                 ]
             },
             relatedOptions() {
-                return this.allFields.filter( item => {
-                    return item.relatedTo !== null
-                })
+                console.log(this.$store.getters['dynamicTableContentStore/organizedByTable'])
+                return this.$store.getters['dynamicTableContentStore/organizedByTable']
             }
 		},
 		data()      {
@@ -243,7 +264,8 @@
                 selected: [],
                 formData: {},
                 fileUpload: [],
-                classicCkeditor: ClassicEditor
+                classicCkeditor: ClassicEditor,
+                viewRelated: null
             }
         },
 		methods   : {
