@@ -5,6 +5,7 @@
                 <AdminDrawerComponent />
             </div>
             <div class='col-md-6 text-right'>
+                <span class='overline' title='Session Remaining'>{{ expirationTime }} Seconds</span>
                 <v-btn icon rounded @click="$router.push('/')"><v-icon small>{{ mdiIconsList.HOME }}</v-icon></v-btn>
                 <v-btn icon rounded><v-icon small>{{ mdiIconsList.BELL }}</v-icon></v-btn>
                 <v-btn icon rounded @click='logout'><v-icon small>{{ mdiIconsList.LOGOUT }}</v-icon></v-btn>
@@ -18,6 +19,7 @@
 
 <script>
     import AdminDrawerComponent from './AdminDrawerComponent'
+	import jwt from 'jsonwebtoken'
     import {MdiIcons} from '@/enums'
     export default {
 		name      : "admin-layout-component",
@@ -25,14 +27,38 @@
 		components: {
             AdminDrawerComponent
         },
-		created()   {},
+		created()   {
+            var self = this
+            setInterval( () => {
+                self.$data.dateNow = Date.now()
+            }, 1000)
+        },
 		computed  : {
             mdiIconsList() {
                 return MdiIcons
-            }
+            },
+            user() {
+				return this.$store.getters['userStore/userData']
+            },
+			parsedJwt() {
+				if (this.user.jwt !== null) {
+					return jwt.decode(this.user.jwt, {complete: true})
+				} else {
+					return null
+				}
+			},
+			expirationTime() {
+                let timeRemaining = Math.ceil((this.parsedJwt.payload.exp * 1000 - this.dateNow)/1000)
+                if (timeRemaining < 0) {
+                    this.$store.dispatch('userStore/logout')
+                }
+				return timeRemaining
+			}
         },
 		data()      {
-            return {}
+            return {
+                dateNow: Date.now()
+            }
         },
 		methods   : {
             logout() {
