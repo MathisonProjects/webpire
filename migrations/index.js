@@ -38,6 +38,7 @@ module.exports = {
             menu: require('./seed/menu.json'),
             pages: require('./seed/pages.json'),
             permissions: require('./seed/permissions.json'),
+            reports: require('./seed/reports.json'),
             roles: require('./seed/roles.json'),
             settings: require('./seed/settings.json'),
             tags: require('./seed/tags.json')
