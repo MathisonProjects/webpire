@@ -120,6 +120,7 @@
                                     <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "user"' dense :items='userList' item-text='username' item-value='sub' />
                                     <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
@@ -140,6 +141,7 @@
                                     <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
                                     <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "user"' dense :items='userList' item-text='username' item-value='sub' />
                                     <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
@@ -257,6 +259,9 @@
             relatedOptions() {
                 console.log(this.$store.getters['dynamicTableContentStore/organizedByTable'])
                 return this.$store.getters['dynamicTableContentStore/organizedByTable']
+            },
+            userList() {
+                return this.$store.state.usersStore.userList
             }
 		},
 		data()      {

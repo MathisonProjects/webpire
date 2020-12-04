@@ -128,18 +128,19 @@
             },
             fieldTypeList() {
                 return [
-                    'text',
-                    'wysiwyg',
-                    'number',
-                    'dropdown',
-                    'date',
-                    'time',
-                    'datetime',
-                    'currency',
                     'computed',
+                    'currency',
+                    'date',
+                    'datetime',
+                    'dropdown',
                     'file',
+                    'filler',
+                    'number',
                     'related to',
-                    'filler'
+                    'text',
+                    'time',
+                    'user',
+                    'wysiwyg',
                 ]
             },
             dynamicTablesHeader() {
