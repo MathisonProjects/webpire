@@ -114,6 +114,8 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "number"' dense />
+                                    <v-text-field prepend-icon="mdi-cash-usd-outline" :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "currency"' dense />
                                     <label v-if='item.type === "wysiwyg"'>{{ item.name }}</label>
                                     <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
@@ -132,6 +134,8 @@
                             <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                 <div class='col' v-if='item.type !== "filler"'>
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
+                                    <v-text-field prepend-icon="mdi-cash-usd-outline" :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "currency"' dense />
                                     <label v-if='item.type === "wysiwyg"'>{{ item.name }}</label>
                                     <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
                                     <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
