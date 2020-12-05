@@ -125,7 +125,7 @@
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
                                     </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='["placeholder","placeholder 2"]' :multiple='item.relationType === "one-to-many"' chips />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='Object.values(relatedOptions[item.relatedId])' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
 
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>

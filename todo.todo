@@ -10,11 +10,12 @@ Tasks to Prioritize
 - Dashboard Report Integration
 - Bulk Changes
 - Import Template
-+ Contacts as a default
-+ User Defined Datatable Headers
-+ Data Filters
-+ Frontend Theme Customization
-+ Export Data
-+ Page Publish Status
-+ File Upload
-+ File Management
+- Workflow Manager
+- Hooks (before/after)
+- Email
+- Filters
+    - Date Range Filters
+    - Number Range Filters 
+    - Price Range Filters
+    - User Filter
+    - Dropdown Filter
