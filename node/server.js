@@ -51,6 +51,9 @@ io.on('connection', socket => {
     socket.emit('return get messages', require(__dirname + '/conversations/' + payload.from + '/'+payload.conversation.id+'.json'))
     socket.to(payload.conversation.id).broadcast.emit('return get messages', require(__dirname + '/conversations/' + payload.from + '/'+payload.conversation.id+'.json'))
   })
+  socket.on('payment process', (payload) => {
+    Plugins.stripe.processPayment(payload)
+  })
 })
 
 express.get('/', (req, res) => {
