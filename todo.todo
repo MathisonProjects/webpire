@@ -2,7 +2,7 @@ Tasks to Prioritize
 - Sandbox vs Production
 - Custom Forms
 - Form Workflow
-- Share Filter
+
 - Admin Theme Customization
 - Menu Permissions
 - Page, add embed from datatable & record
@@ -15,12 +15,14 @@ Tasks to Prioritize
 - Hooks (before/after)
 - Email
 - Create reminder crons
+- Save Filter
+- Share Filter
 - Filters
     - Date Range Filters
     - Number Range Filters
     - Price Range Filters
-    - User Filter
-    - Dropdown Filter
+    + User Filter
+    + Dropdown Filter
 + User Created By default
 + User Updated By default
 + User Created/Update Logic

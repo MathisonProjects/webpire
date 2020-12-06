@@ -36,7 +36,9 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text"' dense />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -44,7 +46,9 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text"' dense />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -204,9 +208,24 @@
                 }).filter( (item) => {
                     let returnItem = true
                     for (let i in this.filters) {
-                        let curItem = item[i].toLowerCase()
-                        if (!curItem.includes(this.filters[i].toLowerCase())) {
+                        let curItem = item[i]
+                        if (this.filters[i].length === 0) continue
+                        if (curItem === null && this.filters[i].length > 0) {
                             returnItem = false
+                            break
+                        }
+
+                        if (typeof curItem === 'string') curItem = curItem.toLowerCase()
+                        if (typeof curItem === 'object') curItem = curItem.map( item => { return item.toLowerCase() })
+
+
+                        if (typeof this.filters[i] === 'string' && !curItem.includes(this.filters[i].toLowerCase())) {
+                            returnItem = false
+                            break
+                        }
+                        if (typeof this.filters[i] === 'object' && !this.filters[i].map( item => { return item.toLowerCase() }).includes(curItem)) {
+                            returnItem = false
+                            break
                         }
                     }
                     if (returnItem) return item
