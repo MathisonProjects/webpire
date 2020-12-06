@@ -8,7 +8,7 @@
         <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='$attrs.value' v-if='item.type === "datetime"' dense />
         <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='$attrs.value' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
         <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='$attrs.value' v-if='item.type === "user"' dense :items='userList' item-text='username' item-value='sub' />
-        <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
+        <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload' v-if='item.type === "file"' @change='runUpload(item.key)' dense />
         <div v-if='$attrs.value !== null && item.type === "file"' class='text-center'>
             <a :href='"https://upload.awsvuem.com/" + $attrs.value' target='_BLANK'>Click to View File</a>
         </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 	import { MdiIcons } from '@/enums'
 	import jwt from 'jsonwebtoken'
 
@@ -51,8 +52,20 @@
                 return this.$store.state.usersStore.userList
             }
 		},
-		data()      { return {} },
-		methods   : {},
+		data()      {
+            return {
+                fileUpload: null,
+                classicCkeditor: ClassicEditor
+            }
+        },
+		methods   : {
+            runUpload(key) {
+                this.$p.fileManagement.runSaveImage(this.fileUpload).then( response => {
+                    this.$p.socket.socketEmitFire(SocketFuncs.UPLOADFILE, response)
+                    this.formData.content[key] = response.file_name
+                })
+            }
+        },
 		watch     : {}
     }
 </script>

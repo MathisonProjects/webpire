@@ -36,7 +36,15 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text" || item.type === "wysiwyg"' dense />
+                                            <div class='row' v-if='item.type === "number" || item.type === "currency"'>
+                                                <div class='col'>
+                                                    <v-text-field v-model='filters[item.key].min' type='number' :label='"Minimum " + item.name' dense />
+                                                </div>
+                                                <div class='col'>
+                                                    <v-text-field v-model='filters[item.key].max' type='number' :label='"Maximum " + item.name'  dense />
+                                                </div>
+                                            </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
                                         </div>
@@ -46,7 +54,15 @@
                                 <div class='col-md-6'>
                                     <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                                         <div class='col' v-if='item.type !== "filler"'>
-                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text"' dense />
+                                            <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text" || item.type === "wysiwyg"' dense />
+                                            <div class='row' v-if='item.type === "number" || item.type === "currency"'>
+                                                <div class='col'>
+                                                    <v-text-field v-model='filters[item.key]' type='number' :label='"Minimum " + item.name' dense />
+                                                </div>
+                                                <div class='col'>
+                                                    <v-text-field v-model='filters[item.key]' type='number' :label='"Maximum " + item.name' dense />
+                                                </div>
+                                            </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
                                         </div>

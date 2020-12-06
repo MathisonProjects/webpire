@@ -5,7 +5,7 @@
         </v-card-title>
         <v-card-text>
             <div class='row'>
-                <div class='col'>
+                <div class='col-md-6'>
                     <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
                         <div class='col' v-if='item.type !== "filler"'>
                             <DynamicFieldComponent v-model='$attrs.value.content[item.key]' :item='item' />
@@ -13,7 +13,7 @@
                         <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                     </div>
                 </div>
-                <div class='col'>
+                <div class='col-md-6'>
                     <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
                         <div class='col' v-if='item.type !== "filler"'>
                             <DynamicFieldComponent v-model='$attrs.value.content[item.key]' :item='item' />
