@@ -102,58 +102,8 @@
                 </v-card-text>
             </v-card>
 
-            <v-card v-if='mode === adminModesList.CREATE || mode === adminModesList.UPDATE'>
-                <v-card-title>
-                    {{ currentTable.name }}
-                    <v-spacer />
-                    <v-btn color='success' small @click='saveTableViewRecord'><v-icon>{{ mdiIconsList.CONTENTSAVE }}</v-icon> Save</v-btn>
-                </v-card-title>
-                <v-card-text>
-                    <div class='row'>
-                        <div class='col'>
-                            <div class='row' v-for='(item,index) in currentTable.displayFieldsLeft' :key='index'>
-                                <div class='col' v-if='item.type !== "filler"'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
-                                    <v-text-field :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "number"' dense />
-                                    <v-text-field prepend-icon="mdi-cash-usd-outline" :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "currency"' dense />
-                                    <label v-if='item.type === "wysiwyg"'>{{ item.name }}</label>
-                                    <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "user"' dense :items='userList' item-text='username' item-value='sub' />
-                                    <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
-                                    <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
-                                        <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
-                                    </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
+            <DynamicFormComponent v-model='formData' :currentTable='currentTable' v-if='mode === adminModesList.CREATE || mode === adminModesList.UPDATE' @saveTableViewRecord='saveTableViewRecord' />
 
-                                </div>
-                                <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
-                            </div>
-                        </div>
-                        <div class='col'>
-                            <div class='row' v-for='(item,index) in currentTable.displayFieldsRight' :key='index'>
-                                <div class='col' v-if='item.type !== "filler"'>
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
-                                    <v-text-field :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "text"' dense />
-                                    <v-text-field prepend-icon="mdi-cash-usd-outline" :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "currency"' dense />
-                                    <label v-if='item.type === "wysiwyg"'>{{ item.name }}</label>
-                                    <ckeditor v-model='formData.content[item.key]' v-if='item.type === "wysiwyg"' :editor="classicCkeditor" :config="{}" />
-                                    <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "datetime"' dense />
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "dropdown"' dense :items='item.options.split(",")' />
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "user"' dense :items='userList' item-text='username' item-value='sub' />
-                                    <v-file-input :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fileUpload[index]' v-if='item.type === "file"' @change='runUpload(index, item.key)' dense />
-                                    <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
-                                        <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
-                                    </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
-                                </div>
-                                <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </v-card-text>
-            </v-card>
             <v-card v-if='mode === adminModesList.DELETE'>
                 <v-card-title>Are you sure you wish to delete the following record<span v-if='selected.length > 1'>s</span>?</v-card-title>
                 <v-card-text>
@@ -170,6 +120,7 @@
 
 <script>
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+    import DynamicFormComponent from '@/components/site/admin/dynamic/DynamicFormComponent'
     import { AdminMode, MdiIcons, SocketFuncs } from '@/enums'
     import moment from 'moment'
     import { uuid } from 'uuidv4'
@@ -178,7 +129,9 @@
     export default {
 		name      : "admin-dynamic-table-view-component",
 		props     : [],
-		components: {},
+		components: {
+            DynamicFormComponent
+        },
 		created()   {
             if (this.routeMode !== null) {
                 this.mode = this.routeMode
@@ -267,7 +220,6 @@
                 ]
             },
             relatedOptions() {
-                console.log(this.$store.getters['dynamicTableContentStore/organizedByTable'])
                 return this.$store.getters['dynamicTableContentStore/organizedByTable']
             },
             userList() {
