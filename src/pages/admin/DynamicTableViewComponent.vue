@@ -125,7 +125,7 @@
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
                                     </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='Object.values(relatedOptions[item.relatedId])' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
 
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
@@ -146,13 +146,23 @@
                                     <div v-if='formData.content[item.key] !== null && item.type === "file"' class='text-center'>
                                         <a :href='"https://upload.awsvuem.com/" + formData.content[item.key]' target='_BLANK'>Click to View File</a>
                                     </div>
-                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='Object.values(relatedOptions[item.relatedId])' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
+                                    <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='formData.content[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips />
                                 </div>
                                 <div class='col my-4' v-if='item.type === "filler"'><div class='mt-4'></div></div>
                             </div>
                         </div>
                     </div>
                 </v-card-text>
+            </v-card>
+            <v-card v-if='mode === adminModesList.DELETE'>
+                <v-card-title>Are you sure you wish to delete the following record<span v-if='selected.length > 1'>s</span>?</v-card-title>
+                <v-card-text>
+                    <pre>{{ selected }}</pre>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer />
+                    <v-btn color='error' @click='deleteRecords' small><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon> Delete</v-btn>
+                </v-card-actions>
             </v-card>
         </div>
     </div>
@@ -339,6 +349,13 @@
                 var blob = new Blob([response], {type: 'text/plain'});
                 link.href = window.URL.createObjectURL(blob);
                 link.click()
+            },
+            deleteRecords() {
+                for (let i in this.selected) {
+                    const record = this.selected[i]
+                    this.$p.socket.socketEmitFire(SocketFuncs.DELETEDYNAMICTABLECONTENT, record)
+                }
+                this.mode = AdminMode.VIEW
             }
         },
 		watch     : {
