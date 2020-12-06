@@ -39,10 +39,10 @@
                                             <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text" || item.type === "wysiwyg"' dense />
                                             <div class='row' v-if='item.type === "number" || item.type === "currency"'>
                                                 <div class='col'>
-                                                    <v-text-field v-model='filters[item.key].min' type='number' :label='"Minimum " + item.name' dense />
+                                                    <v-text-field v-model='filters[item.key]["min"]' type='number' :label='"Minimum " + item.name' dense />
                                                 </div>
                                                 <div class='col'>
-                                                    <v-text-field v-model='filters[item.key].max' type='number' :label='"Maximum " + item.name'  dense />
+                                                    <v-text-field v-model='filters[item.key]["min"]' type='number' :label='"Maximum " + item.name'  dense />
                                                 </div>
                                             </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
@@ -58,10 +58,10 @@
                                             <v-text-field v-model='filters[item.key]' :label='item.name + " Filter"' v-if='item.type === "text" || item.type === "wysiwyg"' dense />
                                             <div class='row' v-if='item.type === "number" || item.type === "currency"'>
                                                 <div class='col'>
-                                                    <v-text-field v-model='filters[item.key]' type='number' :label='"Minimum " + item.name' dense />
+                                                    <v-text-field v-model='filters[item.key]["min"]' type='number' :label='"Minimum " + item.name' dense />
                                                 </div>
                                                 <div class='col'>
-                                                    <v-text-field v-model='filters[item.key]' type='number' :label='"Maximum " + item.name' dense />
+                                                    <v-text-field v-model='filters[item.key]["max"]' type='number' :label='"Maximum " + item.name' dense />
                                                 </div>
                                             </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
@@ -199,6 +199,8 @@
 				return pageHeaders
             },
             items() {
+                    this.filterReset()
+
                 return this.$store.state.dynamicTableContentStore.contentList.filter( (item) => {
                     return item.tid === this.currentTable.id
                 })
@@ -241,6 +243,13 @@
                             returnItem = false
                             break
                         }
+
+                        if (this.filters[i].min !== undefined) {
+                            if (this.filters[i].min !== null && parseInt(this.filters[i].min) > parseInt( curItem )) returnItem = false
+                            if (this.filters[i].max !== null && parseInt(this.filters[i].max) < parseInt( curItem )) returnItem = false
+                            break
+                        }
+
                         if (typeof this.filters[i] === 'object' && !this.filters[i].map( item => { return item.toLowerCase() }).includes(curItem)) {
                             returnItem = false
                             break
@@ -345,9 +354,31 @@
                     this.$p.socket.socketEmitFire(SocketFuncs.DELETEDYNAMICTABLECONTENT, record)
                 }
                 this.mode = AdminMode.VIEW
+            },
+            filterReset() {
+                for (let i in this.currentTable.displayFieldsLeft) {
+                    if (this.currentTable.displayFieldsLeft[i].type === 'number' || this.currentTable.displayFieldsLeft[i].type === 'currency') {
+                        this.filters[this.currentTable.displayFieldsLeft[i].key] = { min: null, max: null }
+                    } else {
+                        this.filters[this.currentTable.displayFieldsLeft[i].key] = ''
+                    }
+                }
+                for (let i in this.currentTable.displayFieldsRight) {
+                    if (this.currentTable.displayFieldsRight[i].type === 'number' || this.currentTable.displayFieldsRight[i].type === 'currency') {
+                        this.filters[this.currentTable.displayFieldsRight[i].key] = { min: null, max: null }
+                    } else {
+                        this.filters[this.currentTable.displayFieldsRight[i].key] = ''
+                    }
+                }
             }
         },
 		watch     : {
+            filters: {
+                deep: true,
+                handler() {
+                    console.log(this.itemsDisplayList)
+                }
+            },
             mode(newVal) {
 				if (newVal === AdminMode.UPDATE || newVal === AdminMode.READ) {
 					this.formData = this.items.filter( item => {
