@@ -242,7 +242,17 @@
                                 key: 'updated_at',
                                 name: 'Updated At',
                                 type: 'datetime'
-                            }
+                            },
+                            {
+                                key: 'created_by',
+                                name: 'Created By',
+                                type: 'user'
+                            },
+                            {
+                                key: 'updated_by',
+                                name: 'Updated By',
+                                type: 'user'
+                            },
                         ],
                         displayFieldsLeft: [],
                         displayFieldsRight: [],

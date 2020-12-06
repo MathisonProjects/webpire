@@ -262,6 +262,9 @@
             },
             userList() {
                 return this.$store.state.usersStore.userList
+            },
+            user() {
+                return this.$store.getters['userStore/userData']
             }
 		},
 		data()      {
@@ -290,6 +293,7 @@
             saveTableViewRecord() {
                 this.formData.updated_at = Date.now()
                 this.formData.content.updated_at = Date.now()
+                this.formData.content.updated_by = this.user.sub
                 this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, this.formData)
                 this.mode = AdminMode.VIEW
             },
@@ -314,6 +318,7 @@
                 }
                 this.formData.created_at = Date.now()
                 this.formData.content.created_at = Date.now()
+                this.formData.content.created_by = this.user.sub
             },
             copyRecord() {
                 this.formData = this.items.filter( item => {
@@ -324,6 +329,7 @@
                 this.formData.content.created_at = Date.now()
                 this.formData.updated_at = Date.now()
                 this.formData.content.updated_at = Date.now()
+                this.formData.content.updated_by = this.user.sub
                 this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, this.formData)
             },
             exportRecords() {
