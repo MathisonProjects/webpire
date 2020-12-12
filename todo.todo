@@ -21,8 +21,8 @@ Tasks to Prioritize
 - Add many-to-one relationship type
 - Filters
     - Date Range Filters
-    - Number Range Filters
-    - Price Range Filters
+    - Number & Currency Range Filters
+	+ Related Filter
     + User Filter
     + Dropdown Filter
 + User Created By default
