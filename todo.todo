@@ -1,8 +1,8 @@
 Tasks to Prioritize
 - Sandbox vs Production
+- App Management
 - Custom Forms
 - Form Workflow
-
 - Admin Theme Customization
 - Menu Permissions
 - Page, add embed from datatable & record
@@ -17,6 +17,8 @@ Tasks to Prioritize
 - Create reminder crons
 - Save Filter
 - Share Filter
+- Easier to add/remove related records
+- Add many-to-one relationship type
 - Filters
     - Date Range Filters
     - Number Range Filters
@@ -26,6 +28,4 @@ Tasks to Prioritize
 + User Created By default
 + User Updated By default
 + User Created/Update Logic
-- Easier to add/remove related records
-- Add many-to-one relationship type
 + Relationship Null/Empty Error
