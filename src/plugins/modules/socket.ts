@@ -13,9 +13,9 @@ export default {
         })
 
         socket.on(SocketResponses.RETURNGETDBSTORE, (response: any) => {
+            console.log(response)
             store.dispatch('menuStore/setInit', response.menu.Items)
             store.dispatch('settingsStore/setInit', response.settings.Items)
-            store.dispatch('pagesStore/setPageList', response.pages.Items)
             store.dispatch('jsonStore/reset')
             store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items)
             store.dispatch('dynamicTableContentStore/setContentList', response.dynamic_table_content.Items)

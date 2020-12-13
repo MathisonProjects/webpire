@@ -2,11 +2,11 @@
     <div>
         <v-navigation-drawer v-model="showDrawer" absolute temporary>
             <v-list-item>
-                <v-list-item-avatar>
-                    JM
+                <v-list-item-avatar color='primary' class='white--text'>
+                    {{ user.username[0].toUpperCase() }}
                 </v-list-item-avatar>
                 <v-list-item-content>
-                    <v-list-item-title>Jacob Mathison</v-list-item-title>
+                    <v-list-item-title>{{ user.username}}</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -34,6 +34,9 @@
 		components: {},
 		created()   {},
 		computed  : {
+            user() {
+                return this.$store.state.userStore
+            },
             menuList() {
 				return this.$store.state.menuStore.adminMenu.sort( (a, b) => {
 					if (a.oid > b.oid) return 1

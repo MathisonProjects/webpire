@@ -94,7 +94,7 @@ class WebpirePlugin {
     }
 
     async getDbStore() {
-        const tables = [ 'dynamic_table_content', 'dynamic_tables', 'menu', 'pages', 'permissions', 'roles', 'settings', 'tags']
+        const tables = [ 'dynamic_table_content', 'dynamic_tables', 'menu', 'permissions', 'settings']
         let tableData = {}
         for (var i in tables) {
             const params = {

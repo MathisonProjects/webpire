@@ -1,5 +1,6 @@
 
 interface IUser {
+    id: '',
     created_at: '',
     email: '',
     email_verified: '',
@@ -28,5 +29,12 @@ export default {
             commit('SET_USERLIST', payload)
         }
     },
-    getters: {}
+    getters: {
+        usersList(state: IUserList) {
+            return state.userList.map( item => {
+                item.id = item.sub
+                return item
+            })
+        }
+    }
 }

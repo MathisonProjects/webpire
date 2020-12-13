@@ -26,6 +26,7 @@ enum MdiIcons {
     CASH                      = "mdi-cash",
     CASHREGISTER              = "mdi-cash-register",
     CHAT                      = "mdi-chat",
+    CHECK                     = "mdi-check",
     CLIPBOARDLIST             = "mdi-clipboard-list",
     COGS                      = "mdi-cogs",
     CONSOLE                   = "mdi-console",

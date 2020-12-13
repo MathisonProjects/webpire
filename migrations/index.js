@@ -24,10 +24,7 @@ module.exports = {
         await this.createTable(dbKey + '_dynamic_tables')
         await this.createTable(dbKey + '_dynamic_table_content')
         await this.createTable(dbKey + '_menu')
-        await this.createTable(dbKey + '_tags')
-        await this.createTable(dbKey + '_pages')
         await this.createTable(dbKey + '_permissions')
-        await this.createTable(dbKey + '_roles')
         await this.createTable(dbKey + '_settings')
     },
     seedTables(endpoint = 'http://172.18.0.2:8000') {
@@ -36,12 +33,8 @@ module.exports = {
             dynamic_table_content: require('./seed/dynamic_table_content.json'),
             dynamic_tables: require('./seed/dynamic_tables.json'),
             menu: require('./seed/menu.json'),
-            pages: require('./seed/pages.json'),
             permissions: require('./seed/permissions.json'),
-            reports: require('./seed/reports.json'),
-            roles: require('./seed/roles.json'),
-            settings: require('./seed/settings.json'),
-            tags: require('./seed/tags.json')
+            settings: require('./seed/settings.json')
         }
 
         for (var i in seedItems) {
