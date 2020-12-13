@@ -66,7 +66,7 @@ export default {
             return state
         },
         userRole(state: IUserStore) {
-            return state.settings.content.role
+            return (state.settings !== null) ? state.settings.content.role : null
         }
     }
 }

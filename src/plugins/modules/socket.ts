@@ -55,22 +55,12 @@ export default {
             store.dispatch('menuStore/setInit', response.menu.Items)
             notifications.menuSavedNotification()
         })
-        socket.on(SocketResponses.SAVEPAGES, (response: any) => {
-            store.dispatch('pagesStore/setPageList', response.pages.Items)
-            notifications.pagesSavedNotification()
-        })
         socket.on(SocketResponses.SAVEPERMISSIONS, (response: any) => {
-            console.log(response)
-        })
-        socket.on(SocketResponses.SAVEROLES, (response: any) => {
             console.log(response)
         })
         socket.on(SocketResponses.SAVESETTINGS, (response: any) => {
             store.dispatch('settingsStore/setInit', response.settings.Items)
             notifications.settingsSavedNotification()
-        })
-        socket.on(SocketResponses.SAVETAGS, (response: any) => {
-            console.log(response)
         })
         socket.on(SocketResponses.DELETEDYNAMICTABLECONTENT, (response: any) => {
             console.log(response)
@@ -82,20 +72,10 @@ export default {
             store.dispatch('menuStore/setInit', response.menu.Items)
             notifications.menuDeletedNotification()
         })
-        socket.on(SocketResponses.DELETEPAGES, (response: any) => {
-            store.dispatch('pagesStore/setPageList', response.pages.Items)
-            notifications.pagesDeletedNotification()
-        })
         socket.on(SocketResponses.DELETEPERMISSIONS, (response: any) => {
             console.log(response)
         })
-        socket.on(SocketResponses.DELETEROLES, (response: any) => {
-            console.log(response)
-        })
         socket.on(SocketResponses.DELETESETTINGS, (response: any) => {
-            console.log(response)
-        })
-        socket.on(SocketResponses.DELETETAGS, (response: any) => {
             console.log(response)
         })
 

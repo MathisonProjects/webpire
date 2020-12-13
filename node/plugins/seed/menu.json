@@ -54,7 +54,7 @@
     {
         "type": "admin",
         "oid": 2,
-        "key": "/admin/pages",
+        "key": "/admin/dt/pages",
         "icon": "mdi-newspaper",
         "text": "Pages",
         "page": "admin-pages",
@@ -90,6 +90,15 @@
     {
         "type": "admin",
         "oid": 6,
+        "key": "/admin/dt/user_settings",
+        "icon": "mdi-account-multiple",
+        "text": "Users",
+        "page": "admin-users",
+        "internal": true
+    },
+    {
+        "type": "admin",
+        "oid": 7,
         "key": "/admin/dt/contacts",
         "icon": "mdi-phone-ring",
         "text": "Contacts",
@@ -98,7 +107,7 @@
     },
     {
         "type": "admin",
-        "oid": 7,
+        "oid": 8,
         "key": "/admin/dt/file_upload",
         "icon": "mdi-folder",
         "text": "File Management",
@@ -107,7 +116,7 @@
     },
     {
         "type": "admin",
-        "oid": 8,
+        "oid": 9,
         "key": "/admin/dt/transactions",
         "icon": "mdi-bank-transfer-in",
         "text": "Transactions",
@@ -116,8 +125,8 @@
     },
     {
         "type": "admin",
-        "oid": 9,
-        "key": "/admin/tags",
+        "oid": 10,
+        "key": "/admin/dt/tags",
         "icon": "mdi-view-dashboard",
         "text": "Tags",
         "page": "admin-tags",
@@ -125,7 +134,7 @@
     },
     {
         "type": "admin",
-        "oid": 10,
+        "oid": 11,
         "key": "/admin/dynamic-tables",
         "icon": "mdi-table",
         "text": "Dynamic Tables",
@@ -134,7 +143,7 @@
     },
     {
         "type": "admin",
-        "oid": 11,
+        "oid": 12,
         "key": "/admin/icons",
         "icon": "mdi-material-design",
         "text": "Icons",
@@ -143,7 +152,7 @@
     },
     {
         "type": "admin",
-        "oid": 12,
+        "oid": 13,
         "key": "/admin/settings",
         "icon": "mdi-cogs",
         "text": "Settings",

@@ -5,22 +5,22 @@ Vue.use(VueRouter)
 
 const layoutList = {
     DefaultLayout : require('@/layouts/DefaultLayoutComponent.vue').default,
-    MemberLayout : require('@/layouts/DefaultMemberComponent.vue').default,
-    AdminLayout : require('@/layouts/AdminLayoutComponent.vue').default,
+    MemberLayout  : require('@/layouts/DefaultMemberComponent.vue').default,
+    AdminLayout   : require('@/layouts/AdminLayoutComponent.vue').default,
 }
 const componentList = {
-    HomeComponent : require('@/pages/HomeComponent.vue').default,
-    AccessComponent : require('@/pages/AccessComponent.vue').default,
-    MemberHomeComponent : require('@/pages/member/HomeComponent.vue').default,
-    MemberChatComponent : require('@/pages/member/ChatComponent.vue').default,
-    MemberSettingsComponent : require('@/pages/member/SettingsComponent.vue').default,
-    AdminHomeComponent : require('@/pages/admin/HomeComponent.vue').default,
-    AdminMenuComponent : require('@/pages/admin/MenuComponent.vue').default,
-    AdminDynamicTablesComponent : require('@/pages/admin/DynamicTablesComponent.vue').default,
+    HomeComponent                  : require('@/pages/HomeComponent.vue').default,
+    AccessComponent                : require('@/pages/AccessComponent.vue').default,
+    MemberHomeComponent            : require('@/pages/member/HomeComponent.vue').default,
+    MemberChatComponent            : require('@/pages/member/ChatComponent.vue').default,
+    MemberSettingsComponent        : require('@/pages/member/SettingsComponent.vue').default,
+    AdminHomeComponent             : require('@/pages/admin/HomeComponent.vue').default,
+    AdminMenuComponent             : require('@/pages/admin/MenuComponent.vue').default,
+    AdminDynamicTablesComponent    : require('@/pages/admin/DynamicTablesComponent.vue').default,
     AdminDynamicTableViewComponent : require('@/pages/admin/DynamicTableViewComponent.vue').default,
-	AdminIconsComponent : require('@/pages/admin/IconsComponent.vue').default,
-	AdminPagesComponent : require('@/pages/admin/PagesComponent.vue').default,
-	AdminSettingsComponent: require('@/pages/admin/SettingsComponent.vue').default
+    AdminUsersComponent            : require('@/pages/admin/UsersComponent.vue').default,
+	AdminIconsComponent            : require('@/pages/admin/IconsComponent.vue').default,
+	AdminSettingsComponent         : require('@/pages/admin/SettingsComponent.vue').default
 }
 
 const routes = [
@@ -116,19 +116,19 @@ const routes = [
 				}
 			},
 			{
-				path: 'pages',
-				name: 'admin-pages',
-				component: componentList.AdminPagesComponent,
-				meta: {
-					title: "Pages"
-				}
-			},
-			{
 				path: 'settings',
 				name: 'admin-settings',
 				component: componentList.AdminSettingsComponent,
 				meta: {
 					title: "Settings"
+				}
+			},
+			{
+				path: 'users',
+				name: 'admin-users',
+				component: componentList.AdminUsersComponent,
+				meta: {
+					title: "Users"
 				}
 			},
 			{
