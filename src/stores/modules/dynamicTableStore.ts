@@ -35,5 +35,9 @@ export default {
             commit('SET_TABLELIST', payload)
         }
     },
-    getters: {}
+    getters: {
+        getDynamicTableByKey: (state,getters) => (key) => {
+            return state.tableList.find( item => item.key === key)
+        }
+    }
 }

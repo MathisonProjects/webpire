@@ -74,7 +74,7 @@
 				return false
 			},
 			admin() {
-				return true
+				return this.$store.getters['userStore/userRole'] === 'Admin'
 			},
 			parsedJwt() {
 				if (this.user.jwt !== null) {

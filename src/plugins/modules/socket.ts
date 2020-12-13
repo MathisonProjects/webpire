@@ -3,6 +3,7 @@ import store from '@/stores'
 import notifications from './notifications'
 import { SocketFuncs, SocketResponses } from '@/enums'
 import { AnyNsRecord } from 'dns'
+import standardFuncs from './standardFuncs'
 const socket = io('http://localhost:8082')
 
 export default {
@@ -18,6 +19,9 @@ export default {
             store.dispatch('jsonStore/reset')
             store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items)
             store.dispatch('dynamicTableContentStore/setContentList', response.dynamic_table_content.Items)
+            if (store.state.userStore.sub !== null) {
+                standardFuncs.getUserSettings()
+            }
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
@@ -26,6 +30,7 @@ export default {
             } else {
                 store.dispatch('userStore/setLogin', response)
                 notifications.registerSuccessNotification()
+                standardFuncs.getUserSettings()
             }
         })
         socket.on(SocketResponses.ACCOUNTLOGIN, (response: any) => {
@@ -34,6 +39,7 @@ export default {
             } else {
                 store.dispatch('userStore/setLogin', response)
                 notifications.loginSuccessNotification()
+                standardFuncs.getUserSettings()
             }
         })
 

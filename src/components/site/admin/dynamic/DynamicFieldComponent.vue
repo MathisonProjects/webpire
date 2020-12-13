@@ -54,7 +54,7 @@
 		},
 		data()      {
             return {
-                fieldValue: null,
+                fieldValue: this.$attrs.value,
                 fileUpload: null,
                 classicCkeditor: ClassicEditor
             }

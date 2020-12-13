@@ -34,6 +34,9 @@ export default {
                 options[item.tid][item.id] = item
             }
             return options
+        },
+        getRecordsByTid: (state,getters) => (tid) => {
+            return state.contentList.filter( item => item.tid === tid)
         }
     }
 }

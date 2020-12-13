@@ -176,14 +176,7 @@
                 if (this.tableKey === null) {
                     return null
                 } else {
-                    const keyedTables = this.tableList.filter( (item) => {
-                        return item.key === this.tableKey
-                    })
-                    if (keyedTables.length > 0) {
-                        return keyedTables[0]
-                    } else {
-                        return null
-                    }
+                    return this.$store.getters['dynamicTableStore/getDynamicTableByKey'](this.tableKey)
                 }
             },
             headers() {

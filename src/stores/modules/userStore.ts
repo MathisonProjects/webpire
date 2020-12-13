@@ -7,6 +7,7 @@ interface IUserStore {
     email: string
     sub: string
     email_verified: boolean
+    settings: any
 }
 
 export default {
@@ -16,7 +17,8 @@ export default {
         sub: null, // uid & sub the same
         username: null,
         email_verified: null,
-        email: null
+        email: null,
+        settings: {}
     },
     mutations: {
         SET_USERNAME(state: IUserStore, payload: string) {
@@ -34,6 +36,9 @@ export default {
         },
         SET_EMAIL(state: IUserStore, payload: string) {
             state.email = payload
+        },
+        SET_SETTINGS(state: IUserStore, payload: any) {
+            state.settings = payload
         }
     },
     actions: {
@@ -45,16 +50,23 @@ export default {
             commit('SET_UID', payload.sub)
             commit('SET_EMAIL', payload.email)
         },
+        setSettings({commit} : {commit: any}, payload: any) {
+            commit('SET_SETTINGS', payload)
+        },
         logout({commit} : {commit: any}) {
             commit('SET_JWT', null)
             commit('SET_USERNAME', null)
             commit('SET_UID', null)
             commit('SET_EMAIL', null)
+            commit('SET_SETTINGS', null)
         }
     },
     getters: {
         userData(state: IUserStore) {
             return state
+        },
+        userRole(state: IUserStore) {
+            return state.settings.content.role
         }
     }
 }
