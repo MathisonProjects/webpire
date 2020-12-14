@@ -19,9 +19,7 @@ export default {
             store.dispatch('jsonStore/reset')
             store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items)
             store.dispatch('dynamicTableContentStore/setContentList', response.dynamic_table_content.Items)
-            if (store.state.userStore.sub !== null) {
-                standardFuncs.getUserSettings()
-            }
+            if (store.state.userStore.sub !== null) standardFuncs.getUserSettings()
         })
 
         socket.on(SocketResponses.ACCOUNTREGISTER, (response: any) => {
@@ -46,6 +44,7 @@ export default {
         socket.on(SocketResponses.SAVEDYNAMICTABLECONTENT, (response: any) => {
             store.dispatch('dynamicTableContentStore/setContentList', response.dynamic_table_content.Items)
             notifications.dynamicTableContentSavedNotification()
+            if (store.state.userStore.sub !== null) standardFuncs.getUserSettings()
         })
         socket.on(SocketResponses.SAVEDYNAMICTABLES, (response: any) => {
             store.dispatch('dynamicTableStore/setTables', response.dynamic_tables.Items) // Dinner Time!
