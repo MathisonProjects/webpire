@@ -1,7 +1,8 @@
-sudo yum install httpd -y
+sudo yum update
+curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
+sudo yum install httpd nodejs -y
 sudo service httpd start
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
+node -v
+npm -v
 npm install -g aws-sdk pm2 dotenv
 npm install
