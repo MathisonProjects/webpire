@@ -1,0 +1,26 @@
+version: 0.2
+
+run-as: ec2-user
+
+phases:
+  install:
+    run-as: ec2-user
+    commands:
+      - echo Starting Install Phase
+      - npm install -g aws-sdk pm2 dotenv
+      - npm install
+  pre_build:
+    run-as: ec2-user
+    commands:
+      - echo Starting Pre Build Phase
+  build:
+    run-as: ec2-user
+    commands:
+      - echo Starting Build Phase
+      - npm run prod
+      - aws s3 cp --recursive dist/ s3://webpire.io/
+  post_build:
+    run-as: ec2-user
+    commands:
+      - echo Post Build Phase
+      - pm2 start ./node/server.js
