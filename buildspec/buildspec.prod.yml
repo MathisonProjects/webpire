@@ -1,14 +1,11 @@
 version: 0.2
 
 phases:
-  pre_install:
-    commands:
-      - echo Starting Pre Install Phase
-      - cp .env.example .env.production
-      - echo $AWS_REGION
   install:
     commands:
       - echo Starting Install Phase
+      - cp .env.example .env.production
+      - echo $AWS_REGION
       - ls -al
       - npm install -g aws-sdk pm2 dotenv
       - npm install
