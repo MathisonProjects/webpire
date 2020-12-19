@@ -4,6 +4,7 @@ phases:
   install:
     commands:
       - echo Starting Install Phase
+      - ls -al
       - npm install -g aws-sdk pm2 dotenv
       - npm install
   pre_build:
