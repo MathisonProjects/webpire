@@ -1,7 +1,14 @@
 const { uuid } = require('uuidv4');
 const AWS = require('aws-sdk')
+const Dotenv = require('dotenv')
+const env = process.env.STAGE ? process.env.STAGE : "development";
+const envFile = './.env.'+env
+const envVariables = Dotenv.config({ path: envFile }).parsed
+
 AWS.config.update({
-    region: "us-west-2"
+    region: envVariables.AWS_REGION,
+    accessKeyId: envVariables.ACCESS_KEY_ID,
+    accessSecretKey: envVariables.SECRET_ACCESS_KEY
 })
 // Use the local Docker endpoint if executed locally
 
@@ -12,9 +19,7 @@ const dbKey = 'webpire'
 module.exports = {
     updateEndpoint(endpoint) {
         // http://172.18.0.2:8000 || http://localhost:8000
-        AWS.config.update({
-            endpoint: endpoint
-        })
+        if (endpoint !== null && endpoint !== undefined) AWS.config.update({ endpoint: endpoint })
         dbHandler = new AWS.DynamoDB({apiVersion: '2012-08-10'})
         docClient = new AWS.DynamoDB.DocumentClient()
     },
@@ -26,6 +31,7 @@ module.exports = {
         await this.createTable(dbKey + '_menu')
         await this.createTable(dbKey + '_permissions')
         await this.createTable(dbKey + '_settings')
+        setTimeout(() => {  console.log("DynamoDb Placed!"); }, 25000)
     },
     seedTables(endpoint = 'http://172.18.0.2:8000') {
         this.updateEndpoint(endpoint)
