@@ -4,9 +4,26 @@ phases:
   install:
     commands:
       - echo Starting Install Phase
-      - cp .env.example .env.production
       - echo $AWS_REGION
       - ls -al
+      - echo > .env.production
+      - echo "SITE_NAME=$SITE_NAME" >> .env.production
+      - echo "APP_URL=$APP_URL" >> .env.production
+      - echo "NODE_URL=$NODE_URL" >> .env.production
+      - echo "DB_KEY=$DB_KEY" >> .env.production
+      - echo "STAGE=$STAGE" >> .env.production
+      - echo "HOT_PORT=$HOT_PORT" >> .env.production
+      - echo "NODE_PORT=$NODE_PORT" >> .env.production
+      - echo "CLIENT_ID=$CLIENT_ID" >> .env.production
+      - echo "APP_DOMAIN=$APP_DOMAIN" >> .env.production
+      - echo "REDIRECT_URI=$REDIRECT_URI" >> .env.production
+      - echo "USERPOOL_ID=$USERPOOL_ID" >> .env.production
+      - echo "REDIRECT_URI_SIGNOUT=$REDIRECT_URI_SIGNOUT" >> .env.production
+      - echo "APP_URL=$APP_URL" >> .env.production
+      - echo "AWS_REGION=$AWS_REGION" >> .env.production
+      - echo "ACCESS_KEY_ID=$ACCESS_KEY_ID" >> .env.production
+      - echo "SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY" >> .env.production
+      - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env.production
       - npm install -g aws-sdk pm2 dotenv
       - npm install
   pre_build:
