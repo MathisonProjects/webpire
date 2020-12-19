@@ -1,1 +1,1 @@
-pm2 start /var/www/html/node/server.js
+pm2 start node/server.js
