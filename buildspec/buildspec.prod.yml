@@ -37,11 +37,9 @@ phases:
     commands:
       - echo Post Build Phase
       - aws s3 cp --recursive dist/ s3://webpire.io/
-      - pm2 start ./node/server.js
 
 artifacts:
   files:
     - '**/*'
-  base-directory: ./
   name: build-artifact-webpire
   discard-paths: no
