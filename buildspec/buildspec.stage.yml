@@ -1,0 +1,45 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Starting Install Phase
+      - echo $AWS_REGION
+      - ls -al
+      - echo > .env.stage
+      - echo "SITE_NAME=$SITE_NAME" >> .env.stage
+      - echo "APP_URL=$APP_URL" >> .env.stage
+      - echo "NODE_URL=$NODE_URL" >> .env.stage
+      - echo "DB_KEY=$DB_KEY" >> .env.stage
+      - echo "STAGE=$STAGE" >> .env.stage
+      - echo "HOT_PORT=$HOT_PORT" >> .env.stage
+      - echo "NODE_PORT=$NODE_PORT" >> .env.stage
+      - echo "CLIENT_ID=$CLIENT_ID" >> .env.stage
+      - echo "APP_DOMAIN=$APP_DOMAIN" >> .env.stage
+      - echo "REDIRECT_URI=$REDIRECT_URI" >> .env.stage
+      - echo "USERPOOL_ID=$USERPOOL_ID" >> .env.stage
+      - echo "REDIRECT_URI_SIGNOUT=$REDIRECT_URI_SIGNOUT" >> .env.stage
+      - echo "APP_URL=$APP_URL" >> .env.stage
+      - echo "AWS_REGION=$AWS_REGION" >> .env.stage
+      - echo "ACCESS_KEY_ID=$ACCESS_KEY_ID" >> .env.stage
+      - echo "SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY" >> .env.stage
+      - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env.stage
+      - npm install -g aws-sdk pm2 dotenv
+      - npm install
+  pre_build:
+    commands:
+      - echo Starting Pre Build Phase
+  build:
+    commands:
+      - echo Starting Build Phase
+      - npm run prod
+  post_build:
+    commands:
+      - echo Post Build Phase
+      - aws s3 cp --recursive dist/ s3://webpire.io/
+
+artifacts:
+  files:
+    - '**/*'
+  name: artifact-webpire-$CODEBUILD_BATCH_BUILD_IDENTIFIER
+  discard-paths: no
