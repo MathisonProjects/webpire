@@ -6,3 +6,5 @@ node -v
 npm -v
 npm install -g aws-sdk pm2 dotenv
 npm install
+pm2 stop all
+pm2 delete all
