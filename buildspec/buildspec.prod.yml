@@ -41,5 +41,6 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: artifact-webpire-$CODEBUILD_BATCH_BUILD_IDENTIFIER
+  name: webpire-arti
+  base-directory: '/'
   discard-paths: no
