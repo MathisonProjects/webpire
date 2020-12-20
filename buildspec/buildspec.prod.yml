@@ -42,5 +42,5 @@ artifacts:
   files:
     - '**/*'
   name: webpire-arti
-  base-directory: /
+  base-directory: dist
   discard-paths: no
