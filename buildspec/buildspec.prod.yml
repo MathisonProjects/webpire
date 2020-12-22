@@ -13,7 +13,7 @@ phases:
       - echo "DB_KEY=$DB_KEY" >> .env.production
       - echo "STAGE=$STAGE" >> .env.production
       - echo "HOT_PORT=$HOT_PORT" >> .env.production
-      - echo "NODE_PORT=$NODE_PORT" >> .env.production
+      - echo "NODE_PORT=80" >> .env.production
       - echo "CLIENT_ID=$CLIENT_ID" >> .env.production
       - echo "APP_DOMAIN=$APP_DOMAIN" >> .env.production
       - echo "REDIRECT_URI=$REDIRECT_URI" >> .env.production
