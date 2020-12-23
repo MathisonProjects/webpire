@@ -2,6 +2,7 @@ const AWS = require('aws-sdk')
 const Cognito = require('./cognito')
 const s3 = require('./s3')
 const { uuid } = require('uuidv4');
+const Dotenv = require('dotenv')
 const env = process.env.STAGE ? process.env.STAGE : "development";
 const envFile = './.env.'+env
 const envVariables = Dotenv.config({ path: envFile }).parsed
@@ -17,10 +18,11 @@ class WebpirePlugin {
         console.log('Test Fire Away!')
     }
 
-    setEndpoint(stage) {
-        if (stage !== 'production') {
+    setEndpoint() {
+        console.log(process.env)
+        if (process.env.STAGE !== 'production') {
             AWS.config.update({
-                endpoint: stage === 'development' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
+                endpoint: process.env.STAGE === 'development' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
             })
         }
 

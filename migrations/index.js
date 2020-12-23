@@ -24,7 +24,6 @@ module.exports = {
         docClient = new AWS.DynamoDB.DocumentClient()
     },
     async createTables(endpoint = 'http://172.18.0.2:8000') {
-        console.log(endpoint)
         this.updateEndpoint(endpoint)
         await this.createTable(dbKey + '_dynamic_tables')
         await this.createTable(dbKey + '_dynamic_table_content')
