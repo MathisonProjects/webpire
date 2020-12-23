@@ -2,8 +2,13 @@ const AWS = require('aws-sdk')
 const Cognito = require('./cognito')
 const s3 = require('./s3')
 const { uuid } = require('uuidv4');
+const env = process.env.STAGE ? process.env.STAGE : "development";
+const envFile = './.env.'+env
+const envVariables = Dotenv.config({ path: envFile }).parsed
 AWS.config.update({
-    region: "us-west-2"
+    region: "us-west-2",
+    accessKeyId: envVariables.ACCESS_KEY_ID,
+    accessSecretKey: envVariables.SECRET_ACCESS_KEY
 })
 var docClient = null
 
