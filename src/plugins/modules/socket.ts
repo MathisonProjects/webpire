@@ -6,7 +6,7 @@ import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
 
 // const nodeUrl: any = 'd3fik8r36xogiu.cloudfront.net'
-const nodeUrl: any = process.env.NODE_URL + ':' + process.env.NODE_PORT
+const nodeUrl: any = 'http://' + process.env.NODE_URL + ':' + process.env.NODE_PORT
 const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3})
 
 export default {
