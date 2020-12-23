@@ -71,7 +71,7 @@ const routes = [
 			},
 			{
 				path: 'chat',
-				name: 'member-home',
+				name: 'member-chat',
 				component: componentList.MemberChatComponent,
 				meta: {
 					title: "Chat"
@@ -79,7 +79,7 @@ const routes = [
 			},
 			{
 				path: 'settings',
-				name: 'member-home',
+				name: 'member-settings',
 				component: componentList.MemberSettingsComponent,
 				meta: {
 					title: "Settings"
@@ -142,7 +142,7 @@ const routes = [
 			},
 			{
 				path: 'dt',
-				name: 'admin-dynamic-table-view',
+				name: 'admin-dynamic-table-view-pick-table',
 				component: componentList.AdminDynamicTableViewComponent,
 				meta: {
 					title: "Dynamic Table View | Pick Table"
@@ -150,7 +150,7 @@ const routes = [
 			},
 			{
 				path: 'dt/:key',
-				name: 'admin-dynamic-table-view',
+				name: 'admin-dynamic-table-view-key',
 				component: componentList.AdminDynamicTableViewComponent,
 				meta: {
 					title: "Dynamic Table View"
@@ -158,7 +158,7 @@ const routes = [
 			},
 			{
 				path: 'dt/:key/:mode',
-				name: 'admin-dynamic-table-view',
+				name: 'admin-dynamic-table-view-key-mode',
 				component: componentList.AdminDynamicTableViewComponent,
 				meta: {
 					title: "Dynamic Table View"
@@ -166,7 +166,7 @@ const routes = [
 			},
 			{
 				path: 'dt/:key/:mode/:id',
-				name: 'admin-dynamic-table-view',
+				name: 'admin-dynamic-table-view-key-mode-id',
 				component: componentList.AdminDynamicTableViewComponent,
 				meta: {
 					title: "Dynamic Table View"
