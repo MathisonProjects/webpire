@@ -4,7 +4,10 @@ import notifications from './notifications'
 import { SocketFuncs, SocketResponses } from '@/enums'
 import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
-const socket = io('http://localhost:8082')
+
+const nodeUrl: any = 'webpire-node-lb-757008e96152f043.elb.us-east-1.amazonaws.com:8082'
+// const nodeUrl: any = process.env.NODE_URL + ':' + process.env.NODE_PORT
+const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3})
 
 export default {
     init() {

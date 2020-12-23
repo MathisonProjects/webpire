@@ -8,6 +8,7 @@
                 <span class='overline' title='Session Remaining'>{{ expirationTime }} Seconds</span>
                 <v-btn icon rounded @click="$router.push('/')"><v-icon small>{{ mdiIconsList.HOME }}</v-icon></v-btn>
                 <v-btn icon rounded><v-icon small>{{ mdiIconsList.BELL }}</v-icon></v-btn>
+                <v-btn icon rounded @click='refreshData'><v-icon small>{{ mdiIconsList.REFRESH }}</v-icon></v-btn>
                 <v-btn icon rounded @click='logout'><v-icon small>{{ mdiIconsList.LOGOUT }}</v-icon></v-btn>
             </div>
         </div>
@@ -20,7 +21,7 @@
 <script>
     import AdminDrawerComponent from './AdminDrawerComponent'
 	import jwt from 'jsonwebtoken'
-    import {MdiIcons} from '@/enums'
+    import {MdiIcons, SocketFuncs} from '@/enums'
     export default {
 		name      : "admin-layout-component",
 		props     : [],
@@ -61,6 +62,9 @@
             }
         },
 		methods   : {
+            refreshData() {
+                this.$p.socket.socketEmitFire(SocketFuncs.GETDBSTORE, {})
+            },
             logout() {
                 this.$store.dispatch('userStore/logout')
                 this.$p.notifications.logoutSuccessfulNotification()

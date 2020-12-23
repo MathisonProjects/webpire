@@ -32,6 +32,7 @@ export default {
                     updated_by: store.state.userStore.uid
                 }
             }
+
             socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, settingsContent)
             store.dispatch('userStore/setSettings', settingsContent)
         }

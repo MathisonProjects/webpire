@@ -13,9 +13,12 @@ class WebpirePlugin {
     }
 
     setEndpoint(stage) {
-        AWS.config.update({
-            endpoint: stage === 'development' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
-        })
+        if (stage !== 'production') {
+            AWS.config.update({
+                endpoint: stage === 'development' ? 'http://localhost:8000' : 'http://172.18.0.2:8000'
+            })
+        }
+
         docClient = new AWS.DynamoDB.DocumentClient()
     }
 
