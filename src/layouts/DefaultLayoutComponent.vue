@@ -5,51 +5,53 @@
 			<h4>Loading...</h4>
 			<v-progress-circular indeterminate color="primary" class='m5-5' />
 		</v-main>
-		<v-app-bar v-if='settings.header_color !== undefined' app dense :style='"background-color: rgba(" +settings.header_color.value.r + ", " +settings.header_color.value.g + ", " +settings.header_color.value.b + ", " +settings.header_color.value.a + ") !important;"'>
-			<v-toolbar-title v-if='settings.site_name === undefined'>{{ $t('Site.name') }}</v-toolbar-title>
-			<v-toolbar-title v-if='settings.site_name !== undefined'>{{ settings.site_name.value }}</v-toolbar-title>
-			<v-spacer></v-spacer>
-			<v-toolbar-items>
-				<v-menu bottom left v-for='(menuItem, index) in menu' :key='index'>
-					<template v-slot:activator="{ on }">
-						<v-btn @click='goToLink(menuItem)' v-if='menuItem.action !== LinkActionsList.DROPDOWN' :aria-label='menuItem.icon'>
-							<v-icon>{{ menuItem.icon }}</v-icon> {{ menuItem.text }}
+		<div v-if='settings.header_color !== undefined'>
+			<v-app-bar app dense :style='"background-color: rgba(" +settings.header_color.value.r + ", " +settings.header_color.value.g + ", " +settings.header_color.value.b + ", " +settings.header_color.value.a + ") !important;"'>
+				<v-toolbar-title v-if='settings.site_name === undefined'>{{ $t('Site.name') }}</v-toolbar-title>
+				<v-toolbar-title v-if='settings.site_name !== undefined'>{{ settings.site_name.value }}</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-toolbar-items>
+					<v-menu bottom left v-for='(menuItem, index) in menu' :key='index'>
+						<template v-slot:activator="{ on }">
+							<v-btn @click='goToLink(menuItem)' v-if='menuItem.action !== LinkActionsList.DROPDOWN' :aria-label='menuItem.icon'>
+								<v-icon>{{ menuItem.icon }}</v-icon> {{ menuItem.text }}
+							</v-btn>
+							<v-btn v-on="on" v-if='menuItem.action === LinkActionsList.DROPDOWN' :aria-label='menuItem.icon'>
+								<v-icon>{{ menuItem.icon }}</v-icon> {{ menuItem.text }}
+							</v-btn>
+						</template>
+						<v-list v-if='menuItem.action === LinkActionsList.DROPDOWN'>
+							<v-list-item v-for="(dropdownItem, index2) in menuItem.dropdown" :key="index2" @click='goToLink(dropdownItem)'>
+								<v-list-item-title><v-icon>{{ dropdownItem.icon }}</v-icon> {{ dropdownItem.text }}</v-list-item-title>
+							</v-list-item>
+						</v-list>
+					</v-menu>
+				</v-toolbar-items>
+			</v-app-bar>
+			<v-main :style='"background-color: rgba(" +settings.background_color.value.r + ", " +settings.background_color.value.g + ", " +settings.background_color.value.b + ", " +settings.background_color.value.a + ") !important;"'>
+				<v-container>
+					<transition name='fade' mode='out-in'>
+						<router-view />
+					</transition>
+				</v-container>
+			</v-main>
+			<v-footer dark padless :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
+				<v-card :style='"background-color: rgba(" +settings.footer_color.value.r + ", " +settings.footer_color.value.g + ", " +settings.footer_color.value.b + ", " +settings.footer_color.value.a + ") !important;"' class="flex" flat tile>
+					<v-card-title class="dark">
+						<strong class="subheading" v-if='settings.footer_text === undefined'>{{ $t('Site.footer.subheader') }}</strong>
+						<strong class="subheading" v-if='settings.footer_text !== undefined'>{{ settings.footer_text.value }}</strong>
+						<v-spacer></v-spacer>
+						<v-btn v-for="(icon, index) in icons" :key="index" target='_BLANK' class="mx-1" :aria-label='icon' dark icon>
+							<v-icon size="24px">{{ icon }}</v-icon>
 						</v-btn>
-						<v-btn v-on="on" v-if='menuItem.action === LinkActionsList.DROPDOWN' :aria-label='menuItem.icon'>
-							<v-icon>{{ menuItem.icon }}</v-icon> {{ menuItem.text }}
-						</v-btn>
-					</template>
-					<v-list v-if='menuItem.action === LinkActionsList.DROPDOWN'>
-						<v-list-item v-for="(dropdownItem, index2) in menuItem.dropdown" :key="index2" @click='goToLink(dropdownItem)'>
-							<v-list-item-title><v-icon>{{ dropdownItem.icon }}</v-icon> {{ dropdownItem.text }}</v-list-item-title>
-						</v-list-item>
-					</v-list>
-				</v-menu>
-			</v-toolbar-items>
-		</v-app-bar>
-        <v-main v-if='settings.header_color !== undefined' :style='"background-color: rgba(" +settings.background_color.value.r + ", " +settings.background_color.value.g + ", " +settings.background_color.value.b + ", " +settings.background_color.value.a + ") !important;"'>
-			<v-container>
-				<transition name='fade' mode='out-in'>
-					<router-view />
-				</transition>
-			</v-container>
-		</v-main>
-		<v-footer v-if='settings.header_color !== undefined'  dark padless :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
-			<v-card :style='"background-color: rgba(" +settings.footer_color.value.r + ", " +settings.footer_color.value.g + ", " +settings.footer_color.value.b + ", " +settings.footer_color.value.a + ") !important;"' class="flex" flat tile>
-				<v-card-title class="dark">
-					<strong class="subheading" v-if='settings.footer_text === undefined'>{{ $t('Site.footer.subheader') }}</strong>
-					<strong class="subheading" v-if='settings.footer_text !== undefined'>{{ settings.footer_text.value }}</strong>
-					<v-spacer></v-spacer>
-					<v-btn v-for="(icon, index) in icons" :key="index" target='_BLANK' class="mx-1" :aria-label='icon' dark icon>
-						<v-icon size="24px">{{ icon }}</v-icon>
-					</v-btn>
-				</v-card-title>
+					</v-card-title>
 
-				<v-card-text class="py-2 white--text text-center">
-					{{ new Date().getFullYear() }} - <strong>{{ $t('Site.name') }}</strong> {{ buildData }}
-				</v-card-text>
-			</v-card>
-		</v-footer>
+					<v-card-text class="py-2 white--text text-center">
+						{{ new Date().getFullYear() }} - <strong>{{ $t('Site.name') }}</strong> {{ buildData }}
+					</v-card-text>
+				</v-card>
+			</v-footer>
+		</div>
     </v-app>
 </template>
 
