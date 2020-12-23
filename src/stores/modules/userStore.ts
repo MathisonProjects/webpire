@@ -58,7 +58,7 @@ export default {
             commit('SET_USERNAME', null)
             commit('SET_UID', null)
             commit('SET_EMAIL', null)
-            commit('SET_SETTINGS', null)
+            commit('SET_SETTINGS', {})
         }
     },
     getters: {
@@ -66,7 +66,7 @@ export default {
             return state
         },
         userRole(state: IUserStore) {
-            return (state.settings !== null) ? state.settings.content.role : null
+            return (state.settings.content !== undefined) ? state.settings.content.role : null
         }
     }
 }
