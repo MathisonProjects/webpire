@@ -4,9 +4,7 @@ const server = require('http').createServer(express)
 const Dotenv = require('dotenv-webpack')
 const io = require('socket.io')(server, {
   allowUpgrades: true,
-  transports: [ 'polling', 'websocket' ],
-  pingTimeout: 9000,
-  pingInterval: 3000,
+  transports: [ 'websocket' ],
   cookie: 'mycookie',
   httpCompression: true,
   origins: '*:*'
@@ -18,7 +16,7 @@ const envVariables = new Dotenv({ path: envFile })
 const port = { hot: parseInt(envVariables.definitions['process.env.HOT_PORT'].replace('"', '')), node: parseInt(envVariables.definitions['process.env.NODE_PORT'].replace('"', '')) }
 
 // Constants
-const PORT = port.node;
+const PORT = port.node
 
 Plugins.WebpirePlugin.setEndpoint()
 

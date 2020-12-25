@@ -5,14 +5,16 @@ import { SocketFuncs, SocketResponses } from '@/enums'
 import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
 
-const nodeUrl: any = '//node.webpire.io'
+const nodeUrl: any = 'https://node.webpire.io'
 // const nodeUrl: any = 'https://' + process.env.NODE_URL + ':' + process.env.NODE_PORT
-const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3})
+const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3, transports: ['websocket']})
 
 export default {
     init() {
         socket.on(SocketResponses.CONNECTIONCONFIRMATION, (response: any) => {
             console.log(response.response)
+            socket.emit('get dbstore', {})
+            socket.emit(SocketFuncs.ACCOUNTGETALLUSERS, {})
         })
 
         socket.on(SocketResponses.RETURNGETDBSTORE, (response: any) => {
@@ -109,9 +111,6 @@ export default {
             })
             store.dispatch('usersStore/setUserList', userMap)
         })
-
-        socket.emit('get dbstore', {})
-        socket.emit(SocketFuncs.ACCOUNTGETALLUSERS, {})
     },
     resetToFactorySettings(resetFunc: SocketFuncs) {
         socket.emit(resetFunc, {})
