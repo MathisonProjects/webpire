@@ -5,7 +5,7 @@ import { SocketFuncs, SocketResponses } from '@/enums'
 import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
 
-const nodeUrl: any = 'https://node.webpire.io'
+const nodeUrl: any = '//node.webpire.io'
 // const nodeUrl: any = 'https://' + process.env.NODE_URL + ':' + process.env.NODE_PORT
 const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3})
 
