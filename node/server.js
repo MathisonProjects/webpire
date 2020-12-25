@@ -2,7 +2,12 @@ const express = require('express')()
 const fs = require('fs')
 const server = require('http').createServer(express)
 const Dotenv = require('dotenv-webpack')
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET']
+  }
+})
 const Plugins = require('./plugins')
 const env = process.env.STAGE ? process.env.STAGE : "development";
 const envFile = './.env.'+env
