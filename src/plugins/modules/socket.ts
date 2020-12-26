@@ -5,8 +5,8 @@ import { SocketFuncs, SocketResponses } from '@/enums'
 import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
 
-const nodeUrl: any = 'https://node.webpire.io'
-// const nodeUrl: any = 'https://' + process.env.NODE_URL + ':' + process.env.NODE_PORT
+// const nodeUrl: any = 'https://node.webpire.io'
+const nodeUrl: any = 'https://' + process.env.NODE_URL
 const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3, transports: ['websocket']})
 
 export default {
@@ -18,7 +18,7 @@ export default {
         })
 
         socket.on(SocketResponses.RETURNGETDBSTORE, (response: any) => {
-            console.log(response)
+            console.log('Client Refreshed')
             store.dispatch('menuStore/setInit', response.menu.Items)
             store.dispatch('settingsStore/setInit', response.settings.Items)
             store.dispatch('jsonStore/reset')

@@ -19,6 +19,7 @@ Tasks to Prioritize
 - Share Filter
 - Easier to add/remove related records
 - Add many-to-one relationship type
+- Register submitted notification
 - Filters
     - Date Range Filters
     - Number & Currency Range Filters

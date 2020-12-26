@@ -7,7 +7,8 @@ const io = require('socket.io')(server, {
   transports: [ 'websocket' ],
   cookie: 'mycookie',
   httpCompression: true,
-  origins: '*:*'
+  origins: '*:*',
+  secure: true
 })
 const Plugins = require('./plugins')
 const env = process.env.STAGE ? process.env.STAGE : "development";

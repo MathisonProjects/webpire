@@ -13,6 +13,7 @@ const componentList = {
     AccessComponent                : require('@/pages/AccessComponent.vue').default,
     MemberHomeComponent            : require('@/pages/member/HomeComponent.vue').default,
     MemberUserSearchComponent      : require('@/pages/member/UserSearchComponent.vue').default,
+    MemberViewUserComponent        : require('@/pages/member/ViewUserComponent.vue').default,
     MemberChatComponent            : require('@/pages/member/ChatComponent.vue').default,
     MemberSettingsComponent        : require('@/pages/member/SettingsComponent.vue').default,
     AdminHomeComponent             : require('@/pages/admin/HomeComponent.vue').default,
@@ -67,6 +68,14 @@ const routes = [
 				component: componentList.MemberUserSearchComponent,
 				meta: {
 					title: "Profile Search"
+				}
+			},
+			{
+				path: 'user/:uid',
+				name: 'member-view-user',
+				component: componentList.MemberViewUserComponent,
+				meta: {
+					title: "View Profile"
 				}
 			},
 			{

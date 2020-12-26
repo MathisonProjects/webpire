@@ -1,6 +1,7 @@
 <template>
     <v-app>
 		<SnackbarNotificationComponent />
+		<SubmitSupportTicket class='position-absolute' />
         <v-main v-if='loggedIn'>
 			<v-container>
 				<transition name='fade' mode='out-in'>
@@ -12,7 +13,8 @@
 </template>
 
 <script>
-    import SnackbarNotificationComponent from '@/components/shared/SnackbarNotificationComponent'
+	import SnackbarNotificationComponent from '@/components/shared/SnackbarNotificationComponent'
+	import SubmitSupportTicket from '@/components/shared/SubmitSupportTicket'
 	import { MdiIcons } from '@/enums'
 	import jwt from 'jsonwebtoken'
 
@@ -20,7 +22,8 @@
 		name      : "layout-member-component",
 		props     : [],
 		components: {
-			SnackbarNotificationComponent
+			SnackbarNotificationComponent,
+			SubmitSupportTicket
 		},
 		created()   {},
 		computed  : {
@@ -57,5 +60,4 @@
 </script>
 
 <style>
-
 </style>
