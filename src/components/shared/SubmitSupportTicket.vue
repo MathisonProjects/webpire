@@ -1,14 +1,15 @@
 <template>
     <div :class='(showSupport) ? "position-absolute support-panel-large" : "position-absolute support-panel-small"'>
         <v-btn v-if='!showSupport' color='warning' @click='updateShowSupport' class='orient-counter-clockwise' small><v-icon small>{{ mdiIconsList.HELP }}</v-icon> Support</v-btn>
-        <VuetifyFormComponent v-model='supportForm' :form='supportFormStructure' v-if='showSupport' />
+        <VuetifyFormComponent v-model='supportForm' :form='supportFormStructure' v-if='showSupport' @callbackHandler='callbackHandler' />
     </div>
 </template>
 
 <script>
     import VuetifyFormComponent from './VuetifyFormComponent'
-	import { FieldTypes, MdiIcons } from '@/enums'
+	import { FieldTypes, LinkActions, MdiIcons, SocketFuncs } from '@/enums'
 	import jwt from 'jsonwebtoken'
+import { uuid } from 'uuidv4'
 
     export default {
 		name      : "submit-support-ticket-component",
@@ -28,7 +29,16 @@
                                 label: 'Title',
                                 type: FieldTypes.TEXT,
                                 md: 12,
-                                vmodel: 'title',
+                                vmodel: 'name',
+                                value: '',
+                                class: '',
+                                options: false
+                            },
+                            {
+                                label: 'Message',
+                                type: FieldTypes.MULTILINE,
+                                md: 12,
+                                vmodel: 'description',
                                 value: '',
                                 class: '',
                                 options: false
@@ -40,13 +50,13 @@
                             label: 'Hide',
                             icon: MdiIcons.MINUS,
                             color: '',
-                            action: ''
+                            action: LinkActions.HIDE
                         },
                         {
                             label: 'Send',
                             icon: MdiIcons.SEND,
                             color: 'primary',
-                            action: ''
+                            action: LinkActions.SUBMIT
                         }
                     ]
                 }
@@ -63,6 +73,9 @@
 				} else {
 					return null
 				}
+            },
+            supportTicketId() {
+                return this.$store.getters['dynamicTableStore/getDynamicTableByKey']('support_tickets').id
             }
 		},
 		data()      {
@@ -72,6 +85,28 @@
             }
         },
 		methods   : {
+            callbackHandler(action) {
+                console.log(action)
+                if (action === LinkActions.HIDE) {
+                    this.showSupport = false
+                } else if (action === LinkActions.SUBMIT) {
+                    this.supportForm.created_at = Date.now(),
+                    this.supportForm.updated_at = Date.now(),
+                    this.supportForm.created_by = this.user.sub,
+                    this.supportForm.updated_by = this.user.sub,
+                    this.supportForm.user       = this.user.sub
+                    this.supportForm.status     = 'New'
+                    const newSupportTicket = {
+                        id: uuid(),
+                        tid: this.supportTicketId,
+                        created_at: Date.now(),
+                        updated_at: Date.now(),
+                        content: this.supportForm
+                    }
+                    this.$p.socket.socketEmitFire(SocketFuncs.SAVEDYNAMICTABLECONTENT, newSupportTicket)
+                    this.showSupport = false
+                }
+            },
             updateShowSupport() {
                 console.log('fire')
                 this.showSupport = !this.showSupport

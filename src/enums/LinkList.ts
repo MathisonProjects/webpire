@@ -30,6 +30,8 @@ enum LinkActions {
 	DELETE = "delete",
 	VIEW = "view",
 	SAVE = "save",
+	HIDE = "hide",
+	SUBMIT = "submit"
 }
 
 enum AdminSectionPurpose {
