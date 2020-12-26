@@ -50,6 +50,7 @@ enum MdiIcons {
     FOLDEROPEN                = "mdi-folder-open",
     FORMATQUOTEOPENOUTLINE    = "mdi-format-quote-open-outline",
     FORMATLISTBULLETEDTYPE    = "mdi-format-list-bulleted-type",
+    HELP                      = "mdi-help",
     HOME                      = "mdi-home",
     HOMECITY                  = "mdi-home-city",
     INFORMATIONOUTLINE        = "mdi-information-variant",

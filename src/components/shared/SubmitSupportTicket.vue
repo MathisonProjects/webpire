@@ -1,26 +1,56 @@
 <template>
-    <div class='force-right'>
-        <div class='row position-absolute'>
-            <div class='col orient-counter-clockwise'>
-                Support
-            </div>
-            <div class='col' v-if='showSupport'>
-                Test
-            </div>
-        </div>
+    <div :class='(showSupport) ? "position-absolute support-panel-large" : "position-absolute support-panel-small"'>
+        <v-btn v-if='!showSupport' color='warning' @click='updateShowSupport' class='orient-counter-clockwise' small><v-icon small>{{ mdiIconsList.HELP }}</v-icon> Support</v-btn>
+        <VuetifyFormComponent v-model='supportForm' :form='supportFormStructure' v-if='showSupport' />
     </div>
 </template>
 
 <script>
-	import { MdiIcons } from '@/enums'
+    import VuetifyFormComponent from './VuetifyFormComponent'
+	import { FieldTypes, MdiIcons } from '@/enums'
 	import jwt from 'jsonwebtoken'
 
     export default {
 		name      : "submit-support-ticket-component",
 		props     : [],
-		components: {},
+		components: {
+            VuetifyFormComponent
+        },
 		created()   {},
 		computed  : {
+            supportFormStructure() {
+                return {
+                    name: 'Submit Ticket',
+                    cardIcon: MdiIcons.HELP,
+                    fields: [
+                        [
+                            {
+                                label: 'Title',
+                                type: FieldTypes.TEXT,
+                                md: 12,
+                                vmodel: 'title',
+                                value: '',
+                                class: '',
+                                options: false
+                            }
+                        ]
+                    ],
+                    actions: [
+                        {
+                            label: 'Hide',
+                            icon: MdiIcons.MINUS,
+                            color: '',
+                            action: ''
+                        },
+                        {
+                            label: 'Send',
+                            icon: MdiIcons.SEND,
+                            color: 'primary',
+                            action: ''
+                        }
+                    ]
+                }
+            },
 			mdiIconsList() {
 				return MdiIcons
 			},
@@ -37,17 +67,32 @@
 		},
 		data()      {
             return {
-                showSupport: false
+                showSupport: false,
+                supportForm: {}
             }
         },
-		methods   : {},
+		methods   : {
+            updateShowSupport() {
+                console.log('fire')
+                this.showSupport = !this.showSupport
+            }
+        },
 		watch     : {}
     }
 </script>
 
 <style>
-    .force-right {
-        margin: 50% 0px 0px 95%;
+    .support-panel-small {
+        right: 15px;
+        width: 50px;
+		bottom: 200px;
+		z-index: 9999;
+    }
+    .support-panel-large {
+        right: -5px;
+        width: 300px;
+        bottom: 200px;
+		z-index: 9999;
     }
     .orient-counter-clockwise {
         transform: rotate(-90deg);

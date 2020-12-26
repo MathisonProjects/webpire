@@ -1,7 +1,7 @@
 <template>
     <v-app>
 		<SnackbarNotificationComponent />
-		<SubmitSupportTicket class='position-absolute' />
+		<SubmitSupportTicket />
         <v-main v-if='loggedIn'>
 			<v-container>
 				<transition name='fade' mode='out-in'>
