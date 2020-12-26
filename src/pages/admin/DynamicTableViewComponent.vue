@@ -47,7 +47,7 @@
                                             </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
-                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' multiple chips />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions !== undefined) ? Object.values(relatedOptions) : []' item-text="content.name" item-value='id' multiple chips />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -66,7 +66,7 @@
                                             </div>
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "dropdown"' chips multiple dense :items='item.options.split(",")' />
                                             <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "user"' dense chips :items='userList' item-text='username' item-value='sub' multiple />
-                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' multiple chips />
+                                            <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='filters[item.key]' v-if='item.type === "related to"' dense :items='(relatedOptions !== undefined) ? Object.values(relatedOptions) : []' item-text="content.name" item-value='id' multiple chips />
                                         </div>
                                         <div class='col my-5' v-if='item.type === "filler"'><div class='my-4'></div></div>
                                     </div>
@@ -87,7 +87,7 @@
                                     <div v-if="item.type !== 'related to'">{{ formData.content[item.key] }}</div>
                                     <div v-if="item.type === 'related to'">
                                         <div v-for='(relatedItem,index) in formData.content[item.key]' :key='index'>
-                                            <v-btn text small>{{ relatedOptions[item.relatedId][relatedItem].content.name }}</v-btn>
+                                            <v-btn text small>{{ relatedOptions[relatedItem].content.name }}</v-btn>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <div v-if="item.type !== 'related to'">{{ formData.content[item.key] }}</div>
                                     <div v-if="item.type === 'related to'">
                                         <div v-for='(relatedItem,index) in formData.content[item.key]' :key='index'>
-                                            <v-btn @click='viewRelated = relatedOptions[item.relatedId][relatedItem]' text small>{{ relatedOptions[item.relatedId][relatedItem].content.name }}</v-btn>
+                                            <v-btn @click='viewRelated = relatedOptions[relatedItem]' text small>{{ relatedOptions[relatedItem].content.name }}</v-btn>
                                         </div>
                                     </div>
                                 </div>
@@ -254,12 +254,13 @@
             allFields() {
                 return [
                     { key: 'id', name: 'Id', relatedTo: null },
-                    ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
-                    ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedId !== undefined && item.relatedId !== null) ? item.relatedId : null } }),
+                    ...this.currentTable.displayFieldsLeft.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedKey !== undefined && item.relatedKey !== null) ? item.relatedKey : null } }),
+                    ...this.currentTable.displayFieldsRight.map( item => { return { key: item.key, name: item.name, relatedTo: (item.relatedKey !== undefined && item.relatedKey !== null) ? item.relatedKey : null } }),
                 ]
             },
             relatedOptions() {
-                return this.$store.getters['dynamicTableContentStore/organizedByTable']
+                const tableId = this.$store.getters['dynamicTableStore/getDynamicTableByKey'](this.item.relatedKey).id
+                return this.$store.getters['dynamicTableContentStore/organizedByTable'][tableId]
             },
             userList() {
                 return this.$store.state.usersStore.userList

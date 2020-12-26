@@ -12,7 +12,7 @@
         <div v-if='fieldValue !== null && fieldValue !== undefined && item.type === "file"' class='text-center'>
             <a :href='"https://upload.awsvuem.com/" + fieldValue' target='_BLANK'>Click to View File</a>
         </div>
-        <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "related to"' dense :items='(relatedOptions[item.relatedId] !== undefined) ? Object.values(relatedOptions[item.relatedId]) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips :disabled='disabled' />
+        <v-select :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "related to"' dense :items='(relatedOptions !== undefined) ? Object.values(relatedOptions) : []' item-text="content.name" item-value='id' :multiple='item.relationType === "one-to-many"' chips :disabled='disabled' />
     </div>
 </template>
 
@@ -49,7 +49,8 @@
 				}
             },
             relatedOptions() {
-                return this.$store.getters['dynamicTableContentStore/organizedByTable']
+                const tableId = this.$store.getters['dynamicTableStore/getDynamicTableByKey'](this.item.relatedKey).id
+                return this.$store.getters['dynamicTableContentStore/organizedByTable'][tableId]
             },
             userList() {
                 return this.$store.state.usersStore.userList

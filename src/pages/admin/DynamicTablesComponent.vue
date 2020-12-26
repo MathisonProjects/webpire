@@ -53,7 +53,7 @@
                         <v-text-field label='Key' dense placeholder='DB Key of field' v-model='fieldItem.key' />
                     </div>
                     <div class='col text-center' v-if='fieldItem.type === "related to"'>
-                        <v-select label='Related To...' placeholder='Table Related To' v-model='fieldItem.relatedId' :items='tablesList' item-text='name' item-value="id" dense />
+                        <v-select label='Related To...' placeholder='Table Related To' v-model='fieldItem.relatedKey' :items='tablesList' item-text='name' item-value="key" dense />
                     </div>
                     <div class='col text-center' v-if='fieldItem.type === "related to"'>
                         <v-select label='Relationship Type' placeholder='Relationship Type' v-model='fieldItem.relationType' :items='["one-to-one","one-to-many"]' dense />
@@ -62,7 +62,7 @@
                         <v-text-field label='Dropdown Options' dense placeholder='Comma list of dropdown options' v-model='fieldItem.options' />
                     </div>
                     <div class='col-md-1 text-center'>
-                        <v-btn color='error' small><v-icon>{{mdiIconsList.TRASHCANOUTLINE}}</v-icon></v-btn>
+                        <v-btn color='error' small @click='removeItem(index)'><v-icon>{{mdiIconsList.TRASHCANOUTLINE}}</v-icon></v-btn>
                     </div>
                 </div>
 
@@ -171,6 +171,9 @@
             }
         },
 		methods   : {
+            removeItem(index) {
+                this.dynamicTableForm.fields.splice(index, 1)
+            },
             tableUpdate(response) {
 				this.selected = response
             },
