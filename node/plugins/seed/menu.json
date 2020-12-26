@@ -1,162 +1,21 @@
 [
-    {
-        "type": "main",
-        "oid": 0,
-        "key": "/",
-        "icon": "mdi-home",
-        "text": "Home",
-        "page": "default-home",
-        "internal": true
-    },
-    {
-        "type": "main",
-        "oid": 1,
-        "key": "/page/about",
-        "icon": "mdi-contacts",
-        "text": "About",
-        "internal": true
-    },
-    {
-        "type": "main",
-        "oid": 2,
-        "key": "/page/contact",
-        "icon": "mdi-email",
-        "text": "Contact",
-        "internal": true
-    },
-    {
-        "type": "main",
-        "oid": 3,
-        "key": "/admin",
-        "icon": "mdi-view-dashboard",
-        "text": "Admin",
-        "page": "admin-dashboard",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 0,
-        "key": "/admin",
-        "icon": "mdi-view-dashboard",
-        "text": "Dashboard",
-        "page": "admin-dashboard",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 1,
-        "key": "/admin/menu",
-        "icon": "mdi-menu",
-        "text": "Menu",
-        "page": "admin-menu",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 2,
-        "key": "/admin/dt/pages",
-        "icon": "mdi-newspaper",
-        "text": "Pages",
-        "page": "admin-pages",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 3,
-        "key": "/admin/roles",
-        "icon": "mdi-police-badge-outline",
-        "text": "Roles",
-        "page": "admin-roles",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 4,
-        "key": "/admin/permissions",
-        "icon": "mdi-view-dashboard",
-        "text": "Permissions",
-        "page": "admin-permissions",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 5,
-        "key": "/admin/users",
-        "icon": "mdi-account-multiple",
-        "text": "Users",
-        "page": "admin-users",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 6,
-        "key": "/admin/dt/user_settings",
-        "icon": "mdi-account-settings",
-        "text": "User Settings",
-        "page": "admin-users",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 7,
-        "key": "/admin/dt/contacts",
-        "icon": "mdi-phone-ring",
-        "text": "Contacts",
-        "page": "admin-contacts",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 8,
-        "key": "/admin/dt/file_upload",
-        "icon": "mdi-folder",
-        "text": "File Management",
-        "page": "admin-folder-management",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 9,
-        "key": "/admin/dt/transactions",
-        "icon": "mdi-bank-transfer-in",
-        "text": "Transactions",
-        "page": "admin-transactions",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 10,
-        "key": "/admin/dt/tags",
-        "icon": "mdi-view-dashboard",
-        "text": "Tags",
-        "page": "admin-tags",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 11,
-        "key": "/admin/dynamic-tables",
-        "icon": "mdi-table",
-        "text": "Dynamic Tables",
-        "page": "admin-dynamic-tables",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 12,
-        "key": "/admin/icons",
-        "icon": "mdi-material-design",
-        "text": "Icons",
-        "page": "admin-settings",
-        "internal": true
-    },
-    {
-        "type": "admin",
-        "oid": 13,
-        "key": "/admin/settings",
-        "icon": "mdi-cogs",
-        "text": "Settings",
-        "page": "admin-settings",
-        "internal": true
-    }
+    { "type": "main", "oid": 0, "key": "/", "icon": "mdi-home", "text": "Home", "page": "default-home", "internal": true },
+    { "type": "main", "oid": 1, "key": "/page/about", "icon": "mdi-contacts", "text": "About", "internal": true },
+    { "type": "main", "oid": 2, "key": "/page/contact", "icon": "mdi-email", "text": "Contact", "internal": true },
+    { "type": "main", "oid": 3, "key": "/admin", "icon": "mdi-view-dashboard", "text": "Admin", "page": "admin-dashboard", "internal": true },
+    { "type": "admin", "oid": 0, "key": "/admin", "icon": "mdi-view-dashboard", "text": "Dashboard", "page": "admin-dashboard", "internal": true },
+    { "type": "admin", "oid": 1, "key": "/admin/menu", "icon": "mdi-menu", "text": "Menu", "page": "admin-menu", "internal": true },
+    { "type": "admin", "oid": 2, "key": "/admin/dt/pages", "icon": "mdi-newspaper", "text": "Pages", "page": "admin-pages", "internal": true },
+    { "type": "admin", "oid": 3, "key": "/admin/roles", "icon": "mdi-police-badge-outline", "text": "Roles", "page": "admin-roles", "internal": true },
+    { "type": "admin", "oid": 4, "key": "/admin/permissions", "icon": "mdi-view-dashboard", "text": "Permissions", "page": "admin-permissions", "internal": true },
+    { "type": "admin", "oid": 5, "key": "/admin/users", "icon": "mdi-account-multiple", "text": "Users", "page": "admin-users", "internal": true },
+    { "type": "admin", "oid": 6, "key": "/admin/dt/user_settings", "icon": "mdi-account-settings", "text": "User Settings", "page": "admin-users", "internal": true },
+    { "type": "admin", "oid": 7, "key": "/admin/dt/contacts", "icon": "mdi-phone-ring", "text": "Contacts", "page": "admin-contacts", "internal": true },
+    { "type": "admin", "oid": 8, "key": "/admin/dt/file_upload", "icon": "mdi-folder", "text": "File Management", "page": "admin-folder-management", "internal": true },
+    { "type": "admin", "oid": 9, "key": "/admin/dt/transactions", "icon": "mdi-bank-transfer-in", "text": "Transactions", "page": "admin-transactions", "internal": true },
+    { "type": "admin", "oid": 10, "key": "/admin/dt/support_tickets", "icon": "mdi-help-network", "text": "Support Tickets", "page": "admin-support-tickets", "internal": true },
+    { "type": "admin", "oid": 11, "key": "/admin/dt/tags", "icon": "mdi-view-dashboard", "text": "Tags", "page": "admin-tags", "internal": true },
+    { "type": "admin", "oid": 12, "key": "/admin/dynamic-tables", "icon": "mdi-table", "text": "Dynamic Tables", "page": "admin-dynamic-tables", "internal": true },
+    { "type": "admin", "oid": 13, "key": "/admin/icons", "icon": "mdi-material-design", "text": "Icons", "page": "admin-settings", "internal": true },
+    { "type": "admin", "oid": 14, "key": "/admin/settings", "icon": "mdi-cogs", "text": "Settings", "page": "admin-settings", "internal": true }
 ]

@@ -86,7 +86,6 @@ import { uuid } from 'uuidv4'
         },
 		methods   : {
             callbackHandler(action) {
-                console.log(action)
                 if (action === LinkActions.HIDE) {
                     this.showSupport = false
                 } else if (action === LinkActions.SUBMIT) {
