@@ -31,8 +31,8 @@
 					"repeat": "Repeat Password",
 					"refresh": "Refresh",
 					"submit": "Submit",
-					"accountExist": "Account Exists?",
-					"accountNotExist": "Account Does Not Exist"
+					"accountExist": "Go Login",
+					"accountNotExist": "Go Register"
 				}
 			}
 		},

@@ -26,13 +26,15 @@ import { uuid } from 'uuidv4'
                     fields: [
                         [
                             {
-                                label: 'Title',
-                                type: FieldTypes.TEXT,
+                                label: 'Reason',
+                                type: FieldTypes.SELECT,
                                 md: 12,
                                 vmodel: 'name',
                                 value: '',
                                 class: '',
-                                options: false
+                                options: [
+                                    'Bug', 'Complaint', 'Error', 'Suggestion', 'Testimony'
+                                ]
                             },
                             {
                                 label: 'Message',

@@ -1,8 +1,13 @@
 <template>
     <div>
         <div v-if='!loggedIn'>
-            <RegisterComponent v-if='accessModeList.REGISTER === accessMode' @callbackHandler='accessMode = accessModeList.LOGIN'  />
-		    <LoginComponent v-if='accessModeList.LOGIN === accessMode' @callbackHandler='callbackHandler' />
+            <div class='row'>
+                <div class='col-xs-12 col-md-6'></div>
+                <div class='col-xs-12 col-md-6'>
+                    <RegisterComponent v-if='accessModeList.REGISTER === accessMode' @callbackHandler='accessMode = accessModeList.LOGIN'  />
+		            <LoginComponent v-if='accessModeList.LOGIN === accessMode' @callbackHandler='accessMode = accessModeList.REGISTER' />
+                </div>
+            </div>
         </div>
         <div v-if='loggedIn'>
             Logged in

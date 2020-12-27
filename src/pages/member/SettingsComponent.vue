@@ -56,8 +56,8 @@
 			},
 			userSettings() {
 				let userSettings = this.$store.getters['dynamicTableStore/getDynamicTableByKey']('user_settings')
-				userSettings.displayFieldsLeft = userSettings.displayFieldsLeft.filter( item => item.key !== 'created_by' && item.key !== 'updated_by' && item.key !== 'user')
-				userSettings.displayFieldsRight = userSettings.displayFieldsRight.filter( item => item.key !== 'created_by' && item.key !== 'updated_by' && item.key !== 'user')
+				userSettings.displayFieldsLeft = userSettings.displayFieldsLeft.filter( item => item.key !== 'created_by' && item.key !== 'updated_by' && item.key !== 'user' && item.key !== 'chat_partners')
+				userSettings.displayFieldsRight = userSettings.displayFieldsRight.filter( item => item.key !== 'created_by' && item.key !== 'updated_by' && item.key !== 'user' && item.key !== 'chat_partners')
 				return userSettings
 			}
 		},

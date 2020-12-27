@@ -1,7 +1,44 @@
 <template>
     <div>
-        <h1><v-icon large>{{ mdiIconsList.TESTTUBEEMPTY }}</v-icon> Dashboard</h1>
-		<p><b>AWS Vue Template</b> This is built off of a template.</p>
+        <h1><v-icon large>{{ mdiIconsList.VIEWDASHBOARD }}</v-icon> Dashboard</h1>
+		<div class='row text-center'>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large @click='$router.push("/m/user-search")'>
+					<v-icon x-large>{{ mdiIconsList.ACCOUNTMULTIPLE }}</v-icon>
+					Profile Search
+				</v-btn>
+			</div>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large @click='$router.push("/m/chat")'>
+					<v-icon x-large>{{ mdiIconsList.CHAT }}</v-icon>
+					Messages
+				</v-btn>
+			</div>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large @click='$router.push("/m/settings")'>
+					<v-icon x-large>{{ mdiIconsList.COGS }}</v-icon>
+					Settings
+				</v-btn>
+			</div>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large>
+					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
+					COMING SOON...
+				</v-btn>
+			</div>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large>
+					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
+					COMING SOON...
+				</v-btn>
+			</div>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
+				<v-btn color='primary' block x-large>
+					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
+					COMING SOON...
+				</v-btn>
+			</div>
+		</div>
     </div>
 </template>
 
