@@ -35,7 +35,7 @@
 					</transition>
 				</v-container>
 			</v-main>
-			<v-footer dark padless :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
+			<v-footer dark padless absolute :fixed='(settings.footer_fixed !== undefined) ? settings.footer_fixed.value : true'>
 				<v-card :style='"background-color: rgba(" +settings.footer_color.value.r + ", " +settings.footer_color.value.g + ", " +settings.footer_color.value.b + ", " +settings.footer_color.value.a + ") !important;"' class="flex" flat tile>
 					<v-card-title class="dark">
 						<strong class="subheading" v-if='settings.footer_text === undefined'>{{ $t('Site.footer.subheader') }}</strong>
