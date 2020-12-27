@@ -22,6 +22,7 @@ enum MdiIcons {
     APPLICATIONEXPORT         = 'mdi-application-export',
     BACKBURGER                = "mdi-backburger",
     BELL                      = "mdi-bell",
+    BOOK                      = "mdi-book",
     BULLHORN                  = "mdi-bullhorn",
     CALENDARMONTH             = "mdi-calendar-month",
     CARDSVARIANT              = "mdi-cards-variant",
@@ -82,6 +83,7 @@ enum MdiIcons {
     TRASHCANOUTLINE           = "mdi-trash-can-outline",
     TWITTER                   = "mdi-twitter",
     VIEWDASHBOARD             = "mdi-view-dashboard",
+    VOTE                      = "mdi-vote",
     WEATHERSUNNY              = "mdi-weather-sunny",
 }
 

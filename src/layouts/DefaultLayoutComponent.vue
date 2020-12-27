@@ -42,7 +42,7 @@
 						<strong class="subheading" v-if='settings.footer_text !== undefined'>{{ settings.footer_text.value }}</strong>
 						<v-spacer></v-spacer>
 						<v-btn v-for="(icon, index) in icons" :key="index" target='_BLANK' class="mx-1" :aria-label='icon' dark icon>
-							<v-icon size="24px">{{ icon }}</v-icon>
+							<v-icon size="24px" @click='openFacebook'>{{ icon }}</v-icon>
 						</v-btn>
 					</v-card-title>
 
@@ -75,10 +75,7 @@
 			},
 			icons() {
 				return [
-					'mdi-home',
-					'mdi-email',
-					'mdi-calendar',
-					'mdi-delete'
+					'mdi-facebook'
 				]
 			},
 			settings() {
@@ -90,21 +87,7 @@
 						if (a.oid > b.oid) return 1
 						if (a.oid < b.oid) return -1
 						return 0
-					}),
-					{ text: '', icon: MdiIcons.EARTH, internal: true, key: null, action: LinkActions.DROPDOWN, dropdown: [
-						{ icon: MdiIcons.ALPHAEBOXOUTLINE, text: this.$t('Site.menu.lang.english'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ENUS },
-						{ icon: MdiIcons.ALPHASBOXOUTLINE, text: this.$t('Site.menu.lang.spanish'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ESMX },
-						{ icon: MdiIcons.ALPHARBOXOUTLINE, text: this.$t('Site.menu.lang.russian'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.RURU },
-						{ icon: MdiIcons.ALPHAFBOXOUTLINE, text: this.$t('Site.menu.lang.french'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.FRFR },
-						{ icon: MdiIcons.ALPHACBOXOUTLINE, text: this.$t('Site.menu.lang.mandarin'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ZHCN },
-						{ icon: MdiIcons.ALPHAVBOXOUTLINE, text: this.$t('Site.menu.lang.vietnamese'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.VIVI },
-						{ icon: MdiIcons.ALPHAKBOXOUTLINE, text: this.$t('Site.menu.lang.korean'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.KOKO },
-						{ icon: MdiIcons.ALPHAJBOXOUTLINE, text: this.$t('Site.menu.lang.japanese'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.JAJA },
-						{ icon: MdiIcons.ALPHAABOXOUTLINE, text: this.$t('Site.menu.lang.arabic'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.ARSA },
-						{ icon: MdiIcons.ALPHAGBOXOUTLINE, text: this.$t('Site.menu.lang.german'), key: null, action: LinkActions.CHANGELANGUAGE, payload: LanguageCodes.DEDE }
-						]
-					},
-					{ text: '', icon: MdiIcons.MOONWANINGCRESCENT, internal: true, key: null, action: LinkActions.CHANGELIGHTMODE }
+					})
 				]
 
 				return customMenu
@@ -128,6 +111,9 @@
 				} else if (item.action === LinkActions.CHANGELANGUAGE) {
 					this.$this.$i18n.locale = item.payload
 				}
+			},
+			openFacebook() {
+				window.open('https://www.facebook.com/groups/291529424771810', '_blank')
 			}
 		},
 		watch     : {}

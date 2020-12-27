@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1><v-icon>{{ mdiIconsList.FACTORY }}</v-icon> Welcome to Webpire</h1>
-		<p>This project will be your first step towards building out an impressive web based empire!</p>
+        <h1><v-icon>{{ mdiIconsList.FACTORY }}</v-icon> Welcome to Total Politics</h1>
+		<p>Updates are pending...</p>
     </div>
 </template>
 

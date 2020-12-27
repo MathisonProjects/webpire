@@ -10,7 +10,13 @@ const layoutList = {
 }
 const componentList = {
     HomeComponent                  : require('@/pages/HomeComponent.vue').default,
-    AccessComponent                : require('@/pages/AccessComponent.vue').default,
+	AccessComponent                : require('@/pages/AccessComponent.vue').default,
+
+	HistoryComponent               : require('@/pages/pages/HistoryComponent.vue').default,
+	ElectionComponent              : require('@/pages/pages/ElectionComponent.vue').default,
+	RulesComponent                 : require('@/pages/pages/RulesComponent.vue').default,
+	ContactComponent               : require('@/pages/pages/ContactComponent.vue').default,
+
     MemberHomeComponent            : require('@/pages/member/HomeComponent.vue').default,
     MemberUserSearchComponent      : require('@/pages/member/UserSearchComponent.vue').default,
     MemberViewUserComponent        : require('@/pages/member/ViewUserComponent.vue').default,
@@ -47,6 +53,39 @@ const routes = [
 					title: "Access"
 				}
 			},
+
+			{
+				path: '/page/history',
+				name: 'default-history',
+				component: componentList.HistoryComponent,
+				meta: {
+					title: "History"
+				}
+			},
+			{
+				path: '/page/elections',
+				name: 'default-elections',
+				component: componentList.ElectionComponent,
+				meta: {
+					title: "Elections"
+				}
+			},
+			{
+				path: '/page/rules',
+				name: 'default-rules',
+				component: componentList.RulesComponent,
+				meta: {
+					title: "Rules"
+				}
+			},
+			{
+				path: '/page/contact',
+				name: 'default-contact',
+				component: componentList.ContactComponent,
+				meta: {
+					title: "Contact"
+				}
+			}
         ]
 	},
 	{
