@@ -23,7 +23,7 @@ module.exports = {
         dbHandler = new AWS.DynamoDB({apiVersion: '2012-08-10'})
         docClient = new AWS.DynamoDB.DocumentClient()
     },
-    async createTables(endpoint = 'http://172.18.0.2:8000') {
+    async createTables(endpoint = null) {
         this.updateEndpoint(endpoint)
         await this.createTable(dbKey + '_dynamic_tables')
         await this.createTable(dbKey + '_dynamic_table_content')
@@ -32,7 +32,7 @@ module.exports = {
         await this.createTable(dbKey + '_settings')
         setTimeout(() => {  console.log("DynamoDb Placed!"); }, 25000)
     },
-    seedTables(endpoint = 'http://172.18.0.2:8000') {
+    seedTables(endpoint = null) {
         this.updateEndpoint(endpoint)
         const seedItems = {
             dynamic_table_content: require('./seed/dynamic_table_content.json'),
@@ -54,6 +54,7 @@ module.exports = {
                 this.insertRecord(payload)
             }
         }
+        console.log('Records inserted!')
     },
     async createTable(tableName) {
         try {
