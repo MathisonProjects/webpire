@@ -14,7 +14,7 @@ AWS.config.update({
 
 var dbHandler = null
 var docClient = null
-const dbKey = 'webpire'
+const dbKey = envVariables.DB_KEY
 
 module.exports = {
     updateEndpoint(endpoint) {
