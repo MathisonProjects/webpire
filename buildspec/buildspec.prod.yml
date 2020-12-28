@@ -38,6 +38,9 @@ phases:
       - echo Post Build Phase
       - aws s3 cp --recursive dist/ s3://totalpolitics.info/
 
+cache:
+  paths:
+    - 'node_modules/**/*'
 artifacts:
   files:
     - '**/*'
