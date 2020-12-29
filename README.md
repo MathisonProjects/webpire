@@ -29,6 +29,16 @@ $ cd webpire
 $ ./init.sh dev
 ```
 
+### Deployment Services
+- Route 53
+- Instance Auto Scaling
+- Load Balancers
+- S3
+- CloudFront
+- IAM
+- DynamoDb
+- Code Pipeline
+
 ## Site Directory
 
 http://localhost:8082 - Confirm NodeJs Server is running and connects you to the rest of the application.

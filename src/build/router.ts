@@ -15,7 +15,6 @@ const componentList = {
 	HistoryComponent               : require('@/pages/pages/HistoryComponent.vue').default,
 	ElectionComponent              : require('@/pages/pages/ElectionComponent.vue').default,
 	RulesComponent                 : require('@/pages/pages/RulesComponent.vue').default,
-	ContactComponent               : require('@/pages/pages/ContactComponent.vue').default,
 
     MemberHomeComponent            : require('@/pages/member/HomeComponent.vue').default,
     MemberUserSearchComponent      : require('@/pages/member/UserSearchComponent.vue').default,
@@ -76,14 +75,6 @@ const routes = [
 				component: componentList.RulesComponent,
 				meta: {
 					title: "Rules"
-				}
-			},
-			{
-				path: '/page/contact',
-				name: 'default-contact',
-				component: componentList.ContactComponent,
-				meta: {
-					title: "Contact"
 				}
 			}
         ]

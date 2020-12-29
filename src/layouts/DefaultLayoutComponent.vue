@@ -1,6 +1,8 @@
 <template>
     <v-app>
 		<SnackbarNotificationComponent />
+		<SubmitSupportTicket v-if='loggedIn' />
+
 		<v-main v-if='settings.header_color === undefined' class='text-center pt-5 mt-5'>
 			<h4>Loading...</h4>
 			<v-progress-circular indeterminate color="primary" class='m5-5' />
@@ -57,13 +59,16 @@
 
 <script>
 	import SnackbarNotificationComponent from '@/components/shared/SnackbarNotificationComponent'
-
+	import SubmitSupportTicket from '@/components/shared/SubmitSupportTicket'
 	import { MdiIcons, LinkActions, LanguageCodes } from '@/enums'
+	import jwt from 'jsonwebtoken'
+
     export default {
 		name      : "default-layout-component",
 		props     : [],
 		components: {
-			SnackbarNotificationComponent
+			SnackbarNotificationComponent,
+			SubmitSupportTicket
 		},
 		created()   {},
 		computed  : {
@@ -96,6 +101,28 @@
 				const devVariables = this.$store.state.jsonStore.devVariables
 				console.log(devVariables)
 				return devVariables.majorRelease + '.' + devVariables.minorRelease + '.' + devVariables.iteration + '.' + devVariables.build
+			},
+			user() {
+				return this.$store.getters['userStore/userData']
+			},
+            parsedJwt() {
+				if (this.user.jwt !== null) {
+					return jwt.decode(this.user.jwt, {complete: true})
+				} else {
+					return null
+				}
+            },
+			loggedIn() {
+				if (this.parsedJwt !== null) {
+					const expirationTime = parseInt(this.parsedJwt.payload.exp + '000')
+					const currentTime = Date.now()
+					if (expirationTime > currentTime) {
+						return true
+					} else {
+						this.$router.push('/access')
+					}
+				}
+				this.$router.push('/access')
 			}
 		},
 		data()      { return {} },
