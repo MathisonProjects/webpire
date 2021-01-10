@@ -135,6 +135,7 @@
                     'dropdown',
                     'file',
                     'filler',
+                    'json',
                     'number',
                     'related to',
                     'text',

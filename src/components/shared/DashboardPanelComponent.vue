@@ -19,7 +19,9 @@
 
     export default {
 		name      : "dashboard-panel-component",
-		props     : [],
+		props     : [
+            'panel'
+        ],
 		components: { VuetifyDataTableComponent },
 		created()   {},
 		computed  : {
@@ -50,21 +52,6 @@
                     }
                     if (passFilter) return item
                 })
-            },
-            panel() {
-                return {
-                    title: 'User Settings',
-                    headers: [
-                        { text: 'ID', value: 'id', align: 'left', sortable: true },
-                        { text: 'Name', value: 'name', align: 'left', sortable: true },
-                        { text: 'Created By', value: 'created_by', align: 'left', sortable: true },
-                        { text: 'Created At', value: 'created_at', align: 'left', sortable: true },
-                        { text: 'Updated At', value: 'updated_at', align: 'left', sortable: true }
-                    ],
-                    items: [],
-                    table_key: 'user_settings',
-                    filters: []
-                }
             }
 		},
 		data()      { return {} },

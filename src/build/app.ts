@@ -7,7 +7,7 @@ import messages from '@/lang'
 import plugins from '@/plugins'
 import CKEditor from '@ckeditor/ckeditor5-vue2'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import VuetifyDataTableComponent from '@/components/shared/VuetifyDataTableComponent.vue'
+import VuetifyDataTableComponent from '@/components/shared/VuetifyDataTableComponent'
 
 
 Vue.component('VuetifyDataTableComponent',VuetifyDataTableComponent)

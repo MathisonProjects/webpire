@@ -1,6 +1,7 @@
 <template>
     <div>
         <v-text-field :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "text"' dense :disabled='disabled' />
+        <v-textarea :label='item.name' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "json"' dense :disabled='disabled' />
         <v-text-field :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "number"' dense :disabled='disabled' />
         <v-text-field prepend-icon="mdi-cash-usd-outline" :label='item.name' type='number' :placeholder='"Enter information into " + item.name' v-model='fieldValue' v-if='item.type === "currency"' dense :disabled='disabled' />
         <label v-if='item.type === "wysiwyg"'>{{ item.name }}</label>
