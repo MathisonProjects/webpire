@@ -11,6 +11,7 @@ const layoutList = {
 const componentList = {
     HomeComponent                  : require('@/pages/HomeComponent.vue').default,
     AccessComponent                : require('@/pages/AccessComponent.vue').default,
+    CompTestComponent              : require('@/pages/TestingComponent.vue').default,
     MemberHomeComponent            : require('@/pages/member/HomeComponent.vue').default,
     MemberUserSearchComponent      : require('@/pages/member/UserSearchComponent.vue').default,
     MemberViewUserComponent        : require('@/pages/member/ViewUserComponent.vue').default,
@@ -47,6 +48,14 @@ const routes = [
 					title: "Access"
 				}
 			},
+			{
+				path: 'comptest',
+				name: 'default-testing-component',
+				component: componentList.CompTestComponent,
+				meta: {
+					title: "Testing Components..."
+				}
+			}
         ]
 	},
 	{

@@ -4,5 +4,5 @@ sudo yum install httpd nodejs -y
 sudo service httpd start
 node -v
 npm -v
-npm install -g aws-sdk pm2 dotenv
+npm install -g aws-sdk pm2 dotenv cross-env
 npm install

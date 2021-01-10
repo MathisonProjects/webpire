@@ -26,7 +26,7 @@
                         return {
                             label: item.label,
                             type: item.type,
-                            md: 12,
+                            md: 6,
                             vmodel: item.key,
                             value: '',
                             class: '',
@@ -38,6 +38,12 @@
                     cardIcon: MdiIcons.COGS,
                     fields: fields,
                     actions: [
+                        {
+                            label: 'Full App Reset',
+                            icon: MdiIcons.REFRESH,
+                            color: 'error',
+                            action: LinkActions.REFRESH
+                        },
                         {
                             label: 'Save',
                             icon: MdiIcons.CONTENTSAVE,
@@ -65,6 +71,12 @@
             callbackHandler(action) {
                 if (action === LinkActions.SAVE) {
                     this.saveForm()
+                } else if (action === LinkActions.REFRESH) {
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETDYNAMICTABLECONTENT)
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETDYNAMICTABLES)
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETMENU)
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETPERMISSIONS)
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETSETTINGS)
                 }
             },
             saveForm() {

@@ -19,7 +19,7 @@ const dbKey = 'webpire'
 module.exports = {
     updateEndpoint(endpoint) {
         // http://172.18.0.2:8000 || http://localhost:8000
-        if (endpoint !== null && endpoint !== undefined) AWS.config.update({ endpoint: endpoint })
+        // if (endpoint !== null && endpoint !== undefined) AWS.config.update({ endpoint: endpoint })
         dbHandler = new AWS.DynamoDB({apiVersion: '2012-08-10'})
         docClient = new AWS.DynamoDB.DocumentClient()
     },

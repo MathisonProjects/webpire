@@ -1,18 +1,18 @@
 [
     {
-        "type": "string",
+        "type": "text",
         "key": "site_name",
         "label": "Site Name",
         "value": "Webpire"
     },
     {
-        "type": "string",
+        "type": "text",
         "key": "description",
         "label": "Description",
         "value": "Webspire helps developers quickly deploy and focus on building their dream site!"
     },
     {
-        "type": "string",
+        "type": "text",
         "key": "footer_text",
         "label": "Footer Text",
         "value": "Join us on social media!"
