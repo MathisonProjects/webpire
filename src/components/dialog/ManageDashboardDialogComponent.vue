@@ -6,7 +6,22 @@
 
         <v-card>
             <v-card-title class="headline grey lighten-2">Privacy Policy</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+            <v-card-text>
+                <div class='row'>
+                    <div class='col-md-4'>
+                        <v-text-field v-model='dataForm.title' label='Dashpanel Title' placeholder='eg. User Settings Report' />
+                    </div>
+                    <div class='col-md-4'>
+                        <v-select label='Reporting Table' placeholder='Select a table...' v-model='dataForm.table_key' :items='dynamicTablesList' item-value='key' item-text='name' />
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col'>
+
+                    </div>
+                    <div class='col'></div>
+                </div>
+            </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -38,11 +53,19 @@
 				} else {
 					return null
 				}
+            },
+            dynamicTablesList() {
+                return this.$store.state.dynamicTableStore.tableList
             }
 		},
 		data()      {
             return {
                 dialog: false,
+                dataForm: {
+                    title: null,
+                    table_key: null,
+                    fields: [],
+                }
             }
         },
 		methods   : {},

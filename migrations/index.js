@@ -5,6 +5,8 @@ const env = process.env.STAGE ? process.env.STAGE : "development";
 const envFile = './.env.'+env
 const envVariables = Dotenv.config({ path: envFile }).parsed
 
+console.log(env)
+
 AWS.config.update({
     region: envVariables.AWS_REGION,
     accessKeyId: envVariables.ACCESS_KEY_ID,
