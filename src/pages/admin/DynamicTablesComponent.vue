@@ -62,6 +62,7 @@
                         <v-text-field label='Dropdown Options' dense placeholder='Comma list of dropdown options' v-model='fieldItem.options' />
                     </div>
                     <div class='col-md-1 text-center'>
+                        <v-btn color='info' small @click='addItem(fieldItem)'><v-icon>{{mdiIconsList.CONTENTCOPY}}</v-icon></v-btn>
                         <v-btn color='error' small @click='removeItem(index)'><v-icon>{{mdiIconsList.TRASHCANOUTLINE}}</v-icon></v-btn>
                     </div>
                 </div>
@@ -177,6 +178,9 @@
             },
             tableUpdate(response) {
 				this.selected = response
+            },
+            addItem(item) {
+                this.dynamicTableForm.fields.push(item)
             },
             addField() {
                 this.dynamicTableForm.fields.push({

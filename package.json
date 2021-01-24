@@ -49,6 +49,7 @@
     "@types/webpack-env": "^1.15.3",
     "amazon-cognito-identity-js": "^4.5.3",
     "aws-sdk": "^2.778.0",
+    "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^4.0.0",

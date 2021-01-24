@@ -1,12 +1,13 @@
 <template>
     <div>
 		<p>This exists solely to help with testing random components...</p>
-        <GoogleMapComponent :markers='markers' />
+        <DynamicFormGeneratorComponent formKey='address_form' />
     </div>
 </template>
 
 <script>
     import GoogleMapComponent from '@/components/shared/GoogleMapComponent'
+    import DynamicFormGeneratorComponent from '@/components/shared/DynamicFormGeneratorComponent'
 	import { MdiIcons } from '@/enums'
 	import jwt from 'jsonwebtoken'
 
@@ -14,7 +15,8 @@
 		name      : "testing-component",
 		props     : [],
 		components: {
-            GoogleMapComponent
+            GoogleMapComponent,
+            DynamicFormGeneratorComponent
         },
 		created()   {},
 		computed  : {
