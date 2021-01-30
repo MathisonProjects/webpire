@@ -48,6 +48,7 @@ enum MdiIcons {
     FACTORY                   = "mdi-factory",
     FILTER                    = 'mdi-filter',
     FOLDEROPEN                = "mdi-folder-open",
+    FORMATLISTNUMBERED        = 'mdi-format-list-numbered',
     FORMATQUOTEOPENOUTLINE    = "mdi-format-quote-open-outline",
     FORMATLISTBULLETEDTYPE    = "mdi-format-list-bulleted-type",
     HELP                      = "mdi-help",

@@ -35,10 +35,16 @@ enum AccessMode {
     FORGET = 'forget'
 }
 
+enum DisplayType {
+    GRID = 'grid',
+    LIST = 'list'
+}
+
 export {
     DynamoDbTables,
     LanguageCodes,
     ColorSets,
     AdminMode,
-    AccessMode
+    AccessMode,
+    DisplayType
 }
