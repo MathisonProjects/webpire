@@ -1,6 +1,7 @@
 
 enum MenuType {
     MAIN = 'main',
+    MEMBER = 'member',
     ADMIN = 'admin'
 }
 interface IMenuItem {
@@ -15,12 +16,14 @@ interface IMenuItem {
 
 interface IMenuList {
     mainMenu: IMenuItem[]
+    memberMenu: IMenuItem[]
     adminMenu: IMenuItem[]
 }
 
 export default {
     state: {
         mainMenu: [],
+        memberMenu: [],
         adminMenu: []
     },
     mutations: {
@@ -29,12 +32,16 @@ export default {
         },
         SET_ADMINMENU(state: IMenuList, payload: IMenuItem[]) {
             state.adminMenu = payload
+        },
+        SET_MEMBERMENU(state: IMenuList, payload: IMenuItem[]) {
+            state.memberMenu = payload
         }
     },
     actions: {
         setInit({ commit }: { commit: any }, payload: IMenuItem[] ) {
             commit('SET_MAINMENU', payload.filter( (item:IMenuItem) => { return item.type === MenuType.MAIN}))
             commit('SET_ADMINMENU', payload.filter( (item:IMenuItem) => { return item.type === MenuType.ADMIN}))
+            commit('SET_MEMBERMENU', payload.filter( (item:IMenuItem) => { return item.type === MenuType.MEMBER}))
         }
     },
     getters: {}

@@ -2,41 +2,8 @@
     <div>
         <h1><v-icon large>{{ mdiIconsList.VIEWDASHBOARD }}</v-icon> Dashboard</h1>
 		<div class='row text-center'>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large @click='$router.push("/m/user-search")'>
-					<v-icon x-large>{{ mdiIconsList.ACCOUNTMULTIPLE }}</v-icon>
-					Profile Search
-				</v-btn>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large @click='$router.push("/m/chat")'>
-					<v-icon x-large>{{ mdiIconsList.CHAT }}</v-icon>
-					Messages
-				</v-btn>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large @click='$router.push("/m/settings")'>
-					<v-icon x-large>{{ mdiIconsList.COGS }}</v-icon>
-					Settings
-				</v-btn>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large>
-					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
-					COMING SOON...
-				</v-btn>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large>
-					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
-					COMING SOON...
-				</v-btn>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2'>
-				<v-btn color='primary' block x-large>
-					<v-icon x-large>{{ mdiIconsList.HELP }}</v-icon>
-					COMING SOON...
-				</v-btn>
+			<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2' v-for='(item,index) in menu' :key='index'>
+				<v-btn color='primary' block x-large @click='$router.push(item.key)'><v-icon x-large>{{ item.icon }}</v-icon> {{ item.text }}</v-btn>
 			</div>
 		</div>
     </div>
@@ -64,7 +31,13 @@
 				} else {
 					return null
 				}
-            }
+			},
+			menu() {
+				return this.$store.state.menuStore.memberMenu.sort( (a,b) => {
+					if (a.oid > b.oid) return 0
+					if (a.oid < b.oid) return -1
+				})
+			}
 		},
 		data()      { return {} },
 		methods   : {},

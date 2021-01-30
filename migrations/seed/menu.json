@@ -17,5 +17,8 @@
     { "type": "admin", "oid": 11, "key": "/admin/dt/tags", "icon": "mdi-view-dashboard", "text": "Tags", "page": "admin-tags", "internal": true },
     { "type": "admin", "oid": 12, "key": "/admin/dynamic-tables", "icon": "mdi-table", "text": "Dynamic Tables", "page": "admin-dynamic-tables", "internal": true },
     { "type": "admin", "oid": 13, "key": "/admin/icons", "icon": "mdi-material-design", "text": "Icons", "page": "admin-settings", "internal": true },
-    { "type": "admin", "oid": 14, "key": "/admin/settings", "icon": "mdi-cogs", "text": "Settings", "page": "admin-settings", "internal": true }
+    { "type": "admin", "oid": 14, "key": "/admin/settings", "icon": "mdi-cogs", "text": "Settings", "page": "admin-settings", "internal": true },
+    {"page":null,"icon":"mdi-cogs","internal":true,"text":"Settings","oid":2,"key":"/m/settings","type":"member"},
+    {"page":null,"icon":"mdi-account-group","internal":true,"text":"Profile Search","oid":0,"key":"/m/user-search","type":"member"},
+    {"page":null,"icon":"mdi-chat","internal":true,"text":"Messages","oid":1,"key":"/m/chat","type":"member"}
 ]
