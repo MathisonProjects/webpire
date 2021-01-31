@@ -24,10 +24,10 @@
                                         <div class='row'>
                                             <div class='col-md-4'>Social Media</div>
                                             <div class='col'>
-                                                <v-btn icon small color='primary' @click='openLink(profileUser.content.link_facebook)'><v-icon>{{ mdiIconsList.FACEBOOK }}</v-icon></v-btn>
-                                                <v-btn icon small color='info' @click='openLink(profileUser.content.link_twitter)'><v-icon>{{ mdiIconsList.TWITTER }}</v-icon></v-btn>
-                                                <v-btn icon small color='error' @click='openLink(profileUser.content.link_instagram)'><v-icon>{{ mdiIconsList.INSTAGRAM }}</v-icon></v-btn>
-                                                <v-btn icon small color='warning' @click='openLink(profileUser.content.link_snapchat)'><v-icon>{{ mdiIconsList.SNAPCHAT }}</v-icon></v-btn>
+                                                <v-btn icon small color='primary' @click='openLink(profileUser.content.link_facebook)' v-if='profileUser.content.link_facebook !== undefined && profileUser.content.link_facebook !== null && profileUser.content.link_facebook !== ""'><v-icon>{{ mdiIconsList.FACEBOOK }}</v-icon></v-btn>
+                                                <v-btn icon small color='info' @click='openLink(profileUser.content.link_twitter)' v-if='profileUser.content.link_twitter !== undefined && profileUser.content.link_twitter !== null && profileUser.content.link_twitter !== ""'><v-icon>{{ mdiIconsList.TWITTER }}</v-icon></v-btn>
+                                                <v-btn icon small color='error' @click='openLink(profileUser.content.link_instagram)' v-if='profileUser.content.link_instagram !== undefined && profileUser.content.link_instagram !== null && profileUser.content.link_instagram !== ""'><v-icon>{{ mdiIconsList.INSTAGRAM }}</v-icon></v-btn>
+                                                <v-btn icon small color='warning' @click='openLink(profileUser.content.link_snapchat)' v-if='profileUser.content.link_snapchat !== undefined && profileUser.content.link_snapchat !== null && profileUser.content.link_snapchat !== ""'><v-icon>{{ mdiIconsList.SNAPCHAT }}</v-icon></v-btn>
                                             </div>
                                         </div>
                                     </div>

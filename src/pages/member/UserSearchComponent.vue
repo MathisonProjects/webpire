@@ -25,7 +25,26 @@
                 </v-card>
             </div>
             <div class='col' v-if='profileSelected !== null'>
-
+                <v-card>
+                    <v-card-title>
+                        {{ profileSelected.content.name }}
+                        <v-spacer />
+                        <v-btn color='primary' icon @click='profileSelected = null'><v-icon>{{ mdiIconsList.MINUS }}</v-icon></v-btn>
+                    </v-card-title>
+                    <v-card-text v-if='profileSelected.content.bio !== undefined'>
+                        {{ profileSelected.content.bio }}
+                    </v-card-text>
+                    <v-card-text v-if='profileSelected.content.bio === undefined'>
+                        This profile does not have a bio...
+                    </v-card-text>
+                    <v-card-action>
+                        <v-spacer />
+                        <v-btn color='success' icon title='View Profile' @click='$router.push("/m/user/"+profileSelected.id)'><v-icon>{{ mdiIconsList.COMMENTEYEOUTLINE }}</v-icon></v-btn>
+                        <v-btn color='info' icon title='View Brief' @click='profileSelected = profileSelected.id'><v-icon>{{ mdiIconsList.EYE }}</v-icon></v-btn>
+                        <v-btn color='warning' icon title='Hide Profile'><v-icon>{{ mdiIconsList.EYEOFF }}</v-icon></v-btn>
+                        <v-btn color='error' icon title='Report Profile'><v-icon>{{ mdiIconsList.BULLHORN }}</v-icon></v-btn>
+                    </v-card-action>
+                </v-card>
             </div>
         </div>
 
