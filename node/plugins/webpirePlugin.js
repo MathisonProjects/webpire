@@ -32,39 +32,42 @@ class WebpirePlugin {
     async routeFunction(endpoint, payload = null) {
         console.log('endpoint:',endpoint,' | ','payload:',payload)
 
+        const dbTarget = (payload.alt_app_db !== undefined) ? payload.alt_app_db : 'webpire'
+        if (payload.alt_app_db !== undefined) delete payload.alt_app_db
+
         switch (endpoint) {
             case 'get dbstore':
-                return await this.getDbStore()
+                return await this.getDbStore(dbTarget)
             case "save dynamicTableContent":
-                await this.saveRecord('proj_webpire_dynamic_table_content', payload)
-                return await this.getDbStore()
+                await this.saveRecord('proj_' + dbTarget + '_dynamic_table_content', payload)
+                return await this.getDbStore(dbTarget)
             case "save dynamicTables":
-                await this.saveRecord('proj_webpire_dynamic_tables', payload)
-                return await this.getDbStore()
+                await this.saveRecord('proj_' + dbTarget + '_dynamic_tables', payload)
+                return await this.getDbStore(dbTarget)
             case "save menu":
-                await this.saveRecord('proj_webpire_menu', payload)
-                return await this.getDbStore()
+                await this.saveRecord('proj_' + dbTarget + '_menu', payload)
+                return await this.getDbStore(dbTarget)
             case "save permissions":
-                await this.saveRecord('proj_webpire_permissions', payload)
-                return await this.getDbStore()
+                await this.saveRecord('proj_' + dbTarget + '_permissions', payload)
+                return await this.getDbStore(dbTarget)
             case "save settings":
-                await this.saveRecord('proj_webpire_settings', payload)
-                return await this.getDbStore()
+                await this.saveRecord('proj_' + dbTarget + '_settings', payload)
+                return await this.getDbStore(dbTarget)
             case "delete dynamicTableContent":
-                await this.deleteRecord('proj_webpire_dynamic_table_content', payload)
-                return await this.getDbStore()
+                await this.deleteRecord('proj_' + dbTarget + '_dynamic_table_content', payload)
+                return await this.getDbStore(dbTarget)
             case "delete dynamicTables":
-                await this.deleteRecord('proj_webpire_dynamic_tables', payload)
-                return await this.getDbStore()
+                await this.deleteRecord('proj_' + dbTarget + '_dynamic_tables', payload)
+                return await this.getDbStore(dbTarget)
             case "delete menu":
-                await this.deleteRecord('proj_webpire_menu', payload)
-                return await this.getDbStore()
+                await this.deleteRecord('proj_' + dbTarget + '_menu', payload)
+                return await this.getDbStore(dbTarget)
             case "delete permissions":
-                await this.deleteRecord('proj_webpire_permissions', payload)
-                return await this.getDbStore()
+                await this.deleteRecord('proj_' + dbTarget + '_permissions', payload)
+                return await this.getDbStore(dbTarget)
             case "delete settings":
-                await this.deleteRecord('proj_webpire_settings', payload)
-                return await this.getDbStore()
+                await this.deleteRecord('proj_' + dbTarget + '_settings', payload)
+                return await this.getDbStore(dbTarget)
             case 'account register':
                 return await Cognito.registerUser(payload)
             case 'account login':
@@ -72,20 +75,20 @@ class WebpirePlugin {
             case 'account forget':
                 break
             case "reset dynamicTableContent":
-                await this.resetTable('proj_webpire_dynamic_table_content')
+                await this.resetTable('proj_' + dbTarget + '_dynamic_table_content')
                 break
             case "reset dynamicTables":
-                await this.resetTable('proj_webpire_dynamic_tables')
+                await this.resetTable('proj_' + dbTarget + '_dynamic_tables')
                 break
             case "reset menu":
-                await this.resetTable('proj_webpire_menu')
-                this.repopulateTable('proj_webpire_menu','menu')
+                await this.resetTable('proj_' + dbTarget + '_menu')
+                this.repopulateTable('proj_' + dbTarget + '_menu','menu')
                 break
             case "reset permissions":
-                await this.resetTable('proj_webpire_permissions')
+                await this.resetTable('proj_' + dbTarget + '_permissions')
                 break
             case "reset settings":
-                await this.resetTable('proj_webpire_settings')
+                await this.resetTable('proj_' + dbTarget + '_settings')
                 break
             case "get all users":
                 return await this.getAllUsers()
@@ -103,12 +106,12 @@ class WebpirePlugin {
         return await Cognito.allUsers()
     }
 
-    async getDbStore() {
+    async getDbStore(dbTarget) {
         const tables = [ 'dynamic_table_content', 'dynamic_tables', 'menu', 'permissions', 'settings']
         let tableData = {}
         for (var i in tables) {
             const params = {
-                TableName: 'proj_webpire_' + tables[i]
+                TableName: 'proj_' + dbTarget + '_' + tables[i]
             }
             tableData[tables[i]] = await docClient.scan(params, (err, data) => {}).promise()
         }
