@@ -19,8 +19,6 @@ const port = { hot: parseInt(envVariables.definitions['process.env.HOT_PORT'].re
 // Constants
 const PORT = port.node
 
-Plugins.WebpirePlugin.setEndpoint()
-
 io.on('connection', socket => {
   socket.setMaxListeners(0)
   console.log('|             Well hello there            |')

@@ -10,6 +10,7 @@ gitcommit.credentials.json
 .env
 .env.development
 .env.production
+.env.site.*
 
 # Log files
 npm-debug.log*
