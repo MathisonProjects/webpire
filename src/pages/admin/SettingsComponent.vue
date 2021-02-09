@@ -39,6 +39,12 @@
                     fields: fields,
                     actions: [
                         {
+                            label: 'Create Database',
+                            icon: MdiIcons.REFRESH,
+                            color: 'success',
+                            action: LinkActions.CREATE
+                        },
+                        {
                             label: 'Full App Reset',
                             icon: MdiIcons.REFRESH,
                             color: 'error',
@@ -77,6 +83,9 @@
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETMENU)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETPERMISSIONS)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETSETTINGS)
+                } else if (action === LinkActions.CREATE) {
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYCREATETABLES)
+
                 }
             },
             saveForm() {

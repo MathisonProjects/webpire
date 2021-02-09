@@ -11,7 +11,6 @@ class WebpirePlugin {
     async routeFunction(endpoint, payload = null) {
         console.log('endpoint:',endpoint,' | ','payload:',payload)
 
-
         const awsApp = (payload.alt_app_db !== undefined) ? AWS[payload.alt_app_db] : AWS.webpire
         if (payload.alt_app_db !== undefined) delete payload.alt_app_db
 
@@ -75,6 +74,9 @@ class WebpirePlugin {
                 break
             case "upload file":
                 s3.upload(payload)
+            case "create tables":
+                await this.createTables(awsApp)
+                break
             default:
                 return this.responseHandler({}, 404)
                 break
@@ -93,7 +95,7 @@ class WebpirePlugin {
             const params = {
                 TableName: 'proj_' + awsApp.env.APP_DB + '_' + tables[i]
             }
-            tableData[tables[i]] = await awsApp.docClient.scan(params, (err, data) => {}).promise()
+            tableData[tables[i]] = await awsApp.docClient.scan(params, (err, data) => { }).promise()
         }
         return tableData
     }
@@ -140,6 +142,30 @@ class WebpirePlugin {
             Key: { 'id': payload.id }
         }
         awsApp.docClient.delete(params, function(err, data) {})
+    }
+    async createTables(awsApp){
+        await this.createTable(awsApp,'_dynamic_tables')
+        await this.createTable(awsApp,'_dynamic_table_content')
+        await this.createTable(awsApp,'_menu')
+        await this.createTable(awsApp,'_permissions')
+        await this.createTable(awsApp,'_settings')
+        setTimeout(() => {  console.log("DynamoDb Placed!"); }, 25000)
+    }
+    async createTable(awsApp,tableName) {
+        const fullTableName = 'proj_' + awsApp.env.APP_DB + tableName
+
+        try {
+            var tableParams = {
+                AttributeDefinitions: [ { AttributeName: 'id', AttributeType: 'S' } ],
+                KeySchema: [ { AttributeName: 'id', KeyType: 'HASH' } ],
+                ProvisionedThroughput: { ReadCapacityUnits: 5, WriteCapacityUnits: 5 },
+                TableName: fullTableName,
+                StreamSpecification: { StreamEnabled: false }
+              };
+              await awsApp.dbHandler.createTable(tableParams, (err, data) => {}).promise();
+        } catch(e) {
+            console.log(fullTableName,'-',e, '-', e.message)
+        }
     }
     responseHandler(response, code = 200) {
         return {

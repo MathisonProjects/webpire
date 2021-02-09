@@ -6,14 +6,14 @@ import { AnyNsRecord } from 'dns'
 import standardFuncs from './standardFuncs'
 
 // const nodeUrl: any = 'https://node.webpire.io'
-const nodeUrl: any = 'https://' + process.env.NODE_URL
+const nodeUrl: any = 'http://' + process.env.NODE_URL
 const socket = io(nodeUrl , {'reconnection': true, 'reconnectionDelay': 1000, reconnectionDelayMax: 5000, 'reconnectionAttempts': 3, transports: ['websocket']})
 
 export default {
     init() {
         socket.on(SocketResponses.CONNECTIONCONFIRMATION, (response: any) => {
             console.log(response.response)
-            socket.emit('get dbstore', {})
+            socket.emit('get dbstore', {alt_app_db: process.env.DB_KEY})
             socket.emit(SocketFuncs.ACCOUNTGETALLUSERS, {})
         })
 
@@ -116,6 +116,12 @@ export default {
         socket.emit(resetFunc, {})
     },
     socketEmitFire(endpoint: SocketFuncs, payload: any) {
-        socket.emit(endpoint, payload)
+        const dbPayload = {
+            alt_app_db: process.env.DB_KEY,
+            ...payload
+        }
+        console.log(endpoint)
+        console.log(payload)
+        socket.emit(endpoint, dbPayload)
     }
 }

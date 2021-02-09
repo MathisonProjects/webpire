@@ -6,6 +6,7 @@ enum SocketFuncs {
     FACTORYRESETMENU                  = 'reset menu',
     FACTORYRESETPERMISSIONS           = 'reset permissions',
     FACTORYRESETSETTINGS              = 'reset settings',
+    FACTORYCREATETABLES               = 'create tables',
 
     SAVEDYNAMICTABLECONTENT           = 'save dynamicTableContent',
     SAVEDYNAMICTABLES                 = 'save dynamicTables',

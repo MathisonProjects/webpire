@@ -7,7 +7,7 @@
             <v-btn color='error' icon title='Remove Panel'><v-icon>{{ mdiIconsList.TRASHCANOUTLINE }}</v-icon></v-btn>
         </v-card-title>
         <v-card-text>
-		    <VuetifyDataTableComponent :headers='panel.headers' :items='filteredItems' :showSelect='false' />
+		    <VuetifyDataTableComponent small :headers='panel.headers' :items='filteredItems' :showSelect='false' />
         </v-card-text>
     </v-card>
 </template>

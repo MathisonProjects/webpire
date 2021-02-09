@@ -20,5 +20,6 @@
     "account login",
     "account forget",
     "get all users",
-    "upload file"
+    "upload file",
+    "create tables"
 ]

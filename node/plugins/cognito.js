@@ -6,8 +6,6 @@ const env = process.env.STAGE ? process.env.STAGE : "development";
 const envFile = './.env.'+env
 const envVariables = Dotenv.config({ path: envFile }).parsed
 
-console.log(envVariables)
-
 const cognitoVariables = {
     CLIENT_ID: envVariables.CLIENT_ID,
     APP_DOMAIN: envVariables.APP_DOMAIN,
