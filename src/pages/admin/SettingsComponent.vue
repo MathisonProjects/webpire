@@ -78,8 +78,8 @@
                 if (action === LinkActions.SAVE) {
                     this.saveForm()
                 } else if (action === LinkActions.REFRESH) {
-                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETDYNAMICTABLECONTENT)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETDYNAMICTABLES)
+                    this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETDYNAMICTABLECONTENT)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETMENU)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETPERMISSIONS)
                     this.$p.socket.socketEmitFire(SocketFuncs.FACTORYRESETSETTINGS)

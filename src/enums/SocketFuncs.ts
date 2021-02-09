@@ -1,5 +1,6 @@
 enum SocketFuncs {
     GETDBSTORE                        = 'get dbstore',
+    SEEDDB                            = 'create seed',
 
     FACTORYRESETDYNAMICTABLECONTENT   = 'reset dynamicTableContent',
     FACTORYRESETDYNAMICTABLES         = 'reset dynamicTables',

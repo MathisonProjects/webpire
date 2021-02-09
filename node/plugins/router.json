@@ -21,5 +21,6 @@
     "account forget",
     "get all users",
     "upload file",
-    "create tables"
+    "create tables",
+    "create seed"
 ]

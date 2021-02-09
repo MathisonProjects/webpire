@@ -123,5 +123,8 @@ export default {
         console.log(endpoint)
         console.log(payload)
         socket.emit(endpoint, dbPayload)
+    },
+    emergencyReset() {
+        socket.emit(SocketFuncs.SEEDDB, {alt_app_db: process.env.DB_KEY})
     }
 }

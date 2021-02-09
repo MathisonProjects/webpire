@@ -77,6 +77,9 @@ class WebpirePlugin {
             case "create tables":
                 await this.createTables(awsApp)
                 break
+            case "create seed":
+                await this.seedTables(awsApp)
+                break
             default:
                 return this.responseHandler({}, 404)
                 break
@@ -166,6 +169,35 @@ class WebpirePlugin {
         } catch(e) {
             console.log(fullTableName,'-',e, '-', e.message)
         }
+    }
+    async seedTables(awsApp) {
+        const seedItems = {
+            dynamic_table_content: require('./seed/dynamic_table_content.json'),
+            dynamic_tables: require('./seed/dynamic_tables.json'),
+            menu: require('./seed/menu.json'),
+            permissions: require('./seed/permissions.json'),
+            settings: require('./seed/settings.json')
+        }
+
+        for (var i in seedItems) {
+            for (var j in seedItems[i]) {
+                let record = seedItems[i][j]
+                record.id = uuid()
+                const payload = {
+                    table : 'proj_' + awsApp.env.APP_DB + '_' + i,
+                    data: record
+                }
+
+                this.insertRecord(awsApp,payload)
+            }
+        }
+    }
+    insertRecord(awsApp,payload) {
+        const params = {
+            TableName: payload.table,
+            Item: payload.data
+        }
+        awsApp.docClient.put(params, function(err, data) {})
     }
     responseHandler(response, code = 200) {
         return {
